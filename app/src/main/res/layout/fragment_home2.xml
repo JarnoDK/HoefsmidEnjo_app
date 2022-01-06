@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background" >
+
+        <Button
+            android:id="@+id/calendar"
+            android:layout_width="313dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="316dp"
+            android:background="@drawable/button_design"
+            android:drawableEnd="@drawable/calendar"
+            android:text="@string/kalender"
+            android:theme="@style/homebuttons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/Invoice"
+            android:layout_width="315dp"
+            android:layout_height="68dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="140dp"
+            android:background="@drawable/button_design"
+            android:drawableEnd="@drawable/workbag"
+            android:text="@string/rekeningen_aan_de_klant"
+            android:theme="@style/homebuttons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/clients"
+            android:layout_width="314dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="232dp"
+            android:background="@drawable/button_design"
+            android:drawableEnd="@drawable/clients"
+            android:text="@string/klanten"
+            android:theme="@style/homebuttons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/Items"
+            android:layout_width="316dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="412dp"
+            android:background="@drawable/button_design"
+            android:drawableEnd="@drawable/addtask"
+            android:text="@string/items"
+            android:theme="@style/homebuttons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

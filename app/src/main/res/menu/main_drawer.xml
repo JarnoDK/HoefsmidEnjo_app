@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:showIn="navigation_view"
+
+    >
+
+    <item android:title="@string/rekening"
+        android:id="@+id/invoice_category"
+        >
+        <menu>
+                <item
+                    android:id="@+id/rekening_toevoegen"
+                    android:title="@string/rekening_toevoegen" />
+                <item
+                    android:id="@+id/rekening_bekijken"
+                    android:title="@string/rekening_bekijken" />
+        </menu>
+    </item>
+    <item android:title="@string/klanten"
+        android:id="@+id/client_category"
+        >
+        <menu>
+                <item
+                    android:id="@+id/klant_toevoegen"
+                    android:title="@string/klant_toevoegen"
+                    />
+
+                <item
+                    android:id="@+id/klant_beheren"
+                    android:title="@string/klant_beheren"
+                    />
+        </menu>
+    </item>
+
+    <item android:title="@string/items"
+        app:itemTextColor="@color/textGold"
+        android:id="@+id/item_category"
+        >
+        <menu>
+                <item
+                    android:id="@+id/item_toevoegen"
+                    android:title="@string/item_toevoegen"
+                    />
+                <item
+                    android:id="@+id/item_beheren"
+                    android:title="@string/item_beheren"
+                    />
+        </menu>
+    </item>
+
+    <item android:title="@string/kalender"
+        android:id="@+id/calendar_category"
+        >
+        <menu>
+                <item
+                    android:id="@+id/kalender_raadplegen"
+                    android:title="@string/kalender_raadplegen"
+
+                    />
+                <item
+                    android:id="@+id/afspraak_maken"
+                    android:title="@string/afspraak_maken"
+                    />
+        </menu>
+    </item>
+
+</menu>

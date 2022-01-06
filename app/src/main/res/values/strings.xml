@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">HoefsmidEnjo</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="item_toevoegen">Item toevoegen</string>
+    <string name="afspraak_maken">Afspraak maken</string>
+    <string name="kalender_raadplegen">Kalender raadplegen</string>
+    <string name="rekening_toevoegen">Rekening toevoegen</string>
+    <string name="rekening_bekijken">Rekening bekijken</string>
+    <string name="rekening">Rekening</string>
+    <string name="klanten">Klanten</string>
+    <string name="item_beheren">Item beheren</string>
+    <string name="klant_beheren">Klant beheren</string>
+    <string name="items">Items</string>
+    <string name="kalender">Kalender</string>
+    <string name="klant_toevoegen">Klant toevoegen</string>
+    <string name="home">home</string>
+    <string name="profile">Profiel</string>
+    <string name="rekeningen_aan_de_klant">Rekeningen aan de klant</string>
+</resources>
