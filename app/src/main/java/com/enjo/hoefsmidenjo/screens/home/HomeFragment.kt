@@ -29,7 +29,7 @@ class HomeFragment : Fragment() {
     ): View {
         // Binding
         binding = FragmentHomeBinding.inflate(layoutInflater)
-
+        
         // ViewModel
         viewModelFactory = HomeViewModelFactory()
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]

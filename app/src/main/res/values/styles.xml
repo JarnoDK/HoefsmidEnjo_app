@@ -30,4 +30,9 @@
         <item name="android:textColorSecondary">@color/textGold</item>
 
     </style>
+
+    <style name="profilecardtext">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

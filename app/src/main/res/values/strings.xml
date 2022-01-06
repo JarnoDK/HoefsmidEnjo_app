@@ -25,4 +25,9 @@
     <string name="home">home</string>
     <string name="profile">Profiel</string>
     <string name="rekeningen_aan_de_klant">Rekeningen aan de klant</string>
+    <string name="email">Email</string>
+    <string name="telefoon">Telefoon</string>
+    <string name="naam">Naam</string>
+    <string name="titel">Titel</string>
+    <string name="uur">Uur</string>
 </resources>
