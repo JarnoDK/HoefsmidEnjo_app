@@ -5,11 +5,11 @@ import com.enjo.hoefsmidenjo.api.classes.enums.RoleType
 data class ApiUser(
 
     var id:Int,
-    var firstname:String,
-    var lastname:String,
-    var role:RoleType,
-    var email:String,
-    var phone:String,
-    var password:String
+    var firstName:String,
+    var lastName:String,
+    var role:Int? = 0,
+    var email:String?=null,
+    var phone:String?=null,
+    var password:String?=null
 
 )

@@ -6,5 +6,5 @@ data class ApiInvoiceLine(
 
     var id:Int,
     var amount:Int,
-    var invoiceItem:ApiInvoiceItem
+    var item:ApiInvoiceItem
 )

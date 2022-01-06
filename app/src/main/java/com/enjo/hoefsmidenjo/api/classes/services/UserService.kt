@@ -1,7 +1,7 @@
 package com.enjo.hoefsmidenjo.api.classes.services
 
-import com.enjo.hoefsmidenjo.api.classes.invoice.ApiInvoice
 import com.enjo.hoefsmidenjo.api.classes.invoiceitem.ApiInvoiceItem
+import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -33,19 +33,19 @@ private val retrofit = Retrofit.Builder()
     .client(client)
     .build()
 
-interface InvoiceService {
+interface UserService {
 
-    @GET("/api/invoice")
-    fun getInvoiceAsync(): Deferred<List<ApiInvoice>>
+    @GET("/api/user")
+    fun getUserAsync(): Deferred<List<ApiUser>>
 
 
 
 }
 
-object InvoiceApi{
+object UserApi{
     //lazy properties = thread safe --> can only be initialized once at a time
     //adds extra safety to our 1 instance we need.
-    val retrofitService : InvoiceService by lazy {
-        retrofit.create(InvoiceService::class.java)
+    val retrofitService : UserService by lazy {
+        retrofit.create(UserService::class.java)
     }
 }
