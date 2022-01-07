@@ -1,6 +1,7 @@
 package com.enjo.hoefsmidenjo.api.classes.user
 
 import com.enjo.hoefsmidenjo.api.classes.enums.RoleType
+import com.enjo.hoefsmidenjo.database.user.DbUser
 
 data class ApiUser(
 
@@ -13,3 +14,17 @@ data class ApiUser(
     var password:String?=null
 
 )
+
+fun List<ApiUser>.asDatabaseModel():Array<DbUser>{
+    return map {
+        DbUser(
+            firstName = it.firstName,
+            lastName = it.lastName,
+            id = it.id,
+            email = it.email,
+            phone = it.phone,
+            password = it.password,
+            role = it.role
+        )
+    }.toTypedArray()
+}

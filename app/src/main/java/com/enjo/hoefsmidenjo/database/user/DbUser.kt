@@ -1,8 +1,10 @@
 package com.enjo.hoefsmidenjo.database.user
 
+import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.enjo.hoefsmidenjo.api.classes.enums.RoleType
 
+@Entity(tableName = "users")
 data class DbUser(
 
     @PrimaryKey(autoGenerate = false)

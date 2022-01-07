@@ -9,15 +9,14 @@ import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.databinding.FragmentHomeBinding
 import timber.log.Timber
 import java.time.LocalDate
-import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 
-class HomeFragment : Fragment() {
+class ClientGetFragment : Fragment() {
 
     // ViewModel
-    private lateinit var viewModelFactory: HomeViewModelFactory
-    private lateinit var viewModel: HomeViewModel
+    private lateinit var viewModelFactory: ClientGetModelFactory
+    private lateinit var viewModel: ClientGetViewModel
 
     // Binding
     private lateinit var binding: FragmentHomeBinding
@@ -31,8 +30,8 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
 
         // ViewModel
-        viewModelFactory = HomeViewModelFactory()
-        viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
+        viewModelFactory = ClientGetModelFactory()
+        viewModel = ViewModelProvider(this, viewModelFactory)[ClientGetViewModel::class.java]
 
         Timber.tag("Home").i("HomeFragment loaded")
 

@@ -30,4 +30,6 @@
     <string name="naam">Naam</string>
     <string name="titel">Titel</string>
     <string name="uur">Uur</string>
+    <string name="filter_voornaam">Filter voornaam...</string>
+    <string name="filter_achternaam">Filter achternaam</string>
 </resources>

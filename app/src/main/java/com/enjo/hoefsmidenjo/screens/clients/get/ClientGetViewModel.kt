@@ -5,7 +5,7 @@ import timber.log.Timber
 import java.time.LocalDate
 import java.time.LocalDateTime
 
-class HomeViewModel:ViewModel() {
+class ClientGetViewModel:ViewModel() {
 
 
     var date:LocalDate= LocalDate.now()

@@ -11,11 +11,55 @@
     android:layout_height="match_parent"
     android:background="@color/background">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <EditText
+        android:id="@+id/clientfilter"
+        android:layout_width="267dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="@string/filter_voornaam"
+        android:inputType="textPersonName"
+        android:text=""
+        android:theme="@style/filterClient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Filter voornaam..."
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/clientfilter2"
+        android:layout_width="267dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/white"
+        android:ems="10"
+        android:hint="@string/filter_achternaam"
+        android:inputType="textPersonName"
+        android:text=""
+        android:theme="@style/filterClient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clientfilter"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="Filter Achternaam..."
+        android:importantForAutofill="no" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/clients"
+        android:layout_width="413dp"
+        android:layout_height="577dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clientfilter2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
