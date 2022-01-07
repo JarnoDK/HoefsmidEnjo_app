@@ -6,13 +6,21 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.enjo.hoefsmidenjo.database.event.DbEvent
 import com.enjo.hoefsmidenjo.database.event.EventDao
+import com.enjo.hoefsmidenjo.database.invoice.DbInvoice
+import com.enjo.hoefsmidenjo.database.invoice.DbInvoiceLine
 import com.enjo.hoefsmidenjo.database.invoice.InvoiceDao
+import com.enjo.hoefsmidenjo.database.invoiceitem.DbInvoiceItem
 import com.enjo.hoefsmidenjo.database.invoiceitem.InvoiceItemDao
+import com.enjo.hoefsmidenjo.database.user.DbUser
 import com.enjo.hoefsmidenjo.database.user.UserDao
 
 @Database(entities = [
 
     DbEvent::class,
+DbInvoice::class,
+DbUser::class,
+DbInvoiceItem::class,
+DbInvoiceLine::class,
 ], version = 1)
 abstract class RoomDb : RoomDatabase() {
 

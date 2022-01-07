@@ -4,7 +4,6 @@ import com.enjo.hoefsmidenjo.api.classes.invoice.asDatabaseModel
 import com.enjo.hoefsmidenjo.api.classes.services.InvoiceApi
 import com.enjo.hoefsmidenjo.database.RoomDb
 import com.enjo.hoefsmidenjo.database.invoice.DbInvoiceLine
-import com.enjo.hoefsmidenjo.database.relations.RelInvoiceLineInvoiceItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -30,12 +29,7 @@ class InvoiceRepository (private val database: RoomDb){
                             invoiceId = inv.id
                         )
                     )
-                    dao.insertRelLineItem(
-                        RelInvoiceLineInvoiceItem(
-                            invoiceItemId = line.item.id,
-                            invoiceLineId = line.id
-                        )
-                    )
+
 
                 }
             }
