@@ -4,7 +4,7 @@ import androidx.room.Embedded
 import com.enjo.hoefsmidenjo.database.event.DbEvent
 import com.enjo.hoefsmidenjo.database.user.DbUser
 
-data class Rel_User_Event(
+data class RelUserEvent(
 
     @Embedded
     var user:DbUser,

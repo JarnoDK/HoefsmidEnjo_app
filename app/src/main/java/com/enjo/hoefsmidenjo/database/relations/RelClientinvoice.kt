@@ -5,7 +5,7 @@ import com.enjo.hoefsmidenjo.database.invoice.DbInvoice
 import com.enjo.hoefsmidenjo.database.user.DbUser
 
 
-data class Rel_Client_invoice(
+data class RelClientinvoice(
 
     @Embedded
     var invoice:DbInvoice,

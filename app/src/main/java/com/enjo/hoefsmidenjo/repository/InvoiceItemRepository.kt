@@ -17,14 +17,14 @@ class InvoiceItemRepository (private val database: RoomDb){
     suspend fun InsertFromApi(){
 
         withContext(Dispatchers.IO){
-            val invoiceitems = InvoiceItemApi.retrofitService.getInvoiceItemAsync().await()
+            val invoiceItems = InvoiceItemApi.retrofitService.getInvoiceItemAsync().await()
             //'*': kotlin spread operator.
             //Used for functions that expect a vararg param
             //just spreads the array into separate fields
 
             var dao = database.invoiceItemDao
 
-            dao.insertAll(*invoiceitems.asDatabaseModel())
+            dao.insertAll(*invoiceItems.asDatabaseModel())
 
             Timber.i("end suspend")
         }
