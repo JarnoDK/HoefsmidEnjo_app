@@ -11,26 +11,32 @@ xmlns:tools="http://schemas.android.com/tools"
         android:background="@color/background">
 
 
+        <View
+            android:id="@+id/view2"
+            android:layout_width="411dp"
+            android:layout_height="90dp"
+            android:background="@color/navigation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/label_telephone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/telefoon"
             android:theme="@style/clientlabel"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/telefoon"
             app:layout_constraintTop_toBottomOf="@+id/lastname" />
 
         <TextView
             android:id="@+id/label_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/email"
             android:theme="@style/clientlabel"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/Email"
             app:layout_constraintTop_toBottomOf="@+id/telefoon" />
 
         <EditText
@@ -43,25 +49,9 @@ xmlns:tools="http://schemas.android.com/tools"
             android:inputType="text"
             android:theme="@style/inputtext"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.144"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_firstname">
-
-        </EditText>
-
-        <EditText
-            android:id="@+id/lastname"
-            android:layout_width="300dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/white"
-            android:hint="@string/achternaam"
-            android:inputType="text"
-            android:theme="@style/inputtext"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.18"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/label_lastname">
 
         </EditText>
 
@@ -75,7 +65,7 @@ xmlns:tools="http://schemas.android.com/tools"
             android:inputType="phone"
             android:theme="@style/inputtext"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.144"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_telephone">
 
@@ -91,9 +81,25 @@ xmlns:tools="http://schemas.android.com/tools"
             android:inputType="textEmailAddress"
             android:theme="@style/inputtext"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.144"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/label_email">
+
+        </EditText>
+
+        <EditText
+            android:id="@+id/lastname"
+            android:layout_width="300dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:hint="@string/achternaam"
+            android:inputType="text"
+            android:theme="@style/inputtext"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.531"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/label_lastname">
 
         </EditText>
 
@@ -101,34 +107,32 @@ xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/label_firstname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="92dp"
             android:text="@string/voornaam"
             android:theme="@style/clientlabel"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/firstname"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/label_lastname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
             android:layout_marginTop="20dp"
             android:text="@string/achternaam"
             android:theme="@style/clientlabel"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/lastname"
             app:layout_constraintTop_toBottomOf="@+id/firstname" />
 
         <TextView
             android:id="@+id/title_newClient"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
+            android:layout_width="410dp"
+            android:layout_height="90dp"
+            android:gravity="center"
             android:text="@string/nieuwe_klant"
             android:textColor="@color/textGold"
             android:textSize="30sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -136,15 +140,15 @@ xmlns:tools="http://schemas.android.com/tools"
             android:id="@+id/button_adduser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/confirmbutton"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:text="Voeg gebruiker toe"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.344"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/Email" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

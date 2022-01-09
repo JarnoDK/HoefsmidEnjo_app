@@ -30,35 +30,33 @@
 
         <ImageView
             android:id="@+id/imgphone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
             android:contentDescription="phonenumber"
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/client_name"
-            app:srcCompat="@drawable/phone"
-            />
+            app:srcCompat="@drawable/phone" />
 
         <TextView
             android:id="@+id/client_phone"
             android:layout_width="257dp"
-            android:layout_height="24dp"
+            android:layout_height="28dp"
             android:layout_marginTop="8dp"
 
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
+            android:scrollbars="horizontal"
             android:text="@string/telefoon"
             android:theme="@style/profilecardtext"
             app:layout_constraintStart_toEndOf="@+id/imgphone"
-            app:layout_constraintTop_toBottomOf="@+id/client_name"
-            android:scrollbars = "horizontal"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/client_name" />
 
         <ImageView
             android:id="@+id/imgemail"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="7dp"
             android:contentDescription="@string/email"
@@ -69,16 +67,15 @@
         <TextView
             android:id="@+id/client_email"
             android:layout_width="275dp"
-            android:layout_height="24dp"
+            android:layout_height="28dp"
             android:layout_marginTop="7dp"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
+            android:scrollbars="horizontal"
             android:text="@string/email"
             android:theme="@style/profilecardtext"
             app:layout_constraintStart_toEndOf="@+id/imgemail"
-            app:layout_constraintTop_toBottomOf="@+id/client_phone"
-            android:scrollbars = "horizontal"
-            />
+            app:layout_constraintTop_toBottomOf="@+id/client_phone" />
 
         <TextView
             android:id="@+id/client_name"

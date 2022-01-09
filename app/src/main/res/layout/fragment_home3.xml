@@ -11,15 +11,23 @@
         android:background="@color/background"
         android:theme="@style/datepicker">
 
+        <View
+            android:id="@+id/view5"
+            android:layout_width="wrap_content"
+            android:layout_height="190dp"
+            android:background="@color/navigation"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/planning"
-            android:layout_width="361dp"
+            android:layout_width="match_parent"
             android:layout_height="429dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="12dp"
             android:paddingBottom="30dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewToday" />
+            app:layout_constraintTop_toBottomOf="@+id/view5" />
 
         <View
             android:id="@+id/viewTomorrow"
@@ -129,7 +137,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="10dp"
             android:text="@string/dinsdag_2_januari"
-            android:textColor="@color/black"
+            android:textColor="@color/textGold"
             android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

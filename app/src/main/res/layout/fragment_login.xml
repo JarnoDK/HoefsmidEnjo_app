@@ -11,11 +11,23 @@
         tools:context=".screens.home.HomeFragment"
         >
 
+        <Button
+            android:id="@+id/pincode_3"
+            android:layout_width="57dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="264dp"
+            android:layout_marginTop="224dp"
+            android:background="@drawable/button_design"
+            android:text="3"
+            android:theme="@style/buttonText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foregroundGravity="center_horizontal"
-            app:constraint_referenced_ids="pincode_6,pincode_back,pincode_9,pincode_3,pincodeDisplay,pincode_7,pincode_8,pincode_1,pincode_ok,pincode_5,pincode_0,pincode_2,pincode_4" />
+            app:constraint_referenced_ids="pincode_6,pincode_back,pincode_9,pincode_3,pincodeDisplay,pincode_7,pincode_8,pincode_1,pincode_ok,pincode_5,pincode_0,pincode_2,pincode_4,view6" />
 
         <Button
             android:id="@+id/pincode_8"
@@ -90,17 +102,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/pincode_3"
-            android:layout_width="57dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="264dp"
-            android:layout_marginTop="224dp"
-            android:background="@drawable/button_design"
-            android:text="3"
-            android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <View
+            android:id="@+id/view6"
+            android:layout_width="wrap_content"
+            android:layout_height="190dp"
+            android:background="@color/navigation" />
 
         <Button
             android:id="@+id/pincode_5"
