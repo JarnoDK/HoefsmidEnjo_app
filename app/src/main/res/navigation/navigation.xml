@@ -37,7 +37,11 @@
         android:name="com.enjo.hoefsmidenjo.screens.clients.create.ClientAddFragment"
         android:label="Klant Toevoegen"
         />
-
+    <fragment
+        android:id="@id/item_beheren"
+        android:name="com.enjo.hoefsmidenjo.screens.items.get.ItemGetFragment"
+        android:label="Item Beheren"
+        />
     <fragment
         android:id="@+id/logout"
         android:name="com.enjo.hoefsmidenjo.screens.login.LoginFragment"

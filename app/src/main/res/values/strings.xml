@@ -43,4 +43,7 @@
     <string name="achternaam">Achternaam</string>
     <string name="voornaam">Voornaam</string>
     <string name="nieuwe_klant"><u>Nieuwe Klant</u></string>
+    <string name="filter_naam">Filter naam</string>
+    <string name="name">Name</string>
+    <string name="_5_00">5.00€</string>
 </resources>
