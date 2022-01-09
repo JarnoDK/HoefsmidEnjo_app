@@ -39,7 +39,7 @@ class HomeFragment : Fragment() {
         viewModelFactory = HomeViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
-        Timber.tag("Home").i("HomeFragment loaded")
+        Timber.tag("Home").i("ItemCreateFragment loaded")
         binding.planning.adapter = adapter
 
         binding.Today.text = viewModel.date.dayOfMonth.toString()

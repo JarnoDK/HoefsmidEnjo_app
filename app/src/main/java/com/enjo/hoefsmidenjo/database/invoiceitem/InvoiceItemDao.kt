@@ -19,4 +19,10 @@ interface InvoiceItemDao {
     @Query("SELECT * FROM invoice_item WHERE name LIKE '%'||:filter||'%'")
     fun GetFilteredItem(filter:String):LiveData<List<DbInvoiceItem>>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insert(item: DbInvoiceItem)
+
+    @Query("SELECT EXISTS(SELECT * FROM invoice_item where name == :name)")
+    fun itemExist(name:String): Boolean
+
 }

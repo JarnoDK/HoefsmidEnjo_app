@@ -48,4 +48,10 @@
         android:label="Logout"
         app:destination="@id/loginFragment"
         />
+
+    <fragment
+        android:id="@+id/item_toevoegen"
+        android:name="com.enjo.hoefsmidenjo.screens.items.create.ItemCreateFragment"
+        android:label="Item Toevoegen"
+        />
 </navigation>

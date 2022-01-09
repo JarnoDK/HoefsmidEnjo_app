@@ -97,7 +97,7 @@ class ClientGetFragment : Fragment() {
                 return false
             }
         })
-        Timber.tag("Home").i("HomeFragment loaded")
+        Timber.tag("Home").i("ItemCreateFragment loaded")
 
         binding.lifecycleOwner = this
 

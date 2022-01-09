@@ -19,3 +19,11 @@ fun List<ApiInvoiceItem>.asDatabaseModel():Array<DbInvoiceItem>{
         )
     }.toTypedArray()
 }
+
+fun ApiInvoiceItem.asDatabaseModel():DbInvoiceItem{
+    return DbInvoiceItem(
+        id = id,
+        name = name,
+        unitPrice = unitPrice
+    )
+}

@@ -33,6 +33,8 @@ abstract class RoomDb : RoomDatabase() {
         @Volatile
         private var INSTANCE: RoomDb? = null
 
+        //<TODO> find fix fir not on main thread
+        // in add invoice item the exist does not want to work (even with view scope)
         fun getInstance(context: Context): RoomDb {
             synchronized(this) {
                 return INSTANCE ?: Room.databaseBuilder(
@@ -40,6 +42,8 @@ abstract class RoomDb : RoomDatabase() {
                     RoomDb::class.java,
                     "HoefsmidEnjo_Roomdb"
                 ).fallbackToDestructiveMigration()
+                        // still needs a fix
+                    .allowMainThreadQueries()
                     .build().also {
                         INSTANCE = it
                     }

@@ -2,9 +2,9 @@ package com.enjo.hoefsmidenjo.api.classes.services
 
 import com.enjo.hoefsmidenjo.api.classes.invoiceitem.ApiInvoiceItem
 import kotlinx.coroutines.Deferred
+import retrofit2.http.Body
 import retrofit2.http.GET
-
-
+import retrofit2.http.POST
 
 
 interface InvoiceItemService {
@@ -12,6 +12,8 @@ interface InvoiceItemService {
     @GET("/api/invoiceItem")
     fun getInvoiceItemAsync(): Deferred<List<ApiInvoiceItem>>
 
+    @POST("/api/invoiceItem")
+    fun createInvoiceItemAsync(@Body item:ApiInvoiceItem):Deferred<ApiInvoiceItem>
 
 }
 object InvoiceItemApi{

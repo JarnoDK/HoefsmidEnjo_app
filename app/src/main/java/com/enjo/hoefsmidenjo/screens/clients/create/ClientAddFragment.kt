@@ -45,7 +45,7 @@ class ClientAddFragment : Fragment() {
         viewModelFactory = ClientAddModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[ClientAddViewModel::class.java]
 
-        Timber.tag("Home").i("HomeFragment loaded")
+        Timber.tag("Home").i("ItemCreateFragment loaded")
         binding.buttonAdduser.setOnClickListener{
 
             viewModel.firstname = binding.firstname.text.toString()
@@ -55,12 +55,6 @@ class ClientAddFragment : Fragment() {
 
             addUser()
         }
-
-
-
-
-
-
 
         binding.lifecycleOwner = this
 

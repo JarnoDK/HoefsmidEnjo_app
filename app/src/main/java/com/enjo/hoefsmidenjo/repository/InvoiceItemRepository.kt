@@ -2,6 +2,7 @@ package com.enjo.hoefsmidenjo.repository
 
 import com.enjo.hoefsmidenjo.api.classes.event.asDatabaseModel
 import com.enjo.hoefsmidenjo.api.classes.invoice.asDatabaseModel
+import com.enjo.hoefsmidenjo.api.classes.invoiceitem.ApiInvoiceItem
 import com.enjo.hoefsmidenjo.api.classes.invoiceitem.asDatabaseModel
 import com.enjo.hoefsmidenjo.api.classes.services.EventApi
 import com.enjo.hoefsmidenjo.api.classes.services.InvoiceApi
@@ -14,6 +15,8 @@ import timber.log.Timber
 
 class InvoiceItemRepository (private val database: RoomDb){
 
+    var dao = database.invoiceItemDao
+
     suspend fun InsertFromApi(){
 
         withContext(Dispatchers.IO){
@@ -22,11 +25,17 @@ class InvoiceItemRepository (private val database: RoomDb){
             //Used for functions that expect a vararg param
             //just spreads the array into separate fields
 
-            var dao = database.invoiceItemDao
 
             dao.insertAll(*invoiceItems.asDatabaseModel())
 
             Timber.i("end suspend")
+        }
+    }
+
+    suspend fun addItem(item:ApiInvoiceItem){
+        withContext(Dispatchers.IO){
+                val invoiceItem= InvoiceItemApi.retrofitService.createInvoiceItemAsync(item).await()
+                dao.insert(invoiceItem.asDatabaseModel())
         }
     }
 }

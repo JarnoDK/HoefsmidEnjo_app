@@ -42,7 +42,7 @@ class ViewHolder(val binding: FragmentItemGetListitemBinding): RecyclerView.View
     fun bind( item: DbInvoiceItem) {
 
         binding.itemname.text = item.name
-        binding.itemprice.text = "${item.unitPrice} €"
+        binding.itemprice.text = "%.2f €".format(item.unitPrice)
 
         binding.dbInvoiceItem = item
         binding.executePendingBindings()
