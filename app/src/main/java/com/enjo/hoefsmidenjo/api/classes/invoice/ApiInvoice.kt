@@ -1,11 +1,13 @@
 package com.enjo.hoefsmidenjo.api.classes.invoice
 
+import androidx.room.ColumnInfo
 import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 import com.enjo.hoefsmidenjo.database.invoice.DbInvoice
 import com.enjo.hoefsmidenjo.database.invoice.DbInvoiceLine
 
 data class ApiInvoice(
 
+    @ColumnInfo(name = "invoiceid")
     var id:Int,
     var client: ApiUser,
     var time:String,

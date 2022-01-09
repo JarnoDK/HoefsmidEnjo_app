@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.enjo.hoefsmidenjo.MainActivity
 import com.enjo.hoefsmidenjo.databinding.FragmentLoginBinding
 import com.example.k2_kolveniershof_android.screens.login.LoginViewModel
 import com.example.k2_kolveniershof_android.screens.login.LoginViewModelFactory
@@ -22,7 +22,9 @@ class LoginFragment : Fragment(){
 
     // Binding
     private lateinit var binding: FragmentLoginBinding
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -54,6 +56,7 @@ class LoginFragment : Fragment(){
             binding.pincodeDisplay.text = viewModel.Pincode
 
         }
+
 
 
         return binding.root

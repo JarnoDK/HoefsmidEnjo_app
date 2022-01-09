@@ -26,8 +26,11 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/planning"
             android:layout_width="410dp"
-            android:layout_height="273dp"
+            android:layout_height="216dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:paddingBottom="30dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/datePicker" />
 

@@ -19,12 +19,11 @@ import android.text.style.TextAppearanceSpan
 
 import android.text.SpannableString
 import android.view.Menu
-import com.enjo.hoefsmidenjo.screens.login.LoginFragment
+import androidx.appcompat.app.AlertDialog
+import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 import com.google.android.material.navigation.NavigationView
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,11 +31,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var drawerLayout: DrawerLayout
-    private lateinit var bottomNav:BottomNavigationView
-
+    private lateinit var bottomNav: BottomNavigationView
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         // Binding
         binding =
@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         Timber.tag("MainActivity").i("onCreate Called")
 
         val navigationView = findViewById<View>(R.id.navView) as NavigationView
-        val navController = findNavController(R.id.navHostFragment)
+        navController = findNavController(R.id.navHostFragment)
 
 
         drawerLayout = this.findViewById(R.id.drawerLayout)
@@ -61,30 +61,61 @@ class MainActivity : AppCompatActivity() {
 
         val menu: Menu = navigationView.menu
 
-        val categories:Array<Int> = arrayOf(R.id.calendar_category, R.id.client_category, R.id.invoice_category, R.id.item_category)
-        for(category:Int in categories){
+        val categories: Array<Int> = arrayOf(
+            R.id.calendar_category,
+            R.id.client_category,
+            R.id.invoice_category,
+            R.id.item_category
+        )
+        for (category: Int in categories) {
             var tools: MenuItem = menu.findItem(category)
             val s = SpannableString(tools.title)
             s.setSpan(TextAppearanceSpan(this, R.style.category), 0, s.length, 0)
             tools.title = s
         }
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            when (destination.id) {
-                R.id.loginFragment -> {
-                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                    bottomNav.visibility = View.INVISIBLE
-                }
-                else -> {
-                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                    bottomNav.visibility = View.VISIBLE
 
-                    }
-                }
+        navController.addOnDestinationChangedListener { _, destination, _  ->
+
+            if (destination.id == R.id.loginFragment) {
+                Timber.tag("DestinationChange").i("Login fragment")
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                bottomNav.visibility = View.INVISIBLE
+
+            } else {
+                Timber.tag("DestinationChange").i("Other fragment")
+
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                bottomNav.visibility = View.VISIBLE
+            }
         }
 
 
+        val logout: View = findViewById(R.id.profileFragment)
+        logout.setOnClickListener {
+            // show popup when user clicks account button
+            val builder = AlertDialog.Builder(this, R.style.deleteDialog)
+            builder.setMessage("Wilt u uitloggen?")
+                .setCancelable(false)
+                .setPositiveButton("Ja") { _, _ ->
+                    logout()
+                }
+                .setNegativeButton("Nee") { dialog, _ ->
+                    // Close dialog
+                    dialog.dismiss()
+                }
+            val alert = builder.create()
+            alert.show()
+        }
 
 
     }
+
+    fun logout() {
+        navController.navigate(R.id.logout)
+        val navController = this.findNavController(R.id.navHostFragment)
+        navController.navigate(R.id.logout)
+    }
 }
+
+

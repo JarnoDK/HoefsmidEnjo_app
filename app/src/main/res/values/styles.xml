@@ -41,4 +41,22 @@
         <item name="android:paddingStart">10dp</item>
         <item name="android:paddingEnd">10dp</item>
     </style>
+
+    <style name="deleteDialog">
+        <item name="android:background">#80343434</item>
+        
+        <item name="android:textColor">@color/textGold</item>
+        <item name="android:textColorPrimary">@color/textGold</item>
+        <item name="android:textColorSecondary">@color/textGold</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="inputtext">
+        <item name="android:paddingStart">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+    </style>
+    <style name="clientlabel">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/textGold</item>
+    </style>
 </resources>

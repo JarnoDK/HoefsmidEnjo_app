@@ -10,7 +10,7 @@
         android:name="com.enjo.hoefsmidenjo.screens.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_home">
-        >
+
 
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
@@ -22,4 +22,26 @@
         android:name="com.enjo.hoefsmidenjo.screens.home.HomeFragment"
         android:label="HomeFragment"
         tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/kalender_raadplegen"
+        android:name="com.enjo.hoefsmidenjo.screens.home.HomeFragment"
+        android:label="KalenderRaadplegen" />
+
+    <fragment
+        android:id="@+id/klant_beheren"
+        android:name="com.enjo.hoefsmidenjo.screens.clients.get.ClientGetFragment"
+        android:label="Klant beheren" />
+    <fragment
+        android:id="@id/klant_toevoegen"
+        android:name="com.enjo.hoefsmidenjo.screens.clients.create.ClientAddFragment"
+        android:label="Klant Toevoegen"
+        />
+
+    <fragment
+        android:id="@+id/logout"
+        android:name="com.enjo.hoefsmidenjo.screens.login.LoginFragment"
+        android:label="Logout"
+        app:destination="@id/loginFragment"
+        />
 </navigation>

@@ -10,4 +10,6 @@
     <color name="background">#595959</color>
     <color name="navigation">#343434</color>
     <color name="textGold">#E0BF1B</color>
+    <color name="lightgreen">#85F0AC</color>
+    <color name="darkgreen">#1C9E57</color>
 </resources>

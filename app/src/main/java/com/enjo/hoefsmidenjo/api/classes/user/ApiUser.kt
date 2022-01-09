@@ -9,11 +9,17 @@ data class ApiUser(
     var firstName:String,
     var lastName:String,
     var role:Int? = 0,
-    var email:String?=null,
+    var email:String="",
     var phone:String?=null,
-    var password:String?=null
+    var password:String?=null,
+    var pincode:String?=null
 
 )
+{
+    override fun toString(): String {
+        return "id: ${id}\nfirstname:${firstName}\nlastname:${lastName}\nrole:$role\nemail: $email\nphone:$phone\npassword:$password\nPincode:$pincode"
+    }
+}
 
 fun List<ApiUser>.asDatabaseModel():Array<DbUser>{
     return map {
@@ -22,9 +28,35 @@ fun List<ApiUser>.asDatabaseModel():Array<DbUser>{
             lastName = it.lastName,
             id = it.id,
             email = it.email,
-            phone = it.phone,
+            phone = it.phone.orEmpty(),
             password = it.password,
-            role = it.role
+            role = it.role,
+            pincode= it.pincode
         )
     }.toTypedArray()
 }
+
+fun DbUser.asApiUser():ApiUser{
+    return ApiUser(
+        id = id,
+        firstName = firstName,
+        lastName=lastName,
+        email=email,
+        password = password,
+        phone = phone,
+        role = role
+    )
+}
+fun ApiUser.asDatabaseModel():DbUser{
+    return DbUser(
+        id = id,
+        firstName = firstName,
+        lastName=lastName,
+        email=email,
+        password = password,
+        phone = phone.orEmpty(),
+        role = role
+    )
+}
+
+

@@ -11,6 +11,8 @@ interface InvoiceItemService {
 
     @GET("/api/invoiceItem")
     fun getInvoiceItemAsync(): Deferred<List<ApiInvoiceItem>>
+
+
 }
 object InvoiceItemApi{
     //lazy properties = thread safe --> can only be initialized once at a time

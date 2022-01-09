@@ -38,7 +38,7 @@ abstract class RoomDb : RoomDatabase() {
                 return INSTANCE ?: Room.databaseBuilder(
                     context.applicationContext,
                     RoomDb::class.java,
-                    "roomdb"
+                    "HoefsmidEnjo_Roomdb"
                 ).fallbackToDestructiveMigration()
                     .build().also {
                         INSTANCE = it

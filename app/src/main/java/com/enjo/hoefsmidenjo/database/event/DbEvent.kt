@@ -1,5 +1,6 @@
 package com.enjo.hoefsmidenjo.database.event
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
@@ -8,6 +9,7 @@ import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 data class DbEvent(
 
     @PrimaryKey(autoGenerate = false)
+    @ColumnInfo(name = "eventid")
     var id:Int,
     var time: String,
     var client: Int,
