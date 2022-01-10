@@ -54,4 +54,12 @@
         android:name="com.enjo.hoefsmidenjo.screens.items.create.ItemCreateFragment"
         android:label="Item Toevoegen"
         />
+
+    <fragment
+        android:id="@+id/rekening_bekijken"
+        android:name="com.enjo.hoefsmidenjo.screens.invoices.get.InvoiceFragment"
+        android:label="Item Toevoegen"
+        />
+
+
 </navigation>

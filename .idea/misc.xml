@@ -11,6 +11,7 @@
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/drawable/calendar.xml" value="0.2703125" />
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/drawable/clients.xml" value="0.2703125" />
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/drawable/confirmbutton.xml" value="0.11041666666666666" />
+        <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/drawable/detail.xml" value="0.22314814814814815" />
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/drawable/home.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/drawable/horse.xml" value="0.14635416666666667" />
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.14635416666666667" />
@@ -32,6 +33,8 @@
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/layout/fragment_home.xml" value="0.3255208333333333" />
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/layout/fragment_home2.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/layout/fragment_home3.xml" value="0.4" />
+        <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/layout/fragment_invoice_list.xml" value="0.28032786885245903" />
+        <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/layout/fragment_invoice_list_item.xml" value="0.4" />
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/layout/fragment_invoiceitem_add.xml" value="0.3255208333333333" />
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/layout/fragment_item_get.xml" value="0.3463541666666667" />
         <entry key="..\:/Users/jarno/Documents/Hoefsmid/App/Android/app/src/main/res/layout/fragment_item_get_listitem.xml" value="0.536" />

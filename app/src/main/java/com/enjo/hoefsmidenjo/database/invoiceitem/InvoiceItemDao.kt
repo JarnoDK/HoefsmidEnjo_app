@@ -25,4 +25,5 @@ interface InvoiceItemDao {
     @Query("SELECT EXISTS(SELECT * FROM invoice_item where name == :name)")
     fun itemExist(name:String): Boolean
 
+
 }
