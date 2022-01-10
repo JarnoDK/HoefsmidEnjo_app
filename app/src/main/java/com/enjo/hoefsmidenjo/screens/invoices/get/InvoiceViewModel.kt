@@ -30,7 +30,12 @@ class InvoiceViewModel(app: Application): AndroidViewModel(app){
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val dao = database.invoiceDao
-    lateinit var invoices:LiveData<List<RelClientInvoiceAmount>>
+    var invoices:LiveData<List<RelClientInvoiceAmount>> = dao.GetInvoicesWithTotalPrice()
+
+    var date = ""
+    var current: LocalDate = LocalDate.now()
+    var firstname = ""
+    var lastname = ""
 
     init {
         Timber.tag("LoginViewModel").i("LoginViewModel created")
@@ -39,7 +44,7 @@ class InvoiceViewModel(app: Application): AndroidViewModel(app){
 
     fun refreshList(){
 
-        invoices = dao.GetInvoicesWithTotalPrice()
+        invoices = dao.GetInvoicesWithTotalPriceFiltered(date,firstname,lastname)
 
     }
 

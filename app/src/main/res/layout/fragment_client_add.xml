@@ -125,7 +125,7 @@ xmlns:tools="http://schemas.android.com/tools"
 
         <TextView
             android:id="@+id/title_newClient"
-            android:layout_width="410dp"
+            android:layout_width="match_parent"
             android:layout_height="90dp"
             android:gravity="center"
             android:text="@string/nieuwe_klant"

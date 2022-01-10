@@ -16,6 +16,7 @@ class InvoiceRepository (private val database: RoomDb){
             val invoices = InvoiceApi.retrofitService.getInvoiceAsync().await()
             var dao = database.invoiceDao
 
+
             // insert invoices
             dao.insertAll(*invoices.asDatabaseModel())
             // insert invoice lines

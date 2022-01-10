@@ -21,7 +21,7 @@ DbInvoice::class,
 DbUser::class,
 DbInvoiceItem::class,
 DbInvoiceLine::class,
-], version = 1)
+], version = 2)
 abstract class RoomDb : RoomDatabase() {
 
     abstract val eventDao: EventDao

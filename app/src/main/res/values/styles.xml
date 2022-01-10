@@ -2,32 +2,32 @@
 <resources>
     <style name="category">
         <item name="android:textColor">@color/textGold</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
     </style>
     <style name="menuItem">
         <item name="android:textColor">@color/textGold</item>
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:paddingStart">12dp</item>
     </style>
 
     <style name="buttonText">
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">25dp</item>
+        <item name="android:textSize">25sp</item>
     </style>
 
     <style name="homebuttons">
         <item name="android:paddingStart">20dp</item>
         <item name="android:paddingEnd">20dp</item>
         <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:fillColor">@color/black</item>
     </style>
 
     <style name="datepicker" >
         <item name="colorAccent">@color/navigation</item>
         <item name="android:calendarTextColor">@color/black</item>
-        <item name="android:textColorPrimary">@color/textGold</item>
-        <item name="android:textColorSecondary">@color/textGold</item>
+        <item name="android:textColorPrimary">@color/black</item>
+        <item name="android:textColorSecondary">@color/black</item>
 
     </style>
 
@@ -63,5 +63,13 @@
     <style name="invoicecard">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/textGold</item>
+    </style>
+    <style name="invoiceheader">
+        <item name="android:gravity">center</item>
+        <item name="android:height">90dp</item>
+        <item name="android:textColor">@color/textGold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
     </style>
 </resources>

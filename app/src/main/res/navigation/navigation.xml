@@ -58,8 +58,15 @@
     <fragment
         android:id="@+id/rekening_bekijken"
         android:name="com.enjo.hoefsmidenjo.screens.invoices.get.InvoiceFragment"
-        android:label="Item Toevoegen"
+        android:label="Item Toevoegen">
+        <action
+            android:id="@+id/invoice_to_detail"
+            app:destination="@+id/detailfragment"
+            />
+
+    </fragment>
+    <fragment
+        android:id="@+id/detailfragment"
+        android:name="com.enjo.hoefsmidenjo.screens.invoices.detail.InvoiceDetailFragment"
         />
-
-
 </navigation>

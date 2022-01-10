@@ -7,6 +7,11 @@
     <variable
         name="RelClientInvoiceAmount"
         type="com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount" />
+
+    <variable
+        name="clickListener"
+        type="com.enjo.hoefsmidenjo.screens.invoices.get.InvoiceDetailListener" />
+
 </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -58,12 +63,15 @@
 
         <ImageView
             android:id="@+id/invoicedetail"
-            android:layout_width="74dp"
-            android:layout_height="82dp"
+            android:layout_width="75dp"
+            android:layout_height="84dp"
             app:layout_constraintBottom_toBottomOf="@+id/view7"
             app:layout_constraintEnd_toEndOf="@+id/view7"
             app:layout_constraintTop_toTopOf="@+id/view7"
-            app:srcCompat="@drawable/detail" />
+            app:srcCompat="@drawable/detail"
+            android:onClick="@{()->clickListener.onClick(RelClientInvoiceAmount)}"
+
+            />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

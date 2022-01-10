@@ -10,7 +10,9 @@ import com.enjo.hoefsmidenjo.api.classes.services.InvoiceItemApi
 import com.enjo.hoefsmidenjo.api.classes.services.UserApi
 import com.enjo.hoefsmidenjo.database.RoomDb
 import com.enjo.hoefsmidenjo.database.event.DbEvent
+import com.enjo.hoefsmidenjo.database.invoice.DbInvoice
 import com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount
+import com.enjo.hoefsmidenjo.database.relations.RelInvoiceLineInvoiceItem
 import com.enjo.hoefsmidenjo.database.relations.RelUserEvent
 import com.enjo.hoefsmidenjo.repository.EventRepository
 import com.enjo.hoefsmidenjo.repository.InvoiceItemRepository
@@ -29,18 +31,24 @@ class InvoiceDetailViewModel(app: Application): AndroidViewModel(app){
     private var viewModelJob = Job()
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
+
     private val dao = database.invoiceDao
-    lateinit var invoices:LiveData<List<RelClientInvoiceAmount>>
+
+    lateinit var invoice: RelClientInvoiceAmount
+
+    lateinit var invoiceItems:LiveData<List<RelInvoiceLineInvoiceItem>>
+    var total:Double = 0.00
 
     init {
         Timber.tag("LoginViewModel").i("LoginViewModel created")
         getInvoices()
     }
 
-    fun refreshList(){
 
-        invoices = dao.GetInvoicesWithTotalPrice()
-
+    fun setInvoice(id:Int){
+        invoice = dao.getById(id)
+        invoiceItems = dao.getInvoiceLinesOfInvoice(id)
+        total = dao.getTotalAmount(id)
     }
 
     private fun getInvoices() {

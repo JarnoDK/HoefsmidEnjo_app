@@ -40,7 +40,7 @@
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@color/white"
-            android:hint="Achternaam"
+            android:hint="@string/achternaam"
             android:inputType="text"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -49,16 +49,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/firstname" />
 
-        <EditText
+        <TextView
             android:id="@+id/invoice_date"
             android:layout_width="300dp"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
             android:background="@color/white"
+            android:gravity="center_vertical"
             android:hint="Datum dd/MM/yyyy"
-            android:inputType="date"
+            android:inputType="none"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
@@ -75,6 +77,15 @@
             app:layout_constraintTop_toBottomOf="@+id/topbackground"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             />
+
+        <ImageView
+            android:id="@+id/imgClear"
+            android:layout_width="50dp"
+            android:layout_height="48dp"
+            app:layout_constraintBottom_toBottomOf="@+id/invoice_date"
+            app:layout_constraintEnd_toEndOf="@+id/invoice_date"
+            app:layout_constraintTop_toTopOf="@+id/invoice_date"
+            app:srcCompat="@drawable/imgclear" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

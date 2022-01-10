@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 import com.enjo.hoefsmidenjo.database.invoice.DbInvoice
 import com.enjo.hoefsmidenjo.database.invoice.DbInvoiceLine
+import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 
 data class ApiInvoice(
 
@@ -19,8 +20,9 @@ fun List<ApiInvoice>.asDatabaseModel(): Array<DbInvoice>{
     return map{
         DbInvoice(
             id =  it.id,
-            time = it.time,
+            time = DomainController.instance.convertDateTime(it.time),
             client = it.client.id
             )
     }.toTypedArray()
 }
+
