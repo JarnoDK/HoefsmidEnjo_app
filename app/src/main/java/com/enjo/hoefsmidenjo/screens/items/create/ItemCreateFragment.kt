@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.databinding.FragmentHome3Binding
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceitemAddBinding
+import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import timber.log.Timber
 import java.lang.Exception
 import java.time.LocalDate
@@ -48,7 +49,16 @@ class ItemCreateFragment : Fragment() {
         binding.additem.setOnClickListener{
             viewModel.name = binding.itemname.text.toString()
             viewModel.price = binding.Prijs.parseToDouble()
-            addItem()
+            if(DomainController.instance.checkForInternet(this.requireContext())) {
+                addItem()
+
+            }else {
+                AlertDialog
+                    .Builder(this.requireContext())
+                    .setTitle("Geen verbinding")
+                    .setMessage("Kan geen verbinding maken tot databank")
+                    .show()
+            }
         }
 
 

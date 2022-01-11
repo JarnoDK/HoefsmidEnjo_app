@@ -17,6 +17,7 @@ import com.enjo.hoefsmidenjo.repository.InvoiceRepository
 import com.enjo.hoefsmidenjo.repository.UserRepository
 import kotlinx.coroutines.*
 import timber.log.Timber
+import java.io.IOException
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -64,9 +65,7 @@ class HomeViewModel( app: Application): AndroidViewModel(app){
 
             } catch (t: Throwable) {
 
-                Timber.tag("Error").i("Could not load invoices")
-
-                throw t
+                Timber.tag("Error").i("Kan geen contact maken met repository")
             }
         }
     }

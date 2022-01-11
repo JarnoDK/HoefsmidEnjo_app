@@ -25,10 +25,14 @@ class UserRepository (private val database: RoomDb){
     suspend fun removeUser(id:Int){
         withContext(Dispatchers.IO) {
 
-            var bool:Boolean=  UserApi.retrofitService.removeUserAsync(id).await()
-            Timber.tag("Deleted: ${bool.toString()}")
-            database.userDao.deleteUser(id)
-            Timber.i("end suspend")
+            try {
+                var bool:Boolean=  UserApi.retrofitService.removeUserAsync(id).await()
+                database.userDao.deleteUser(id)
+            }catch (t: Throwable){
+                Timber.tag("Geen connectie").i("Kan geen verbinding maken met api")
+            }
+
+
 
         }
     }
@@ -36,9 +40,13 @@ class UserRepository (private val database: RoomDb){
     suspend fun addUser(user:ApiUser){
         withContext(Dispatchers.IO) {
 
-            var user = UserApi.retrofitService.createUserAsync(user).await()
-            database.userDao.insert(user.asDatabaseModel())
-            Timber.i("end suspend")
+            try{
+                var user = UserApi.retrofitService.createUserAsync(user).await()
+                database.userDao.insert(user.asDatabaseModel())
+            }catch (t: Throwable){
+                throw t
+            }
+
 
         }
     }

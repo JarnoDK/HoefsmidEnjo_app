@@ -79,8 +79,13 @@ class ClientAddViewModel( app: Application): AndroidViewModel(app){
         viewModelScope.launch {
             if(check) {
 
-                Timber.tag("Create user").i(user.toString())
-                userRepo.addUser(user)
+                try {
+                    Timber.tag("Create user").i(user.toString())
+                    userRepo.addUser(user)
+                }catch (t:Throwable){
+                    throw t
+                }
+
             }
         }
 

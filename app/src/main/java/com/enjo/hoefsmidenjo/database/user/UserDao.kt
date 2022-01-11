@@ -18,10 +18,16 @@ interface UserDao {
     @Query("SELECT * FROM users where role==0")
     fun getAllClients():LiveData<List<DbUser>>
 
+    @Query("SELECT * FROM users where role==0")
+    fun getAllClientArray():Array<DbUser>
+
     @Query("select * from users where firstName LIKE '%' || :firstname || '%' and lastName LIKE '%'||:lastname||'%'")
     fun getAllFilteredClients(firstname:String,lastname:String):LiveData<List<DbUser>>
 
     @Query("delete from users where userid == :id")
     fun deleteUser(id:Int)
+
+    @Query("SELECT * FROM users WHERE (firstName ||' '||lastName) == :name")
+    fun getUserByName(name: String):DbUser
 
 }

@@ -27,3 +27,10 @@ fun ApiInvoiceItem.asDatabaseModel():DbInvoiceItem{
         unitPrice = unitPrice
     )
 }
+fun DbInvoiceItem.asApiModel():ApiInvoiceItem{
+    return ApiInvoiceItem(
+        name = name,
+        id = id,
+        unitPrice = unitPrice
+    )
+}

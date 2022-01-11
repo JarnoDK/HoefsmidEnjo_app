@@ -15,7 +15,14 @@ interface InvoiceDao {
     suspend fun insertAll(vararg invoice:DbInvoice )
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(invoice:DbInvoice )
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertLine(invoiceLine: DbInvoiceLine )
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllInvoiceLines(invoiceLines:Array<DbInvoiceLine> )
+
 
     @Query("select * from invoice")
     fun getAll():LiveData<List<DbInvoice>>

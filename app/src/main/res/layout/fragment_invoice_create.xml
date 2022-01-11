@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="938dp"
+        android:background="@color/background">
+
+        <ScrollView
+            android:id="@+id/scroller"
+            android:layout_width="match_parent"
+            android:layout_height="464dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/background_header"
+            tools:ignore="SpeakableTextPresentCheck">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background">
+
+                <TextView
+                    android:id="@+id/invoicelabelklant"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:labelFor="@id/invoiceclient"
+                    android:text="@string/klant"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/invoiceclient"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TimePicker
+                    android:id="@+id/hourpicker"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/invoicetime" />
+
+                <TextView
+                    android:id="@+id/InvoiceLineItem"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:labelFor="@id/invoiceItemname"
+                    android:text="@string/naam"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/invoicetitleTask"
+                    app:layout_constraintTop_toBottomOf="@+id/splitter" />
+
+                <Spinner
+                    android:id="@+id/invoiceclient"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/invoicelabelklant"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <View
+                    android:id="@+id/splitter"
+                    android:layout_width="350dp"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="12dp"
+                    android:background="@color/navigation"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/invoicetitleTask" />
+
+                <TextView
+                    android:id="@+id/invoicedate"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="@string/datum"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/datum"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/invoicedate"
+                    app:layout_constraintTop_toBottomOf="@+id/invoiceclient" />
+
+                <Spinner
+                    android:id="@+id/invoiceItemname"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/InvoiceLineItem"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+                <TextView
+                    android:id="@+id/invoicelabelamount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/aantal"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/invoiceItemname"
+                    app:layout_constraintTop_toBottomOf="@+id/invoiceItemname" />
+
+                <TextView
+                    android:id="@+id/invoicetime"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:labelFor="@id/hourpicker"
+                    android:text="@string/tijd"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/invoicedate"
+                    app:layout_constraintTop_toBottomOf="@+id/invoicedate" />
+
+                <TextView
+                    android:id="@+id/invoicetitleTask"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="@string/items"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/hourpicker"
+                    app:layout_constraintTop_toBottomOf="@+id/hourpicker" />
+
+                <EditText
+                    android:id="@+id/invoiceamount"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:hint="0"
+                    android:inputType="number"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/invoicelabelamount" />
+
+                <Button
+                    android:id="@+id/btnvoegitemtoe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/confirmbutton"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="Voeg Item Toe"
+                    app:layout_constraintEnd_toEndOf="@+id/invoiceamount"
+                    app:layout_constraintStart_toStartOf="@+id/invoiceamount"
+                    app:layout_constraintTop_toBottomOf="@+id/invoiceamount" />
+
+                <TableLayout
+                    android:id="@+id/items"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/navigation"
+                    android:minHeight="50dp"
+                    android:paddingBottom="50dp"
+                    android:stretchColumns="*"
+                    app:layout_constraintEnd_toEndOf="@+id/invoicetime"
+                    app:layout_constraintStart_toStartOf="@+id/invoicelabelamount"
+                    app:layout_constraintTop_toBottomOf="@+id/btnvoegitemtoe"
+                    >
+
+
+                    <TableRow
+
+                        android:id="@+id/tableheader"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+
+                            android:gravity="center_horizontal"
+                            android:text="@string/item"
+                            android:textColor="@color/textGold"
+                            android:textSize="18sp" />
+
+                        <TextView
+
+                            android:gravity="center_horizontal"
+                            android:text="@string/aantal"
+                            android:textColor="@color/textGold"
+                            android:textSize="18sp" />
+
+                        <TextView
+
+                            android:gravity="center_horizontal"
+                            android:text="@string/totaal"
+                            android:textColor="@color/textGold"
+                            android:textSize="18sp" />
+
+                        <TextView
+
+                            android:gravity="center_horizontal"
+                            android:text="@string/verwijder"
+                            android:textColor="@color/textGold"
+                            android:textSize="18sp" />
+                    </TableRow>
+
+                </TableLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <View
+            android:id="@+id/background_header"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/titleInvoiceAdd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/rekening_toevoegen"
+            android:theme="@style/invoiceheader"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteX="0dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

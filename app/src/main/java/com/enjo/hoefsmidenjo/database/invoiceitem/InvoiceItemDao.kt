@@ -16,6 +16,9 @@ interface InvoiceItemDao {
     @Query("SELECT * FROM invoice_item")
     fun GetAll():LiveData<List<DbInvoiceItem>>
 
+    @Query("SELECT * FROM invoice_item")
+    fun GetAllArray():Array<DbInvoiceItem>
+
     @Query("SELECT * FROM invoice_item WHERE name LIKE '%'||:filter||'%'")
     fun GetFilteredItem(filter:String):LiveData<List<DbInvoiceItem>>
 
@@ -24,6 +27,9 @@ interface InvoiceItemDao {
 
     @Query("SELECT EXISTS(SELECT * FROM invoice_item where name == :name)")
     fun itemExist(name:String): Boolean
+
+    @Query("SELECT * FROM invoice_item where name == :name")
+    fun getByName(name:String):DbInvoiceItem
 
 
 }

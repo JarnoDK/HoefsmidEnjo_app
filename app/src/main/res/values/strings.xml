@@ -13,7 +13,6 @@
     <string name="item_toevoegen">Item toevoegen</string>
     <string name="afspraak_maken">Afspraak maken</string>
     <string name="kalender_raadplegen">Kalender raadplegen</string>
-    <string name="rekening_toevoegen">Rekening toevoegen</string>
     <string name="rekening_bekijken">Rekening bekijken</string>
     <string name="rekening">Rekening</string>
     <string name="klanten">Klanten</string>
@@ -53,4 +52,12 @@
     <string name="total">Total</string>
     <string name="aantal">Aantal</string>
     <string name="totale_prijs">totale prijs</string>
+    <string name="klant">Klant</string>
+    <string name="datum">Datum</string>
+    <string name="taken">Taken</string>
+    <string name="item">Item</string>
+    <string name="totaal">Totaal</string>
+    <string name="verwijder">Verwijder</string>
+    <string name="tijd">Tijd</string>
+    <string name="rekening_toevoegen">Rekening toevoegen</string>
 </resources>

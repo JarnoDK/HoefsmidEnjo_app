@@ -52,7 +52,13 @@
     <fragment
         android:id="@+id/item_toevoegen"
         android:name="com.enjo.hoefsmidenjo.screens.items.create.ItemCreateFragment"
-        android:label="Item Toevoegen"
+        android:label="@string/item_toevoegen"
+        />
+
+    <fragment
+        android:id="@+id/rekening_toevoegen"
+        android:name="com.enjo.hoefsmidenjo.screens.invoices.create.InvoiceCreateFragment"
+        android:label="@string/rekening_toevoegen"
         />
 
     <fragment
@@ -65,6 +71,7 @@
             />
 
     </fragment>
+
     <fragment
         android:id="@+id/detailfragment"
         android:name="com.enjo.hoefsmidenjo.screens.invoices.detail.InvoiceDetailFragment"

@@ -17,6 +17,7 @@ import com.enjo.hoefsmidenjo.MainActivity
 import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.databinding.FragmentClientAddBinding
 import com.enjo.hoefsmidenjo.databinding.FragmentClientGetBinding
+import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import timber.log.Timber
 
 
@@ -53,7 +54,19 @@ class ClientAddFragment : Fragment() {
             viewModel.email = binding.Email.text.toString()
             viewModel.telephone = binding.telefoon.text.toString()
 
-            addUser()
+            if(DomainController.instance.checkForInternet(this.requireContext())) {
+                addUser()
+
+            }else {
+                AlertDialog
+                    .Builder(this.requireContext())
+                    .setTitle("Geen verbinding")
+                    .setMessage("Kan geen verbinding maken tot databank")
+                    .show()
+            }
+
+
+
         }
 
         binding.lifecycleOwner = this
@@ -63,27 +76,28 @@ class ClientAddFragment : Fragment() {
 
 
     fun addUser(){
-        if(!viewModel.addUser()){
-            AlertDialog
-                .Builder(this.requireContext())
-                .setTitle("Kan klant niet maken")
-                .setMessage(viewModel.errors)
-                .show()
 
-        }else{
-            AlertDialog
-                .Builder(this.requireContext())
-                .setTitle("Klant aangemaakt")
-                .setMessage("De klant ${viewModel.firstname} ${viewModel.lastname} is aangemaakt")
-                .show()
-            viewModel.resetValues()
-            binding.firstname.text.clear()
-            binding.lastname.text.clear()
-            binding.telefoon.text.clear()
-            binding.Email.text.clear()
+            if (!viewModel.addUser()) {
+                AlertDialog
+                    .Builder(this.requireContext())
+                    .setTitle("Kan klant niet maken")
+                    .setMessage(viewModel.errors)
+                    .show()
 
+            } else {
+                AlertDialog
+                    .Builder(this.requireContext())
+                    .setTitle("Klant aangemaakt")
+                    .setMessage("De klant ${viewModel.firstname} ${viewModel.lastname} is aangemaakt")
+                    .show()
+                viewModel.resetValues()
+                binding.firstname.text.clear()
+                binding.lastname.text.clear()
+                binding.telefoon.text.clear()
+                binding.Email.text.clear()
 
-        }
+            }
+
 
 
     }

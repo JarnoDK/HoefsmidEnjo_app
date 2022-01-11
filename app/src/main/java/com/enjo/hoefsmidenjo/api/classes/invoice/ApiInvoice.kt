@@ -25,4 +25,11 @@ fun List<ApiInvoice>.asDatabaseModel(): Array<DbInvoice>{
             )
     }.toTypedArray()
 }
+fun ApiInvoice.asDatabaseModel(): DbInvoice{
+        return DbInvoice(
+            id =  id,
+            time = DomainController.instance.convertDateTime(time),
+            client = client.id
+        )
+}
 

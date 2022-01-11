@@ -41,7 +41,6 @@ class InvoiceDetailViewModel(app: Application): AndroidViewModel(app){
 
     init {
         Timber.tag("LoginViewModel").i("LoginViewModel created")
-        getInvoices()
     }
 
 
@@ -51,31 +50,7 @@ class InvoiceDetailViewModel(app: Application): AndroidViewModel(app){
         total = dao.getTotalAmount(id)
     }
 
-    private fun getInvoices() {
-        // Call API
-        coroutineScope.launch {
-            try {
 
-                var invRepo = InvoiceRepository(database)
-                invRepo.InsertFromApi()
-
-                var itemRepo = InvoiceItemRepository(database)
-                itemRepo.InsertFromApi()
-                var invoiceRepo = InvoiceItemRepository(database)
-                invoiceRepo.InsertFromApi()
-                var eventRepo = EventRepository(database)
-                eventRepo.InsertFromApi()
-                var userRepo = UserRepository(database)
-                userRepo.InsertFromApi()
-
-            } catch (t: Throwable) {
-
-                Timber.tag("Error").i("Could not load invoices")
-
-                throw t
-            }
-        }
-    }
 
     override fun onCleared() {
         super.onCleared()
