@@ -21,6 +21,8 @@ fun ApiInvoiceLine.asDatabaseModel():DbInvoiceLine{
     )
 }
 
+
+
 fun List<ApiInvoiceLine>.asDatabaseModel(invoiceId:Int):Array<DbInvoiceLine>{
     return map{
         DbInvoiceLine(

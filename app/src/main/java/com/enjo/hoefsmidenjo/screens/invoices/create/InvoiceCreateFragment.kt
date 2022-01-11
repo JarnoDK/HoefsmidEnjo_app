@@ -1,24 +1,22 @@
 package com.enjo.hoefsmidenjo.screens.invoices.create
 
-import android.R.attr
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.ListAdapter
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.enjo.hoefsmidenjo.R
-import com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceCreateBinding
-import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceDetailBinding
 import timber.log.Timber
-import android.R.attr.country
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.widget.TableRow
-import com.enjo.hoefsmidenjo.database.user.DbUser
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 
 class InvoiceCreateFragment() : Fragment() {
@@ -62,6 +60,33 @@ class InvoiceCreateFragment() : Fragment() {
         binding.btnvoegitemtoe.setOnClickListener{
             addItem()
         }
+
+
+        binding.invoicedate.setOnClickListener{
+
+
+
+            val datePickerDialog = DatePickerDialog(this.requireContext(),R.style.datepicker, DatePickerDialog.OnDateSetListener
+            { view, year, monthOfYear, dayOfMonth ->
+
+
+                viewModel.current = LocalDate.of(year,monthOfYear,dayOfMonth)
+                viewModel.date =  viewModel.current.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                binding.invoicedate.text = viewModel.date
+
+                Timber.tag("Selected date").i(viewModel.date)
+            }, viewModel.current.year, viewModel.current.monthValue, viewModel.current.dayOfMonth)
+            datePickerDialog.show()
+        }
+
+
+        val now = LocalTime.now()
+        binding.hourpicker.setIs24HourView(true)
+
+        binding.btnaddinvoice.setOnClickListener{
+            addInvoice()
+        }
+
         binding.lifecycleOwner = this
 
         return binding.root
@@ -74,14 +99,17 @@ class InvoiceCreateFragment() : Fragment() {
 
         var row:TableRow =  viewModel.addItem(name,amount, this.requireContext())
 
-        Timber.tag("data").i("name: $name , amount:$amount")
-
         binding.items.addView(row)
     }
 
+    fun addInvoice(){
 
+        var timepicker = binding.hourpicker
+        viewModel.time = "${timepicker.hour}:${timepicker.minute}"
 
+        viewModel.addInvoice(binding.invoiceclient.selectedItem.toString())
 
+    }
 
 
 }

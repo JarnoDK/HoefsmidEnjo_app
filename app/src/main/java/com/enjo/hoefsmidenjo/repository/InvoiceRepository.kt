@@ -33,8 +33,8 @@ class InvoiceRepository (private val database: RoomDb){
         val invoice:ApiInvoice = InvoiceApi.retrofitService.createInvoiceAsync(inv).await()
 
 
-        dao.insertAllInvoiceLines(inv.invoiceLines.asDatabaseModel(invoice.id))
-        dao.insert(inv.asDatabaseModel())
+        dao.insertAllInvoiceLines(invoice.invoiceLines.asDatabaseModel(invoice.id))
+        dao.insert(invoice.asDatabaseModel())
     }
 
 

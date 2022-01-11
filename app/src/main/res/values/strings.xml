@@ -60,4 +60,7 @@
     <string name="verwijder">Verwijder</string>
     <string name="tijd">Tijd</string>
     <string name="rekening_toevoegen">Rekening toevoegen</string>
+    <string name="voeg_item_toe">Voeg Item Toe</string>
+    <string name="voeg_rekening_toe">Voeg rekening toe</string>
+    <string name="_1">1</string>
 </resources>

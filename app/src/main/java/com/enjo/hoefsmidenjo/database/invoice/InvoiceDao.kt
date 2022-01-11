@@ -36,7 +36,7 @@ interface InvoiceDao {
     @Query("Select sum(ii.unitPrice*il.amount) as amount from invoice_line il join invoice_item ii on il.item == ii.itemId where il.invoiceId == :id")
     fun getTotalAmount(id:Int):Double
 
-    @Query("Select *,  (Select sum(ii.unitPrice*il.amount) from invoice_line il join invoice_item ii on il.item == ii.itemId where il.invoiceId == :id ) as  \"amount\" from invoice inv join users us on inv.client == us.userid Order by firstName,lastName")
+    @Query("Select *,  (Select sum(ii.unitPrice*il.amount) from invoice_line il join invoice_item ii on il.item == ii.itemId where il.invoiceId == :id ) as  \"amount\" from invoice inv join users us on inv.client == us.userid where inv.id == :id Order by firstName,lastName")
     fun getById(id:Int): RelClientInvoiceAmount
 
     @Query("Select *,  (Select sum(ii.unitPrice*il.amount) from invoice_line il join invoice_item ii on il.item == ii.itemId where il.invoiceId == inv.id ) as  \"amount\" from invoice inv join users us on inv.client == us.userid where firstName like '%'||:firstname||'%' and lastName like '%'||:lastname||'%' and time LIKE :date||'%' Order by time")

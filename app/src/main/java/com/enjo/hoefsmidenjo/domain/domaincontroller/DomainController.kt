@@ -4,7 +4,9 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import timber.log.Timber
 import java.time.LocalDate
+import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
@@ -18,12 +20,15 @@ class DomainController {
         instance=this
     }
 
-    fun convertDateTime(input:String):String{
-        //2022-01-09T23:15:00.4026798+01:00
+    fun getTimeOfString(time:String):String{
 
-        var date = LocalDate.parse(input.substring(0,10))
-        var hourMin = LocalTime.parse(input.substring(11,16))
-        return "${date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))} $hourMin"
+        val date:LocalDate = LocalDate.parse(time.substring(0,10))
+        val hm :LocalTime= LocalTime.parse(time.substring(11,16))
+        val dt = LocalDateTime.of(date.year,date.monthValue,date.dayOfMonth,hm.hour,hm.minute)
+        val dtstring = dt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+
+        Timber.tag("Datetime converted").i(dtstring)
+        return dtstring
     }
 
     fun checkForInternet(context: Context): Boolean {

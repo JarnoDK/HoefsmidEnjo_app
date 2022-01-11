@@ -10,6 +10,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
 
@@ -20,7 +21,7 @@ interface InvoiceService {
     fun getInvoiceAsync(): Deferred<List<ApiInvoice>>
 
     @POST("/api/invoice")
-    fun createInvoiceAsync(inv:ApiInvoice):Deferred<ApiInvoice>
+    fun createInvoiceAsync(@Body inv:ApiInvoice):Deferred<ApiInvoice>
 
 
 

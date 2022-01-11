@@ -38,6 +38,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
+import java.util.stream.Collectors
 
 class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
 
@@ -51,10 +52,15 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
 
     lateinit var selectedUser:DbUser
 
+    var current = LocalDate.now()
+    var date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+
+    var time:String = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
+
     var invoiceRepo:InvoiceRepository= InvoiceRepository(database)
 
     lateinit var invoice:DbInvoice
-    var lines:List<ApiInvoiceLine> = listOf()
+    var lines:MutableList<ApiInvoiceLine> = mutableListOf()
 
 
     fun addItem(name:String , amount:Int, context:Context ):TableRow{
@@ -95,7 +101,7 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         row.addView(total,layoutParams)
         row.addView(delete,layoutParams)
 
-        lines.plusElement(
+        lines.add(
             ApiInvoiceLine(
                 amount = amount,
                 id = -1,
@@ -110,16 +116,23 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         return row
     }
 
-    fun addInvoice(date:String,time:String,client:String){
+    fun addInvoice(client:String){
 
-        var dt = LocalDate.parse(date)
-        var tm = LocalTime.parse(time)
+        var dt = current
+        var timestring = time.split(":")
+        var tm = LocalTime.of(timestring[0].toInt(),timestring[1].toInt())
+
 
         var datetime :LocalDateTime = LocalDateTime.of(dt.year,dt.monthValue,dt.dayOfMonth,tm.hour,tm.minute)
-        var inv : ApiInvoice = ApiInvoice(
+        var dtstring = datetime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+        Timber.tag("Datetime = ").i(dtstring)
+        Timber.tag("Lines = ").i("${lines.stream().map { s -> "${s.item.name} x ${s.amount} " }.collect(
+            Collectors.joining("\n"))}")
+
+        var inv  = ApiInvoice(
             client = database.userDao.getUserByName(client).asApiUser(),
             id = -1,
-            time = datetime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")),
+            time = dtstring,
             invoiceLines = lines
         )
 

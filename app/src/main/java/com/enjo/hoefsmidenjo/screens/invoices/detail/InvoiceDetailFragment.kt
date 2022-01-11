@@ -64,7 +64,7 @@ class InvoiceDetailFragment() : Fragment() {
             adapter.submitList(it)
         })
 
-        var format = viewModel.invoice.invoice.time.substring(1,10)
+        var format = viewModel.invoice.invoice.time.substring(0,10)
         binding.fragmentTitle.text = "Rekening van ${invoice.client.firstName} ${invoice.client.lastName}\n${format}"
 
         binding.invoiceTotalprice.text = "Totale prijs: %.2f €".format(viewModel.total)

@@ -20,7 +20,7 @@ fun List<ApiInvoice>.asDatabaseModel(): Array<DbInvoice>{
     return map{
         DbInvoice(
             id =  it.id,
-            time = DomainController.instance.convertDateTime(it.time),
+            time = DomainController.instance.getTimeOfString(it.time),
             client = it.client.id
             )
     }.toTypedArray()
@@ -28,7 +28,7 @@ fun List<ApiInvoice>.asDatabaseModel(): Array<DbInvoice>{
 fun ApiInvoice.asDatabaseModel(): DbInvoice{
         return DbInvoice(
             id =  id,
-            time = DomainController.instance.convertDateTime(time),
+            time = DomainController.instance.getTimeOfString(time),
             client = client.id
         )
 }
