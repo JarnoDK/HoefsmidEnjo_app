@@ -63,7 +63,9 @@ class AppointmentCreateFragment : Fragment() {
 
 
                 var dt = LocalDate.of(year,monthOfYear,dayOfMonth)
-                viewModel.day =  dt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                var format =  dt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                binding.appointmentdate.text = format
+                viewModel.day = format
 
                 Timber.tag("Selected date").i(viewModel.day)
             }, now.year, now.monthValue, now.dayOfMonth)

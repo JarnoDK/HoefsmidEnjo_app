@@ -3,8 +3,12 @@ package com.enjo.hoefsmidenjo.screens.invoices.create
 import android.app.Application
 import android.content.Context
 import android.view.Gravity
+import android.view.View
+import android.widget.ImageView
+import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.core.view.get
 import androidx.core.view.updatePadding
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -28,6 +32,7 @@ import com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount
 import com.enjo.hoefsmidenjo.database.relations.RelInvoiceLineInvoiceItem
 import com.enjo.hoefsmidenjo.database.relations.RelUserEvent
 import com.enjo.hoefsmidenjo.database.user.DbUser
+import com.enjo.hoefsmidenjo.generated.callback.OnClickListener
 import com.enjo.hoefsmidenjo.repository.EventRepository
 import com.enjo.hoefsmidenjo.repository.InvoiceItemRepository
 import com.enjo.hoefsmidenjo.repository.InvoiceRepository
@@ -61,8 +66,12 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
 
     lateinit var invoice:DbInvoice
     var lines:MutableList<ApiInvoiceLine> = mutableListOf()
+    var rows:MutableMap<String,TableRow> = mutableMapOf()
 
     var errors:String = ""
+
+    lateinit var table:TableLayout
+
 
 
     fun addItem(name:String , amount:Int, context:Context ):TableRow{
@@ -72,7 +81,13 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         val itemName = TextView(context)
         val am = TextView(context)
         val total = TextView(context)
-        val delete = TextView(context)
+        val delete = ImageView(context)
+
+        delete.setImageResource(R.drawable.trashcan)
+        delete.isClickable = true
+        delete.setOnClickListener{
+            removeInvoiceLine(name)
+        }
 
         itemName.setTextAppearance(R.style.tablerowtext)
         am.setTextAppearance(R.style.tablerowtext)
@@ -103,12 +118,7 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         row.addView(am, layoutParams)
         row.addView(total,layoutParams)
         row.addView(delete,layoutParams)
-        /*var id:Int = 0
-        if(lines.size>1){
-           id = database.invoiceDao.getMaxInvoiceLineId()+lines.size+1
-        }else{
-            id = lines.maxOf { s -> s.id } +1
-        }*/
+
         lines.add(
             ApiInvoiceLine(
                 amount = amount,
@@ -117,13 +127,24 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
             )
         )
 
-
-
-        //row.addView("%.2f".format(amount.times(item.unitPrice)), layoutParams)
-
-        //table!!.addView(newRow)
+        rows[name] = row
         return row
     }
+
+
+    private fun removeInvoiceLine(name: String){
+        Timber.tag("Removing $name" )
+
+        if(rows[name] != null){
+            table.removeView(rows[name])
+            rows.remove(name)
+            var invoiceLine = lines.firstOrNull{s -> s.item.name == name}
+            if(invoiceLine != null){
+                lines.remove(invoiceLine)
+            }
+        }
+    }
+
 
     fun itemExists(name:String):Boolean{
         for(item in lines){
@@ -132,6 +153,13 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
             }
         }
         return false
+    }
+
+    fun reset(){
+        for(item in lines.toList()){
+            removeInvoiceLine(item.item.name?:"")
+        }
+
     }
 
     fun addInvoice(client:String):Boolean{
@@ -147,12 +175,7 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         Timber.tag("Lines = ").i("${lines.stream().map { s -> "${s.item.name} x ${s.amount} " }.collect(
             Collectors.joining("\n"))}")
 
-        var inv  = ApiInvoice(
-            client = database.userDao.getUserByName(client).asApiUser(),
-            id = -1,
-            time = dtstring,
-            invoiceLines = lines
-        )
+
         var check = true
 
         if(lines.size == 0){
@@ -164,17 +187,23 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         if(!check){
             return false
         }
+
+        var inv  = ApiInvoice(
+            client = database.userDao.getUserByName(client).asApiUser(),
+            id = -1,
+            time = dtstring,
+            invoiceLines = lines
+        )
+
         coroutineScope.launch {
             invoiceRepo.addInvoice(inv)
             errors = ""
 
         }
+
         return check
     }
 
-    fun removeInvoiceLine(){
-
-    }
 
 
     override fun onCleared() {
@@ -211,4 +240,5 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
 
         return check
     }
+
 }

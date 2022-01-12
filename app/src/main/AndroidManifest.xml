@@ -22,7 +22,11 @@ package="com.enjo.hoefsmidenjo">
         android:screenOrientation="portrait"
         android:launchMode="singleTop"
         android:name=".MainActivity"
-        android:exported="true">
+        android:exported="true"
+        android:windowSoftInputMode="adjustPan"
+
+
+        >
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 

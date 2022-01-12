@@ -67,5 +67,6 @@
     <string name="afspraak_titel">Afspraak titel</string>
     <string name="bevestig_afspraak">Bevestig afspraak</string>
     <string name="locatie">Locatie</string>
+    <string name="prijs">Prijs</string>
 
 </resources>

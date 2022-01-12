@@ -14,7 +14,12 @@ data class ApiInvoice(
     var time:String,
     var invoiceLines:List<ApiInvoiceLine>
 
-)
+){
+
+    override fun toString(): String {
+        return "id: $id client:$client time:$time, lines:${invoiceLines.size}"
+    }
+}
 
 fun List<ApiInvoice>.asDatabaseModel(): Array<DbInvoice>{
     return map{

@@ -88,19 +88,16 @@ class InvoiceCreateFragment() : Fragment() {
             addInvoice()
         }
 
+        viewModel.table = binding.items
+
         binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
     fun addItem(){
-
-
         var name:String = binding.invoiceItemname.selectedItem.toString()
         var amountstring = binding.invoiceamount.text.toString().toString()
         var amount :Int = -1
-
-
-
 
         if(viewModel.isValid(name,amountstring)){
             amount = amountstring.toInt()
@@ -130,6 +127,10 @@ class InvoiceCreateFragment() : Fragment() {
                     .setTitle("Rekening aangemaakt")
                     .setMessage("De rekening voor ${binding.invoiceclient.selectedItem} is succesvol toegevoegd")
                     .show()
+
+                binding.InvoiceLineItem.text = ""
+                binding.invoiceamount.text.clear()
+
             }else{
                 AlertDialog
                     .Builder(this.requireContext())
