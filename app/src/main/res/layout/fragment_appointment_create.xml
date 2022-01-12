@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background">
+
+        <View
+            android:id="@+id/headerbackground"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="@color/navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/appointmentheader_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Afspraak_maken2"
+            android:theme="@style/invoiceheader"
+            app:layout_constraintBottom_toBottomOf="@+id/headerbackground"
+            app:layout_constraintEnd_toEndOf="@+id/headerbackground"
+            app:layout_constraintStart_toStartOf="@+id/headerbackground"
+            app:layout_constraintTop_toTopOf="@+id/headerbackground" />
+
+        <ScrollView
+            android:id="@+id/appointmentscroller"
+            android:layout_width="402dp"
+            android:layout_height="430dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/headerbackground">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TimePicker
+                    android:id="@+id/appointmenttime"
+                    android:layout_width="302dp"
+                    android:layout_height="96dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:timePickerMode="spinner"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.504"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+                <TextView
+                    android:id="@+id/appointmentdate"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="20dp"
+                    android:text="@string/datum"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/apointmentdatelabel" />
+
+                <Spinner
+                    android:id="@+id/appointmentclient"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/appointmentclientlabel"
+                    tools:ignore="DuplicateSpeakableTextCheck" />
+
+
+                <TextView
+                    android:id="@+id/apointmentdatelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/datum"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/appointmentdate"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/tijd"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/appointmenttime"
+                    app:layout_constraintTop_toBottomOf="@+id/appointmentdate" />
+
+                <TextView
+                    android:id="@+id/appointmentclientlabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:labelFor="@id/appointmentclient"
+                    android:text="@string/klant"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/appointmentclient"
+                    app:layout_constraintTop_toBottomOf="@+id/appointmenttime" />
+
+                <EditText
+                    android:id="@+id/appointmenttitle"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:hint="@string/titel"
+                    android:inputType="text"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/appointmenttitlelabel" />
+
+                <EditText
+                    android:id="@+id/appointmentlocation"
+                    android:layout_width="300dp"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@color/white"
+                    android:hint="@string/locatie"
+                    android:inputType="text"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.495"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/appointmentlocationlabel" />
+
+
+                <TextView
+                    android:id="@+id/appointmenttitlelabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/afspraak_titel"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/appointmentclient"
+                    app:layout_constraintTop_toBottomOf="@+id/appointmentclient" />
+
+                <TextView
+                    android:id="@+id/appointmentlocationlabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/locatie"
+                    android:theme="@style/clientlabel"
+                    app:layout_constraintStart_toStartOf="@+id/appointmenttitle"
+                    app:layout_constraintTop_toBottomOf="@+id/appointmenttitle" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <Button
+            android:id="@+id/appointmentconfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/confirmbutton"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:text="@string/bevestig_afspraak"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/appointmentscroller" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

@@ -18,7 +18,12 @@ data class ApiEvent (
     var title:String,
     var location:String
 
-)
+){
+
+    override fun toString(): String {
+        return "id:$id time:$time title:$title location:$location\nclient: $client"
+    }
+}
 
 
 fun List<ApiEvent>.asDatabaseModel():Array<DbEvent>{
@@ -32,6 +37,18 @@ fun List<ApiEvent>.asDatabaseModel():Array<DbEvent>{
         )
         }.toTypedArray()
 }
+
+fun ApiEvent.asDatabaseModel():DbEvent{
+
+        return DbEvent (
+            id = id,
+            client = client.id,
+            location = location,
+            time = DomainController.instance.getTimeOfString(time),
+            title = title
+        )
+}
+
 
 
 

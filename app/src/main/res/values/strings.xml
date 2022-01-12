@@ -63,4 +63,9 @@
     <string name="voeg_item_toe">Voeg Item Toe</string>
     <string name="voeg_rekening_toe">Voeg rekening toe</string>
     <string name="_1">1</string>
+    <string name="Afspraak_maken2"><u>Afspraak maken</u></string>
+    <string name="afspraak_titel">Afspraak titel</string>
+    <string name="bevestig_afspraak">Bevestig afspraak</string>
+    <string name="locatie">Locatie</string>
+
 </resources>

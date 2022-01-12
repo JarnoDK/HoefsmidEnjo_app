@@ -10,7 +10,7 @@ data class ApiUser(
     var lastName:String,
     var role:Int? = 0,
     var email:String="",
-    var phone:String?=null,
+    var phone:String?="",
     var password:String?=null,
     var pincode:String?=null
 
@@ -37,12 +37,14 @@ fun List<ApiUser>.asDatabaseModel():Array<DbUser>{
 }
 
 fun DbUser.asApiUser():ApiUser{
+
     return ApiUser(
         id = id,
         firstName = firstName,
         lastName=lastName,
         email=email,
-        password = password,
+        password = password?:"",
+        pincode = pincode?:"",
         phone = phone,
         role = role
     )
@@ -53,7 +55,8 @@ fun ApiUser.asDatabaseModel():DbUser{
         firstName = firstName,
         lastName=lastName,
         email=email,
-        password = password,
+        password = password?:"",
+        pincode = pincode?:"",
         phone = phone.orEmpty(),
         role = role
     )

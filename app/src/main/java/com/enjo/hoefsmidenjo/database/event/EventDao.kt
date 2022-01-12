@@ -13,9 +13,15 @@ interface EventDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(vararg event :DbEvent)
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(event :DbEvent)
+
     @Query("SELECT * FROM event_table ORDER BY title DESC")
     fun getAllEventsLive(): LiveData<List<DbEvent>>
 
     @Query("SELECT * FROM event_table ev join users us on ev.client == us.userid where time LIKE :date|| '%' ORDER BY title DESC ")
     fun getAllEventsOfDateLive(date:String): LiveData<List<RelUserEvent>>
+
+    @Query("SELECT * FROM event_table ORDER BY time")
+    fun getAllEvents():Array<DbEvent>
 }

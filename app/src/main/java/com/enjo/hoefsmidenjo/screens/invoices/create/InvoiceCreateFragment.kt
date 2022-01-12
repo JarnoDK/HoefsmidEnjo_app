@@ -99,24 +99,11 @@ class InvoiceCreateFragment() : Fragment() {
         var amountstring = binding.invoiceamount.text.toString().toString()
         var amount :Int = -1
 
-        var check:Boolean = true
-        if(!amountstring.matches(Regex("[\\d]+"))){
-
-            viewModel.errors += "Aantal moet een getal zijn\n"
-            check = false
-        }else{
-            amount = binding.invoiceamount.text.toString().toInt()
-        }
-
-        if(amount < 1){
-            viewModel.errors += "Aantal moet minimum 1 bedragen\n"
-        }
-        if(name == null || name.trim().equals("")){
-            viewModel.errors += "Naam kan niet leeg zijn\n"
-        }
 
 
-        if(check){
+
+        if(viewModel.isValid(name,amountstring)){
+            amount = amountstring.toInt()
             var row:TableRow =  viewModel.addItem(name,amount, this.requireContext())
             binding.items.addView(row)
         }else{
@@ -137,12 +124,20 @@ class InvoiceCreateFragment() : Fragment() {
             var timepicker = binding.hourpicker
             viewModel.time = "${timepicker.hour}:${timepicker.minute}"
 
-            viewModel.addInvoice(binding.invoiceclient.selectedItem.toString())
+            if(viewModel.addInvoice(binding.invoiceclient.selectedItem.toString())){
                 AlertDialog
                     .Builder(this.requireContext())
                     .setTitle("Rekening aangemaakt")
                     .setMessage("De rekening voor ${binding.invoiceclient.selectedItem} is succesvol toegevoegd")
                     .show()
+            }else{
+                AlertDialog
+                    .Builder(this.requireContext())
+                    .setTitle("Rekening niet aangemaakt")
+                    .setMessage("De rekening bevat geen items")
+                    .show()
+            }
+
 
         }else{
             AlertDialog

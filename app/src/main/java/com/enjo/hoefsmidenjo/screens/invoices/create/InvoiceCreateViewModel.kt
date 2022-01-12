@@ -118,13 +118,23 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         )
 
 
+
         //row.addView("%.2f".format(amount.times(item.unitPrice)), layoutParams)
 
         //table!!.addView(newRow)
         return row
     }
 
-    fun addInvoice(client:String){
+    fun itemExists(name:String):Boolean{
+        for(item in lines){
+            if(item.item.name == name){
+                return true
+            }
+        }
+        return false
+    }
+
+    fun addInvoice(client:String):Boolean{
 
         var dt = current
         var timestring = time.split(":")
@@ -143,11 +153,23 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
             time = dtstring,
             invoiceLines = lines
         )
+        var check = true
 
+        if(lines.size == 0){
+            errors += "kan geen lege rekening sturen\n"
+            check=false
+        }
+
+
+        if(!check){
+            return false
+        }
         coroutineScope.launch {
             invoiceRepo.addInvoice(inv)
+            errors = ""
 
         }
+        return check
     }
 
     fun removeInvoiceLine(){
@@ -158,5 +180,35 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
     override fun onCleared() {
         super.onCleared()
         Timber.tag("LoginViewModel").i("LoginViewModel destroyed")
+    }
+
+    fun isValid(name: String, amountstring: String): Boolean {
+        var check:Boolean = true
+        var amount:Int = -1
+        if(!amountstring.matches(Regex("[\\d]+"))){
+
+            errors += "Aantal moet een getal zijn\n"
+            check = false
+        }else{
+            amount = amountstring.toInt()
+        }
+
+        if(amount < 1){
+            errors += "Aantal moet minimum 1 bedragen\n"
+            check=false
+        }
+        if(name == null || name.trim().equals("")){
+            errors += "Naam kan niet leeg zijn\n"
+            check=false
+        }
+
+        if(itemExists(name)){
+            errors +="Item zit reeds in de rekening\n"
+            check = false
+        }
+
+
+
+        return check
     }
 }
