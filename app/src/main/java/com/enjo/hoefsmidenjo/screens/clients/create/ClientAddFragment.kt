@@ -69,14 +69,14 @@ class ClientAddFragment : Fragment() {
 
         }
 
-        binding.lifecycleOwner = this
-
+        binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
 
     fun addUser(){
 
+        if(DomainController.instance.checkForInternet(this.requireContext())){
             if (!viewModel.addUser()) {
                 AlertDialog
                     .Builder(this.requireContext())
@@ -97,9 +97,22 @@ class ClientAddFragment : Fragment() {
                 binding.Email.text.clear()
 
             }
+        }else{
+            AlertDialog
+                .Builder(this.requireContext())
+                .setTitle("Geen verbinding")
+                .setMessage("Kan geen verbinding maken met internet")
+                .show()
+        }
 
 
 
+
+    }
+
+    override fun onDestroy() {
+        binding.unbind()
+        super.onDestroy()
     }
 
 

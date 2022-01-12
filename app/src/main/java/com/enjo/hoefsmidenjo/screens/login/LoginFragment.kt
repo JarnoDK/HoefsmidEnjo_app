@@ -82,4 +82,10 @@ class LoginFragment : Fragment(){
         binding.pincodeDisplay.text = viewModel.Pincode
 
     }
+
+    override fun onDestroy() {
+        binding.unbind()
+        super.onDestroy()
+    }
+
 }

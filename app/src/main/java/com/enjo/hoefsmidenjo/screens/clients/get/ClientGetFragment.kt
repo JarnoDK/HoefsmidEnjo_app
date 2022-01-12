@@ -99,8 +99,7 @@ class ClientGetFragment : Fragment() {
         })
         Timber.tag("Home").i("ItemCreateFragment loaded")
 
-        binding.lifecycleOwner = this
-
+        binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
@@ -112,6 +111,11 @@ class ClientGetFragment : Fragment() {
             adapter.submitList(it)
         })
 
+    }
+
+    override fun onDestroy() {
+        binding.unbind()
+        super.onDestroy()
     }
 
 

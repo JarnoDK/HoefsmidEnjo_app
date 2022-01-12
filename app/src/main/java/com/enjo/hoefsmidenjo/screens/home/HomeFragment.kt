@@ -57,8 +57,7 @@ class HomeFragment : Fragment() {
 
 
 
-        binding.lifecycleOwner = this
-
+        binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
@@ -103,6 +102,11 @@ class HomeFragment : Fragment() {
         binding.tomorrowDay.text = dt.plusDays(1).dayOfWeek.getDisplayName(TextStyle.FULL , Locale("nl","NL")).substring(0,2).uppercase()
         binding.tomorrowDate.text = dt.plusDays(1).dayOfMonth.toString()
 
+    }
+
+    override fun onDestroy() {
+        binding.unbind()
+        super.onDestroy()
     }
 
 

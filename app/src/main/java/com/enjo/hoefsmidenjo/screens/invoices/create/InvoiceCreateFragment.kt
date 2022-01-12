@@ -13,6 +13,8 @@ import timber.log.Timber
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.widget.TableRow
+import androidx.appcompat.app.AlertDialog
+import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalTime
@@ -80,35 +82,82 @@ class InvoiceCreateFragment() : Fragment() {
         }
 
 
-        val now = LocalTime.now()
         binding.hourpicker.setIs24HourView(true)
 
         binding.btnaddinvoice.setOnClickListener{
             addInvoice()
         }
 
-        binding.lifecycleOwner = this
-
+        binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
     fun addItem(){
 
+
         var name:String = binding.invoiceItemname.selectedItem.toString()
-        var amount :Int = binding.invoiceamount.text.toString().toInt()
+        var amountstring = binding.invoiceamount.text.toString().toString()
+        var amount :Int = -1
 
-        var row:TableRow =  viewModel.addItem(name,amount, this.requireContext())
+        var check:Boolean = true
+        if(!amountstring.matches(Regex("[\\d]+"))){
 
-        binding.items.addView(row)
+            viewModel.errors += "Aantal moet een getal zijn\n"
+            check = false
+        }else{
+            amount = binding.invoiceamount.text.toString().toInt()
+        }
+
+        if(amount < 1){
+            viewModel.errors += "Aantal moet minimum 1 bedragen\n"
+        }
+        if(name == null || name.trim().equals("")){
+            viewModel.errors += "Naam kan niet leeg zijn\n"
+        }
+
+
+        if(check){
+            var row:TableRow =  viewModel.addItem(name,amount, this.requireContext())
+            binding.items.addView(row)
+        }else{
+            AlertDialog
+                .Builder(this.requireContext())
+                .setTitle("Item niet toegevoegd")
+                .setMessage(viewModel.errors)
+                .show()
+            viewModel.errors = ""
+        }
+
     }
 
     fun addInvoice(){
 
-        var timepicker = binding.hourpicker
-        viewModel.time = "${timepicker.hour}:${timepicker.minute}"
+        if(DomainController.instance.checkForInternet(this.requireContext())){
 
-        viewModel.addInvoice(binding.invoiceclient.selectedItem.toString())
+            var timepicker = binding.hourpicker
+            viewModel.time = "${timepicker.hour}:${timepicker.minute}"
 
+            viewModel.addInvoice(binding.invoiceclient.selectedItem.toString())
+                AlertDialog
+                    .Builder(this.requireContext())
+                    .setTitle("Rekening aangemaakt")
+                    .setMessage("De rekening voor ${binding.invoiceclient.selectedItem} is succesvol toegevoegd")
+                    .show()
+
+        }else{
+            AlertDialog
+                .Builder(this.requireContext())
+                .setTitle("Geen verbinding")
+                .setMessage("Kan geen verbinding maken met internet")
+                .show()
+        }
+
+
+    }
+
+    override fun onDestroy() {
+        binding.unbind()
+        super.onDestroy()
     }
 
 

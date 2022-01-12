@@ -136,7 +136,7 @@ class InvoiceFragment : Fragment() {
 
 
 
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = this.viewLifecycleOwner
 
         return binding.root
     }
@@ -151,6 +151,11 @@ class InvoiceFragment : Fragment() {
         viewModel.invoices.observe(viewLifecycleOwner, Observer{
             adapter.submitList(it)
         })
+    }
+
+    override fun onDestroy() {
+        binding.unbind()
+        super.onDestroy()
     }
 
 

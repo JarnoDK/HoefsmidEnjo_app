@@ -62,8 +62,7 @@ class ItemCreateFragment : Fragment() {
         }
 
 
-        binding.lifecycleOwner = this
-
+        binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
@@ -91,6 +90,10 @@ class ItemCreateFragment : Fragment() {
 
     }
 
+    override fun onDestroy() {
+        binding.unbind()
+        super.onDestroy()
+    }
 
 
 }
@@ -105,3 +108,5 @@ fun EditText.parseToDouble() :Double{
     }
 
 }
+
+

@@ -62,8 +62,11 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
     lateinit var invoice:DbInvoice
     var lines:MutableList<ApiInvoiceLine> = mutableListOf()
 
+    var errors:String = ""
+
 
     fun addItem(name:String , amount:Int, context:Context ):TableRow{
+
 
         val row = TableRow(context)
         val itemName = TextView(context)
@@ -100,7 +103,12 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         row.addView(am, layoutParams)
         row.addView(total,layoutParams)
         row.addView(delete,layoutParams)
-
+        /*var id:Int = 0
+        if(lines.size>1){
+           id = database.invoiceDao.getMaxInvoiceLineId()+lines.size+1
+        }else{
+            id = lines.maxOf { s -> s.id } +1
+        }*/
         lines.add(
             ApiInvoiceLine(
                 amount = amount,
@@ -140,6 +148,10 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
             invoiceRepo.addInvoice(inv)
 
         }
+    }
+
+    fun removeInvoiceLine(){
+
     }
 
 

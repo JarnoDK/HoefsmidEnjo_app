@@ -67,8 +67,7 @@ class ItemGetFragment : Fragment() {
 
         Timber.tag("Home").i("Ite get fragment loaded")
 
-        binding.lifecycleOwner = this
-
+        binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
@@ -82,5 +81,9 @@ class ItemGetFragment : Fragment() {
 
     }
 
+    override fun onDestroy() {
+        binding.unbind()
+        super.onDestroy()
+    }
 
 }
