@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -40,6 +41,7 @@ class LoginFragment : Fragment(){
 
         binding.pincodeDisplay.text = ""
 
+        // toevoegen letter
         binding.pincode0.setOnClickListener{ view -> Check(0) }
         binding.pincode1.setOnClickListener{ view -> Check(1) }
         binding.pincode2.setOnClickListener{ view -> Check(2) }
@@ -61,22 +63,24 @@ class LoginFragment : Fragment(){
         return binding.root
     }
 
+    /**
+     * Inloggen, bij 4'de getal automatische check
+     * momenteel hardcoded "1234"
+     */
     fun Check(number:Int){
         viewModel.AppendNumber(number)
         if(viewModel.Pincode.length >=4){
-            // add check for valid user
-
                 if(viewModel.ValidatePin()){
-                    Timber.tag("Login").i("Successful login")
-
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
 
                 }else{
-                    Timber.tag("Login").i("Failed login")
-
+                    AlertDialog
+                        .Builder(this.requireContext())
+                        .setTitle("Inloggen mislukt")
+                        .setMessage("Ongeldige pincode, probeer opnieuw")
+                        .show()
+                    viewModel.ClearPincode()
                 }
-            // relocate
-            viewModel.ClearPincode()
         }
         binding.pincodeDisplay.text = viewModel.Pincode
 

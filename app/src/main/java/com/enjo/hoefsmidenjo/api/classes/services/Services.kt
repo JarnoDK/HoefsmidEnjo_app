@@ -10,10 +10,12 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 open class Services {
 
-
-
+    /**
+     * Connectie met backend
+     * Momenteel ngrok om backend lokaal raad te plegen
+     */
     companion object {
-        // Localhost api using ngrok
+
         const val BASE_URL = "https://0330-2a02-1811-cd1b-600-f1a1-c1b-a47d-9dd.ngrok.io "
 
         val moshi = Moshi.Builder()
@@ -22,6 +24,7 @@ open class Services {
 
         val logger = HttpLoggingInterceptor()
             .apply{level = HttpLoggingInterceptor.Level.BASIC}
+
 
         val client = OkHttpClient.Builder()
             .addInterceptor(logger)

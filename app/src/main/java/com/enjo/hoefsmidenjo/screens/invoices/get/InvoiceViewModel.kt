@@ -27,6 +27,9 @@ class InvoiceViewModel(app: Application): AndroidViewModel(app){
     var lastname = ""
 
 
+    /**
+     * Invullen van invoices met eventuele filter
+     */
     fun refreshList(){
 
         invoices = dao.GetInvoicesWithTotalPriceFiltered(date,firstname,lastname)
@@ -36,6 +39,5 @@ class InvoiceViewModel(app: Application): AndroidViewModel(app){
 
     override fun onCleared() {
         super.onCleared()
-        Timber.tag("LoginViewModel").i("LoginViewModel destroyed")
     }
 }

@@ -2,6 +2,9 @@ package com.enjo.hoefsmidenjo.api.classes.user
 
 import com.enjo.hoefsmidenjo.database.user.DbUser
 
+/**
+ * Api model van gebruiker
+ */
 data class ApiUser(
 
     var id:Int,
@@ -20,6 +23,10 @@ data class ApiUser(
     }
 }
 
+/**
+ * Converteer lijst met API gebruikers naar array met database gebruikers
+ * @return Array met database gebruikers
+ */
 fun List<ApiUser>.asDatabaseModel():Array<DbUser>{
     return map {
         DbUser(
@@ -35,6 +42,10 @@ fun List<ApiUser>.asDatabaseModel():Array<DbUser>{
     }.toTypedArray()
 }
 
+/**
+ * Converteer een enkele database gebruiker naar api gebruiker
+ * @return API gebruiker
+ */
 fun DbUser.asApiUser():ApiUser{
 
     return ApiUser(
@@ -48,6 +59,11 @@ fun DbUser.asApiUser():ApiUser{
         role = role
     )
 }
+
+/**
+ * Converteer een enkele API gebruiker naar database gebruiker
+ * @return database gebruiker
+ */
 fun ApiUser.asDatabaseModel():DbUser{
     return DbUser(
         id = id,

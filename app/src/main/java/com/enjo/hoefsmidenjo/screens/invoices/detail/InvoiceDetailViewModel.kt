@@ -26,11 +26,10 @@ class InvoiceDetailViewModel(app: Application): AndroidViewModel(app){
     lateinit var invoiceItems:LiveData<List<RelInvoiceLineInvoiceItem>>
     var total:Double = 0.00
 
-    init {
-        Timber.tag("LoginViewModel").i("LoginViewModel created")
-    }
-
-
+    /**
+     * Zetten van invoice, invoiceitem en totaal door middel van id
+     * @param Rekening ID
+     */
     fun setInvoice(id:Int){
         invoice = dao.getById(id)
         invoiceItems = dao.getInvoiceLinesOfInvoice(id)
@@ -41,6 +40,5 @@ class InvoiceDetailViewModel(app: Application): AndroidViewModel(app){
 
     override fun onCleared() {
         super.onCleared()
-        Timber.tag("LoginViewModel").i("LoginViewModel destroyed")
     }
 }

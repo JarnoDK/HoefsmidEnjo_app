@@ -43,15 +43,14 @@ class InvoiceCreateFragment() : Fragment() {
         viewModelFactory = InvoiceCreateViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[InvoiceCreateViewModel::class.java]
 
-        Timber.tag("Invoice").i("InvoiceCreateFragment loaded")
 
-        // Fills users in selector
+        // vult mogelijke gebruikers
         val userAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.users)
         userAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.invoiceclient.adapter = userAdapter
 
 
-        // Fills items in selector
+        // vult mogelijke items
         val itemListAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.items)
         itemListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.invoiceItemname.adapter = itemListAdapter
@@ -61,10 +60,8 @@ class InvoiceCreateFragment() : Fragment() {
         }
 
 
+        // datum
         binding.invoicedate.setOnClickListener{
-
-
-
             val datePickerDialog = DatePickerDialog(this.requireContext(),R.style.datepicker, DatePickerDialog.OnDateSetListener
             { view, year, monthOfYear, dayOfMonth ->
 
@@ -79,23 +76,31 @@ class InvoiceCreateFragment() : Fragment() {
         }
 
 
+        // tijd
         binding.hourpicker.setIs24HourView(true)
 
+        // Voegt rekening toe
         binding.btnaddinvoice.setOnClickListener{
             addInvoice()
         }
 
+        // deelt tabel met viewmodel
         viewModel.table = binding.items
 
         binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
+    /**
+     * Voegt rekening item toe
+     */
     fun addItem(){
+        // variabelen
         var name:String = binding.invoiceItemname.selectedItem.toString()
-        var amountstring = binding.invoiceamount.text.toString().toString()
+        var amountstring = binding.invoiceamount.text.toString()
         var amount :Int = -1
 
+        // controleert of item geldig is, indien true, voegt rij toe aan tabel, anders toont een foutmelding
         if(viewModel.isValid(name,amountstring)){
             amount = amountstring.toInt()
             var row:TableRow =  viewModel.addItem(name,amount, this.requireContext())
@@ -114,13 +119,19 @@ class InvoiceCreateFragment() : Fragment() {
 
     }
 
+    /**
+     * Voegt rekening toe indien geldig, toont bericht nadien
+     */
     fun addInvoice(){
 
+        // controleert internet, indien geen internet , geeft melding
         if(DomainController.instance.checkForInternet(this.requireContext())){
 
+            // variabelen initialiseren
             var timepicker = binding.hourpicker
             viewModel.time = "${timepicker.hour}:${timepicker.minute}"
 
+            //voegt invoice toe en leeft bepaalde verlden indien true, anders geeft foutmelding
             if(viewModel.addInvoice(binding.invoiceclient.selectedItem.toString())){
                 AlertDialog
                     .Builder(this.requireContext())

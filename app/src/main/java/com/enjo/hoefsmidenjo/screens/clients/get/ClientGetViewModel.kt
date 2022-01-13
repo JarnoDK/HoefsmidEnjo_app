@@ -30,15 +30,21 @@ class ClientGetViewModel( app: Application): AndroidViewModel(app){
     private val dao = database.userDao
     lateinit var users:LiveData<List<DbUser>>
 
+    /**
+     * Lijst hervullen met gegeven filters
+     */
     fun refreshUserList(){
 
         Timber.tag("Filtered").i("Firstname: ${firstnamefilter} lastname:${lastnamefilter}")
         users = dao.getAllFilteredClients(firstnamefilter,lastnamefilter)
     }
 
+    /**
+     * Gebruiker verwijderen
+     * @param Id van gebruiker om te verwijderen
+     */
     fun removeUser(id:Int){
 
-        Timber.tag("User").i("Remove ${id}")
         viewModelScope.launch {
             userRepo.removeUser(id)
 

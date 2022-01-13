@@ -22,9 +22,10 @@ class ItemGetViewModel( app: Application): AndroidViewModel(app){
     private val dao = database.invoiceItemDao
     var items:LiveData<List<DbInvoiceItem>> = dao.GetAll()
 
+    /**
+     * Herlaad items met filter
+     */
     fun refreshItems(){
-
-        Timber.tag("Filtered").i("ItemName: ${itemname}")
         items = dao.GetFilteredItem(itemname)
     }
 

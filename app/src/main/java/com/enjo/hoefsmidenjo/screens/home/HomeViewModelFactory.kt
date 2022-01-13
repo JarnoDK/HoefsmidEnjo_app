@@ -9,6 +9,6 @@ class HomeViewModelFactory(private val application: Application): ViewModelProvi
         if(modelClass.isAssignableFrom(HomeViewModel::class.java)){
             return HomeViewModel(application) as T
         }
-        throw IllegalArgumentException("LoginViewModel class not found")
+        throw IllegalArgumentException("HomeViewModel class not found")
     }
 }

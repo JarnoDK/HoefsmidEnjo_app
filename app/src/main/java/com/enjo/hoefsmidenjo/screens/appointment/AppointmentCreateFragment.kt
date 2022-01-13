@@ -44,53 +44,63 @@ class AppointmentCreateFragment : Fragment() {
         viewModelFactory = AppointmentCreateModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[AppointmentCreateViewModel::class.java]
 
+        // Datum
         var now = LocalDateTime.now()
-
         viewModel.day = now.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 
+
+        binding.appointmentdate.setOnClickListener{
+            val datePickerDialog = DatePickerDialog(this.requireContext(),
+                R.style.datepicker, DatePickerDialog.OnDateSetListener
+                { view, year, monthOfYear, dayOfMonth ->
+
+
+                    var dt = LocalDate.of(year,monthOfYear,dayOfMonth)
+                    var format =  dt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+                    binding.appointmentdate.text = format
+                    viewModel.day = format
+
+                    Timber.tag("Selected date").i(viewModel.day)
+                }, now.year, now.monthValue, now.dayOfMonth)
+            datePickerDialog.show()
+        }
+
+
+        // Gebruikers
         val userListAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.users)
         userListAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.appointmentclient.adapter = userListAdapter
 
         viewModel.setSelectedUser(binding.appointmentclient.selectedItem.toString())
 
-        binding.appointmentdate.setOnClickListener{
-            val datePickerDialog = DatePickerDialog(this.requireContext(),
-                R.style.datepicker, DatePickerDialog.OnDateSetListener
-            { view, year, monthOfYear, dayOfMonth ->
-
-
-                var dt = LocalDate.of(year,monthOfYear,dayOfMonth)
-                var format =  dt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
-                binding.appointmentdate.text = format
-                viewModel.day = format
-
-                Timber.tag("Selected date").i(viewModel.day)
-            }, now.year, now.monthValue, now.dayOfMonth)
-            datePickerDialog.show()
-        }
-
+        // Tijd
         binding.appointmenttime.setIs24HourView(true)
         viewModel.time = now.format(DateTimeFormatter.ofPattern("HH:mm"))
 
+        // Bevestig aanmaken
         binding.appointmentconfirm.setOnClickListener{
             addAppointment()
         }
-
-        Timber.tag("Home").i("ItemCreateFragment loaded")
 
         binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
+    /**
+     * Toevoegen van een afspraak + foutmeldingen/succesmelding
+     */
     fun addAppointment(){
 
+        // controle op internet, geeft melding indien false
         if(DomainController.instance.checkForInternet(this.requireContext())){
 
+            // Variabelen in viewmodel toekennen door inputs in fragment
             viewModel.time = "${binding.appointmenttime.hour}:${binding.appointmenttime.minute}"
             viewModel.location = binding.appointmentlocation.text.toString()
             viewModel.setSelectedUser(binding.appointmentclient.selectedItem.toString())
             viewModel.title = binding.appointmenttitle.text.toString()
+            // indien true, voeg toe + melding van success
+            // indien false, geeft melding met alle fouten
             if(viewModel.addAppointment()){
                 AlertDialog
                     .Builder(this.requireContext())

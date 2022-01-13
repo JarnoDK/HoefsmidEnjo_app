@@ -5,6 +5,9 @@ import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 import com.enjo.hoefsmidenjo.database.invoice.DbInvoice
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 
+/**
+* Rekening over api
+*/
 data class ApiInvoice(
 
     @ColumnInfo(name = "invoiceid")
@@ -20,6 +23,9 @@ data class ApiInvoice(
     }
 }
 
+/**
+* Converteer lijst van Api rekeningen naar array van database rekeningen
+*/
 fun List<ApiInvoice>.asDatabaseModel(): Array<DbInvoice>{
     return map{
         DbInvoice(
@@ -29,6 +35,9 @@ fun List<ApiInvoice>.asDatabaseModel(): Array<DbInvoice>{
             )
     }.toTypedArray()
 }
+/**
+* Converteer enkele api rekening naar database rekening
+*/
 fun ApiInvoice.asDatabaseModel(): DbInvoice{
         return DbInvoice(
             id =  id,

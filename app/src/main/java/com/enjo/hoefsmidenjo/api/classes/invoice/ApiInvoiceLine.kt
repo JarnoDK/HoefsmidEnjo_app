@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import com.enjo.hoefsmidenjo.api.classes.invoiceitem.ApiInvoiceItem
 import com.enjo.hoefsmidenjo.database.invoice.DbInvoiceLine
 
+/**
+* Api van rekening lijnen
+*/
 data class ApiInvoiceLine(
 
     @ColumnInfo(name = "invoielineid")
@@ -12,17 +15,11 @@ data class ApiInvoiceLine(
     var item:ApiInvoiceItem
 )
 
-fun ApiInvoiceLine.asDatabaseModel():DbInvoiceLine{
-    return DbInvoiceLine(
-        id = id,
-        amount = amount,
-        item = item.id,
-        invoiceId = id
-    )
-}
-
-
-
+/**
+ * Converteer lijst van API rekeningen lijn naar Array met database reking lijnen
+ * @param invoiceId Rekening id van welke rekening je de lijnen wilt converteren
+ * @return Array met database invoice lijnen
+ */
 fun List<ApiInvoiceLine>.asDatabaseModel(invoiceId:Int):Array<DbInvoiceLine>{
     return map{
         DbInvoiceLine(

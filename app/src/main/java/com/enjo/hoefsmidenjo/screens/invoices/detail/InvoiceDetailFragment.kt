@@ -23,6 +23,10 @@ class InvoiceDetailFragment() : Fragment() {
     private var invoiceId:Int = -1
     // Binding
     private lateinit var binding: FragmentInvoiceDetailBinding
+
+    /**
+     * toevoegen van id door middel van argument
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.getInt("invoiceid").let{ invId ->
@@ -44,27 +48,29 @@ class InvoiceDetailFragment() : Fragment() {
         ViewModelFactory = InvoiceDetailViewModelFactory(application)
         viewModel = ViewModelProvider(this, ViewModelFactory)[InvoiceDetailViewModel::class.java]
 
-        Timber.tag("Home").i("ItemCreateFragment loaded")
 
+        // Ophalen van rekening door meegegeven id
         viewModel.setInvoice(invoiceId)
-        Timber.tag("Fragment invoice detail").i("id = $invoiceId")
 
         var invoice:RelClientInvoiceAmount =  viewModel.invoice
 
         adapter = InvoiceLineAdapter()
         binding.invoicelines.adapter = adapter
 
+        // invullen rekening lijnen
         viewModel.invoiceItems.observe(viewLifecycleOwner, Observer {
 
             adapter.submitList(it)
         })
 
+        // datum
         var format = viewModel.invoice.invoice.time.substring(0,10)
         binding.fragmentTitle.text = "Rekening van ${invoice.client.firstName} ${invoice.client.lastName}\n${format}"
 
+        // totale prijs
         binding.invoiceTotalprice.text = "Totale prijs: %.2f €".format(viewModel.total)
 
-
+        // back knop
         binding.imgback.setOnClickListener{
             findNavController().navigate(R.id.rekening_bekijken)
         }

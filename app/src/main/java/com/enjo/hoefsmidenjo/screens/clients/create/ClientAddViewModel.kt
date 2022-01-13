@@ -30,6 +30,9 @@ class ClientAddViewModel( app: Application): AndroidViewModel(app){
     private val dao = database.userDao
     var errors:String = ""
 
+    /**
+     * Resetten van data naar originele staat
+     */
     fun resetValues(){
         errors = ""
         firstname = ""
@@ -38,6 +41,11 @@ class ClientAddViewModel( app: Application): AndroidViewModel(app){
         telephone = ""
     }
 
+    /**
+     * Gebruiker toevoegen
+     * Controleert op voornaam, achternaam, email en telefoon niet leeg
+     * @return true indien gebruiker is aangemaakt
+     */
     fun addUser():Boolean{
 
         errors = ""
@@ -86,6 +94,9 @@ class ClientAddViewModel( app: Application): AndroidViewModel(app){
 
     }
 
+    /**
+     * Controleer of string leeg is
+     */
     private fun isEmpty(text: String):Boolean{
         return (text == null || text.trim() == "")
     }

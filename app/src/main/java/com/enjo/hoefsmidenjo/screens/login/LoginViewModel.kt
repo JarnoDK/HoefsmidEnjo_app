@@ -9,20 +9,34 @@ class LoginViewModel:ViewModel() {
 
     val TestPincode = "1234"
 
+    /**
+     * voeg nummer toe aan pincode
+     */
     fun AppendNumber(number:Int){
         Pincode += number
     }
 
+    /**
+     * verwijder laatste element van pincode
+     */
     fun RemoveNumber(){
         if(Pincode!=""){
             Pincode = Pincode.substring(0,Pincode.length-1)
         }
 
     }
+
+    /**
+     * Leeg pincode
+     */
     fun ClearPincode(){
         Pincode = ""
     }
 
+    /**
+     * Controleerd pincode
+     * @return true indien pincode correct
+     */
     fun ValidatePin():Boolean{
         if(Pincode != ""){
             if(Pincode == TestPincode){
@@ -31,12 +45,9 @@ class LoginViewModel:ViewModel() {
         }
         return false
     }
-    init {
-        Timber.tag("LoginViewModel").i("LoginViewModel created")
-    }
+
 
     override fun onCleared() {
         super.onCleared()
-        Timber.tag("LoginViewModel").i("LoginViewModel destroyed")
     }
 }

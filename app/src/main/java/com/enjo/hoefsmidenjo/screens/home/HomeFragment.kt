@@ -42,12 +42,14 @@ class HomeFragment : Fragment() {
         Timber.tag("Home").i("ItemCreateFragment loaded")
         binding.planning.adapter = adapter
 
+        // Set days at top
         binding.Today.text = viewModel.date.dayOfMonth.toString()
         binding.tomorrowDate.text = viewModel.date.plusDays(1).dayOfMonth.toString()
         binding.tomorrowDate.text = viewModel.date.plusDays(-1).dayOfMonth.toString()
 
         update(0)
 
+        // update on click
         binding.viewTomorrow.setOnClickListener{
             update(1)
         }
@@ -61,6 +63,11 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    /**
+     * Refresh day
+     * @param day offset compared to current selected date
+     * @param negative whether or not to go back or forward
+     */
     private fun update(day:Int,negative:Boolean=false){
 
         var dt :LocalDate = viewModel.date
@@ -86,17 +93,29 @@ class HomeFragment : Fragment() {
 
     }
 
+    /**
+     * Set previousdate
+     * @param current date
+     */
     private fun updateYesterday(dt:LocalDate){
         binding.yesterdayDate.text = dt.plusDays(-1).dayOfMonth.toString()
         binding.yesterdayDay.text = dt.minusDays(1).dayOfWeek.getDisplayName(TextStyle.FULL , Locale("nl","NL")).substring(0,2).uppercase()
 
     }
+    /**
+     * Set today
+     * @param current date
+     */
     private fun updateToday(dt:LocalDate){
         binding.Today.text = dt.dayOfMonth.toString()
         binding.todayDay.text = dt.dayOfWeek.getDisplayName(TextStyle.FULL , Locale("nl","NL")).substring(0,2).uppercase()
         binding.date.text =  " " + dt.dayOfMonth + " " + dt.month.getDisplayName(TextStyle.FULL , Locale("nl","NL"))
 
     }
+    /**
+     * Set tomorrow
+     * @param current date
+     */
     private fun updateTomorrow(dt:LocalDate){
 
         binding.tomorrowDay.text = dt.plusDays(1).dayOfWeek.getDisplayName(TextStyle.FULL , Locale("nl","NL")).substring(0,2).uppercase()

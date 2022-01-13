@@ -57,12 +57,14 @@ class MainActivity : AppCompatActivity() {
 
         val menu: Menu = navigationView.menu
 
+        // drawer nav categorieën
         val categories: Array<Int> = arrayOf(
             R.id.calendar_category,
             R.id.client_category,
             R.id.invoice_category,
             R.id.item_category
         )
+        // drawer nav design
         for (category: Int in categories) {
             var tools: MenuItem = menu.findItem(category)
             val s = SpannableString(tools.title)
@@ -71,19 +73,9 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        // indien login scherm, schakel navigatie uit, anders schakel navigatie in
         navController.addOnDestinationChangedListener { _, destination, _  ->
-/*
-            if (destination.id == R.id.loginFragment) {
-                Timber.tag("DestinationChange").i("Login fragment")
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                bottomNav.visibility = View.INVISIBLE
 
-            } else {
-                Timber.tag("DestinationChange").i("Other fragment")
-
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-                bottomNav.visibility = View.VISIBLE
-            }*/
 
             when (destination.id) {
                 R.id.loginFragment -> {
@@ -102,6 +94,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val logout: View = findViewById(R.id.profileFragment)
+        // klik op profiel, toont scherm om uit te loggen
         logout.setOnClickListener {
             // show popup when user clicks account button
             val builder = AlertDialog.Builder(this, R.style.deleteDialog)
@@ -111,7 +104,6 @@ class MainActivity : AppCompatActivity() {
                     logout()
                 }
                 .setNegativeButton("Nee") { dialog, _ ->
-                    // Close dialog
                     dialog.dismiss()
                 }
             val alert = builder.create()
@@ -121,6 +113,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    /**
+     * Navigeer naar start scherm
+     */
     fun logout() {
         navController.navigate(R.id.logout)
         val navController = this.findNavController(R.id.navHostFragment)

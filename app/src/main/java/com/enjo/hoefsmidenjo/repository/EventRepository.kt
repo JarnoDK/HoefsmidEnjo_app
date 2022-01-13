@@ -13,6 +13,9 @@ import timber.log.Timber
 
 class EventRepository (private val database: RoomDb){
 
+    /**
+     * Ophalen data van api en toevoegen aan room database
+     */
     suspend fun InsertFromApi(){
 
         withContext(Dispatchers.IO){
@@ -24,6 +27,9 @@ class EventRepository (private val database: RoomDb){
         }
     }
 
+    /**
+     * Verwijderen van data uit zowel api als room database
+     */
     suspend fun addEvent(ev:ApiEvent){
         withContext(Dispatchers.IO){
 

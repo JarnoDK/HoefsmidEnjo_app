@@ -9,6 +9,6 @@ class ItemGetModelFactory(private var app:Application) : ViewModelProvider.Facto
         if(modelClass.isAssignableFrom(ItemGetViewModel::class.java)){
             return ItemGetViewModel(app) as T
         }
-        throw IllegalArgumentException("LoginViewModel class not found")
+        throw IllegalArgumentException("ItemGetViewModel class not found")
     }
 }

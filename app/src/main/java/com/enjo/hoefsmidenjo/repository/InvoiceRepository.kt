@@ -12,15 +12,14 @@ import timber.log.Timber
 class InvoiceRepository (private val database: RoomDb){
     private var dao = database.invoiceDao
 
+    /**
+     * Ophalen van data uit api en toevoegen aan room database
+     */
     suspend fun InsertFromApi(){
 
         withContext(Dispatchers.IO){
             val invoices = InvoiceApi.retrofitService.getInvoiceAsync().await()
-
-
-            // insert invoices
             dao.insertAll(*invoices.asDatabaseModel())
-            // insert invoice lines
             for(inv in invoices){
                 dao.insertAllInvoiceLines(inv.invoiceLines.asDatabaseModel(inv.id))
             }
@@ -28,6 +27,9 @@ class InvoiceRepository (private val database: RoomDb){
         }
     }
 
+    /**
+     * Toevoegen van rekening aan api en room database
+     */
     suspend fun addInvoice(inv:ApiInvoice){
         Timber.tag("Added invoice").i("$inv")
 

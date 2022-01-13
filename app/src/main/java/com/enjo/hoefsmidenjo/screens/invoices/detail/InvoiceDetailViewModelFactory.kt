@@ -9,6 +9,6 @@ class InvoiceDetailViewModelFactory(private val application: Application): ViewM
         if(modelClass.isAssignableFrom(InvoiceDetailViewModel::class.java)){
             return InvoiceDetailViewModel(application) as T
         }
-        throw IllegalArgumentException("LoginViewModel class not found")
+        throw IllegalArgumentException("InvoiceDetailViewModel class not found")
     }
 }

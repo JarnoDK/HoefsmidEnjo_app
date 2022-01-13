@@ -37,21 +37,13 @@ class ItemCreateFragment : Fragment() {
         viewModelFactory = ItemCreateViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[ItemCreateViewModel::class.java]
 
-        Timber.tag("Home").i("ItemCreateFragment loaded")
 
-        binding.additem.setOnClickListener{
-            viewModel.name = binding.itemname.text.toString()
-            viewModel.price = binding.Prijs.parseToDouble()
-            if(DomainController.instance.checkForInternet(this.requireContext())) {
-                addItem()
+        // Item toevoegen
+        binding.additem.setOnClickListener {
 
-            }else {
-                AlertDialog
-                    .Builder(this.requireContext())
-                    .setTitle("Geen verbinding")
-                    .setMessage("Kan geen verbinding maken tot databank")
-                    .show()
-            }
+            addItem()
+
+
         }
 
 
@@ -59,24 +51,35 @@ class ItemCreateFragment : Fragment() {
         return binding.root
     }
 
-    private fun addItem(){
+    private fun addItem() {
 
-        if(viewModel.createInvoiceItem()){
+
+        if (DomainController.instance.checkForInternet(this.requireContext())) {
+            viewModel.name = binding.itemname.text.toString()
+            viewModel.price = binding.Prijs.parseToDouble()
+            if (viewModel.createInvoiceItem()) {
+                AlertDialog
+                    .Builder(this.requireContext())
+                    .setTitle("item aangemaakt")
+                    .setMessage("Het item ${viewModel.name} is aangemaakt")
+                    .show()
+                binding.itemname.text.clear()
+                binding.Prijs.text.clear()
+
+                viewModel.name = ""
+                viewModel.price = -1.00
+            } else {
+                AlertDialog
+                    .Builder(this.requireContext())
+                    .setTitle("Item aanmaken mislukt")
+                    .setMessage(viewModel.errors)
+                    .show()
+            }
+        } else {
             AlertDialog
                 .Builder(this.requireContext())
-                .setTitle("item aangemaakt")
-                .setMessage("Het item ${viewModel.name} is aangemaakt")
-                .show()
-            binding.itemname.text.clear()
-            binding.Prijs.text.clear()
-
-            viewModel.name = ""
-            viewModel.price = -1.00
-        }else{
-            AlertDialog
-                .Builder(this.requireContext())
-                .setTitle("Item aanmaken mislukt")
-                .setMessage(viewModel.errors)
+                .setTitle("Geen verbinding")
+                .setMessage("Kan geen verbinding maken tot databank")
                 .show()
         }
 
@@ -91,12 +94,12 @@ class ItemCreateFragment : Fragment() {
 
 }
 
-fun EditText.parseToDouble() :Double{
+fun EditText.parseToDouble(): Double {
     var text = this.text.toString()
 
     try {
         return text.toDouble()
-    }catch (ex:Exception){
+    } catch (ex: Exception) {
         return -1.00
     }
 

@@ -33,6 +33,7 @@ class ViewHolder(val binding: FragmentClientItemBinding, val online:Boolean): Re
      */
     fun bind(clickListener: ClientListener, item: DbUser) {
 
+        // indien offline, zet verwijder knop onzichtbaar
         if(!online){
             binding.imgDelete.visibility = View.INVISIBLE
         }else{
@@ -51,13 +52,12 @@ class ViewHolder(val binding: FragmentClientItemBinding, val online:Boolean): Re
 
     }
 
-    /**
-     * Layout binding for element
-     */
+
     companion object {
         fun from(parent: ViewGroup): ViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = FragmentClientItemBinding.inflate(layoutInflater, parent, false)
+            // add binding + check internet
             return ViewHolder(binding, DomainController.instance.checkForInternet(parent.context))
         }
     }

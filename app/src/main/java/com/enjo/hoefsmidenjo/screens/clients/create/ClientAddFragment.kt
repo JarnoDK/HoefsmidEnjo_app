@@ -37,37 +37,29 @@ class ClientAddFragment : Fragment() {
         viewModelFactory = ClientAddModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[ClientAddViewModel::class.java]
 
-        Timber.tag("Home").i("ItemCreateFragment loaded")
+        // voeg gebruiker toe
         binding.buttonAdduser.setOnClickListener{
-
-            viewModel.firstname = binding.firstname.text.toString()
-            viewModel.lastname = binding.lastname.text.toString()
-            viewModel.email = binding.Email.text.toString()
-            viewModel.telephone = binding.telefoon.text.toString()
-
-            if(DomainController.instance.checkForInternet(this.requireContext())) {
                 addUser()
-
-            }else {
-                AlertDialog
-                    .Builder(this.requireContext())
-                    .setTitle("Geen verbinding")
-                    .setMessage("Kan geen verbinding maken tot databank")
-                    .show()
-            }
-
-
-
         }
 
         binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
-
+    /**
+     * Initialiseer viewmodels met inputs
+     * Toevoegen van gebruiker
+     */
     fun addUser(){
 
+        // check voor apparaat online
         if(DomainController.instance.checkForInternet(this.requireContext())){
+            // toekennen variabelen
+            viewModel.firstname = binding.firstname.text.toString()
+            viewModel.lastname = binding.lastname.text.toString()
+            viewModel.email = binding.Email.text.toString()
+            viewModel.telephone = binding.telefoon.text.toString()
+            // controleer of aanmaken is gelukt, success melding indien geslaagd, anders foutmelding met fouten
             if (!viewModel.addUser()) {
                 AlertDialog
                     .Builder(this.requireContext())
@@ -81,6 +73,8 @@ class ClientAddFragment : Fragment() {
                     .setTitle("Klant aangemaakt")
                     .setMessage("De klant ${viewModel.firstname} ${viewModel.lastname} is aangemaakt")
                     .show()
+
+                // Legen van velden na aanmaken klant
                 viewModel.resetValues()
                 binding.firstname.text.clear()
                 binding.lastname.text.clear()

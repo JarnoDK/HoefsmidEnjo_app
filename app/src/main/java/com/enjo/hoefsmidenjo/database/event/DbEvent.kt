@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Database model van event naar tabel event_table
+ */
 @Entity(tableName = "event_table")
 data class DbEvent(
 

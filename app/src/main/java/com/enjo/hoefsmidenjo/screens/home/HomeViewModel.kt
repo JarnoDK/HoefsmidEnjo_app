@@ -30,9 +30,14 @@ class HomeViewModel( app: Application): AndroidViewModel(app){
 
     init {
         Timber.tag("LoginViewModel").i("LoginViewModel created")
+
+        // read API
         getInvoices()
     }
 
+    /**
+     * Refresh events of selected date on date changed
+     */
     fun refreshList(){
 
 
@@ -41,6 +46,9 @@ class HomeViewModel( app: Application): AndroidViewModel(app){
 
     }
 
+    /**
+     * Read data from api and add to room database
+     */
     private fun getInvoices() {
         // Call API
         coroutineScope.launch {
@@ -67,6 +75,5 @@ class HomeViewModel( app: Application): AndroidViewModel(app){
 
     override fun onCleared() {
         super.onCleared()
-        Timber.tag("LoginViewModel").i("LoginViewModel destroyed")
     }
 }

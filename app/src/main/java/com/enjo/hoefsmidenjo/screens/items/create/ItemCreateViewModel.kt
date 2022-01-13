@@ -28,14 +28,11 @@ class ItemCreateViewModel( app: Application): AndroidViewModel(app){
 
     var errors:String = ""
     private var check: Boolean = true
-
-
-
-    init {
-        Timber.tag("item create viewmodel").i("LoginViewModel created")
-    }
     var items:LiveData<List<DbInvoiceItem>> = database.invoiceItemDao.GetAll()
 
+    /**
+     * Toevoegen van rekening met controle
+     */
     fun createInvoiceItem():Boolean {
         errors = ""
         var item = ApiInvoiceItem(
@@ -44,18 +41,19 @@ class ItemCreateViewModel( app: Application): AndroidViewModel(app){
             unitPrice = price
         )
 
-
+        // naam leeg
         if (name == null || name.trim() == "") {
             errors += "Item naam kan niet leeg zijn\n"
             check = false
         }
 
+        // prijs kleiner of gelijk aan 0
         if (price <= 0) {
             errors += "Prijs moet groter zijn dan 0"
             check = false
         }
 
-
+        // item bestaat al
             if (dao.itemExist(name)) {
                 errors += "Item bestaat reeds"
                 check=false
@@ -72,6 +70,5 @@ class ItemCreateViewModel( app: Application): AndroidViewModel(app){
 
     override fun onCleared() {
         super.onCleared()
-        Timber.tag("LoginViewModel").i("LoginViewModel destroyed")
     }
 }

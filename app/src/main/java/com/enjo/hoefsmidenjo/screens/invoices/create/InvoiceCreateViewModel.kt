@@ -67,22 +67,31 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
     lateinit var table:TableLayout
 
 
-
+    /**
+     * Maakt nieuw item aan voor de rekening
+     * @return tabel rij met waarde van item en verwijder knop
+     */
     fun addItem(name:String , amount:Int, context:Context ):TableRow{
 
 
+        // Aanmaken rows en items in kolommen
         val row = TableRow(context)
         val itemName = TextView(context)
         val am = TextView(context)
         val total = TextView(context)
         val delete = ImageView(context)
 
+        // Zet foto van imageview
         delete.setImageResource(R.drawable.trashcan)
+        // imageview zet klikbaar
         delete.isClickable = true
+
+        // onclick voor waarden in rij, verwijderd lijn
         delete.setOnClickListener{
             removeInvoiceLine(name)
         }
 
+        // toevoegen stijl van items
         itemName.setTextAppearance(R.style.tablerowtext)
         am.setTextAppearance(R.style.tablerowtext)
         total.setTextAppearance(R.style.tablerowprice)
@@ -92,29 +101,37 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         total.gravity = Gravity.CENTER
 
 
+        // naam van item naar item
         val item:DbInvoiceItem = database.invoiceItemDao.getByName(name)
 
+        // zet layout breedte naar wrapcontent
         var layoutParams = TableRow.LayoutParams(
             TableRow.LayoutParams.WRAP_CONTENT,
             TableRow.LayoutParams.WRAP_CONTENT,
             )
 
-
+        // waarde van lijnen invullen
         var unitprice:Double = item.unitPrice?:0.00
         var result:Double = unitprice*amount
 
+        //  view elementen invullen met correcte tekst
         itemName.text = name
         am.text = "$amount"
         total.text = "%.2f €".format(result)
 
+        // item breedte limiteren
         itemName.maxWidth = 150
 
+        // toevoegen view elementen aan row
         row.addView(itemName, layoutParams)
         row.addView(am, layoutParams)
         row.addView(total,layoutParams)
         row.addView(delete,layoutParams)
 
+        // views in row verticaal centreren
         row.gravity = Gravity.CENTER_VERTICAL
+
+        // toevoegen lijnen aan lijst
         lines.add(
             ApiInvoiceLine(
                 amount = amount,
@@ -122,18 +139,23 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
                 item = item.asApiModel()
             )
         )
-
+        // opslaan rij per naam van item (aangezien deze uniek moet zijn)
         rows[name] = row
         return row
     }
 
-
+    /**
+     * Verwijderen item van lijst met items en uit tabel
+     * @param name naam van item
+     */
     private fun removeInvoiceLine(name: String){
         Timber.tag("Removing $name" )
 
+        // verwijder uit tabel (zicht)
         if(rows[name] != null){
             table.removeView(rows[name])
             rows.remove(name)
+            // verwijder van rekening lijnen (benodigdheid in rekening)
             var invoiceLine = lines.firstOrNull{s -> s.item.name == name}
             if(invoiceLine != null){
                 lines.remove(invoiceLine)
@@ -142,6 +164,11 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
     }
 
 
+    /**
+     * Controleert of item reeds in de lijst zit
+     * @param name naam van item
+     * @return true indien item in lijst
+     */
     fun itemExists(name:String):Boolean{
         for(item in lines){
             if(item.item.name == name){
@@ -151,29 +178,22 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         return false
     }
 
-    fun reset(){
-        for(item in lines.toList()){
-            removeInvoiceLine(item.item.name?:"")
-        }
-
-    }
-
+    /**
+     * Voeg rekening toe
+     * @param client geselecteerde klant
+     */
     fun addInvoice(client:String):Boolean{
 
+        // tijd naar correct formaat
         var dt = current
         var timestring = time.split(":")
         var tm = LocalTime.of(timestring[0].toInt(),timestring[1].toInt())
-
-
         var datetime :LocalDateTime = LocalDateTime.of(dt.year,dt.monthValue,dt.dayOfMonth,tm.hour,tm.minute)
         var dtstring = datetime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
-        Timber.tag("Datetime = ").i(dtstring)
-        Timber.tag("Lines = ").i("${lines.stream().map { s -> "${s.item.name} x ${s.amount} " }.collect(
-            Collectors.joining("\n"))}")
-
 
         var check = true
 
+        // controleerd of rekening daadwerkelijk items heeft
         if(lines.size == 0){
             errors += "kan geen lege rekening sturen\n"
             check=false
@@ -207,9 +227,13 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         Timber.tag("LoginViewModel").i("LoginViewModel destroyed")
     }
 
+    /**
+     * controleerd of een item kan worden toegevoegd
+     */
     fun isValid(name: String, amountstring: String): Boolean {
-        var check:Boolean = true
+        var check = true
         var amount:Int = -1
+        // controle of amount een getal is , indien wel, neemt getal, anders getal blijft -1, check is false en melding toegevoegd
         if(!amountstring.matches(Regex("[\\d]+"))){
 
             errors += "Aantal moet een getal zijn\n"
@@ -218,15 +242,18 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
             amount = amountstring.toInt()
         }
 
+        // Controle op aantal minimum 1
         if(amount < 1){
             errors += "Aantal moet minimum 1 bedragen\n"
             check=false
         }
+        // controle of naam niet leef is
         if(name == null || name.trim().equals("")){
             errors += "Naam kan niet leeg zijn\n"
             check=false
         }
 
+        // controle of item uniek is
         if(itemExists(name)){
             errors +="Item zit reeds in de rekening\n"
             check = false

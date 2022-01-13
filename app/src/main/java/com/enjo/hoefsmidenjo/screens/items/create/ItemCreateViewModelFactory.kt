@@ -9,6 +9,6 @@ class ItemCreateViewModelFactory(private val application: Application): ViewMode
         if(modelClass.isAssignableFrom(ItemCreateViewModel::class.java)){
             return ItemCreateViewModel(application) as T
         }
-        throw IllegalArgumentException("LoginViewModel class not found")
+        throw IllegalArgumentException("ItemCreateViewModel class not found")
     }
 }

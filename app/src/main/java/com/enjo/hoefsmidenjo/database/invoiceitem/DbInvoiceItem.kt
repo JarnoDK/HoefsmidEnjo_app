@@ -4,6 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Database model van rekening items
+ * Database is invoice_item
+ */
 @Entity(tableName = "invoice_item")
 data class DbInvoiceItem(
     @PrimaryKey(autoGenerate = false)

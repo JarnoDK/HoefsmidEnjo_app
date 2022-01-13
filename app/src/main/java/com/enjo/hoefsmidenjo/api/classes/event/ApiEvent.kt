@@ -4,6 +4,9 @@ import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 import com.enjo.hoefsmidenjo.database.event.DbEvent
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 
+/**
+ * Inlezen van Event uit backend
+*/
 data class ApiEvent (
     var id: Int,
     var time: String,
@@ -18,7 +21,10 @@ data class ApiEvent (
     }
 }
 
-
+/**
+ * Converteer lijst api event naar een array database event
+ * @return Array met database events
+*/
 fun List<ApiEvent>.asDatabaseModel():Array<DbEvent>{
         return map{
             DbEvent (
@@ -31,6 +37,10 @@ fun List<ApiEvent>.asDatabaseModel():Array<DbEvent>{
         }.toTypedArray()
 }
 
+/**
+ * Converteer API event naar database event
+ * @return database event
+*/
 fun ApiEvent.asDatabaseModel():DbEvent{
 
         return DbEvent (

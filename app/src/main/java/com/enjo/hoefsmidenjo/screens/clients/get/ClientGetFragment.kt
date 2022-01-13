@@ -37,12 +37,9 @@ class ClientGetFragment : Fragment() {
         binding = FragmentClientGetBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
 
-
+        // adapter met onclick event
         adapter = ClientAdapter( ClientListener{
                 user ->
-            //Toast.makeText(context, "${userID}", Toast.LENGTH_SHORT).show()
-
-                // show popup when user clicks account button
                 val builder = AlertDialog.Builder(this.requireContext(),R.style.deleteDialog)
                 builder.setMessage("Wilt u de klant ${user.firstName} ${user.lastName} verwijderen?")
                     .setCancelable(false)
@@ -60,11 +57,13 @@ class ClientGetFragment : Fragment() {
         // ViewModel
         viewModelFactory = ClientGetModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[ClientGetViewModel::class.java]
-
-        refreshUsers()
         binding.clients.adapter = adapter
 
+        // invullen van correcte data
+        refreshUsers()
 
+
+        // filter op voornaam wanneer veld bevestigd (enter)
         binding.filterVoornaam.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 // if the event is a key down event on the enter button
@@ -73,6 +72,7 @@ class ClientGetFragment : Fragment() {
                 ) {
                     viewModel.firstnamefilter = binding.filterVoornaam.text.toString()
                     refreshUsers()
+                    //
                     val imm: InputMethodManager = context!!.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                     imm.hideSoftInputFromWindow(binding.filterVoornaam.windowToken, 0)
                     return true
@@ -81,6 +81,7 @@ class ClientGetFragment : Fragment() {
             }
         })
 
+        // filter op achternaam wanneer veld bevestigd (enter)
         binding.filterAchternaam.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 // if the event is a key down event on the enter button
@@ -96,12 +97,14 @@ class ClientGetFragment : Fragment() {
                 return false
             }
         })
-        Timber.tag("Home").i("ItemCreateFragment loaded")
 
         binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root
     }
 
+    /**
+     * Herladen lijst met gebruikers dat wordt getoond (filter)
+     */
     fun refreshUsers(){
 
         viewModel.refreshUserList()

@@ -40,11 +40,12 @@ class ItemGetFragment : Fragment() {
         // ViewModel
         viewModelFactory = ItemGetModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[ItemGetViewModel::class.java]
-
-        refreshItems()
         binding.items.adapter = adapter
 
+        // vult lijst met items
+        refreshItems()
 
+        // filter op naam
         binding.filtername.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 // if the event is a key down event on the enter button
@@ -61,7 +62,6 @@ class ItemGetFragment : Fragment() {
             }
         })
 
-        Timber.tag("Home").i("Ite get fragment loaded")
 
         binding.lifecycleOwner = this.viewLifecycleOwner
         return binding.root

@@ -44,8 +44,9 @@ class InvoiceFragment : Fragment() {
         viewModelFactory = InvoiceViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[InvoiceViewModel::class.java]
 
-        Timber.tag("Home").i("ItemCreateFragment loaded")
         viewModel.refreshList()
+        // Adapter rekeningen met onclick naar detail scherm
+        // overschrijven bundle met invoice id voor correct detailscherm
         adapter = InvoiceAdapter(
             InvoiceDetailListener{
                 invoice ->
@@ -57,16 +58,17 @@ class InvoiceFragment : Fragment() {
 
         binding.invoices.adapter = adapter
 
+        // datum
         var current:LocalDate = LocalDate.now()
         viewModel.date = current.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         binding.invoiceDate.text = viewModel.date
+
+        // kruis om datum te legen zichtbaar bij start
         binding.imgClear.visibility = View.VISIBLE
 
 
+        // Datepicker + zichtbaar maken kruis
         binding.invoiceDate.setOnClickListener{
-
-
-
             val datePickerDialog = DatePickerDialog(this.requireContext(),R.style.datepicker, DatePickerDialog.OnDateSetListener
             { view, year, monthOfYear, dayOfMonth ->
 
@@ -82,6 +84,7 @@ class InvoiceFragment : Fragment() {
 
         }
 
+        // Op kruis klik, leeg datum en maak onzichtbaar
         binding.imgClear.setOnClickListener{
             viewModel.date = ""
             binding.invoiceDate.text = ""
@@ -92,6 +95,7 @@ class InvoiceFragment : Fragment() {
         }
 
 
+        // filter op voornaam na "enter"
         binding.firstname.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 // if the event is a key down event on the enter button
@@ -108,6 +112,7 @@ class InvoiceFragment : Fragment() {
             }
         })
 
+        // filter op achternaam na "enter"
         binding.invoiceLastname.setOnKeyListener(object : View.OnKeyListener {
             override fun onKey(v: View?, keyCode: Int, event: KeyEvent): Boolean {
                 // if the event is a key down event on the enter button
@@ -125,15 +130,17 @@ class InvoiceFragment : Fragment() {
         })
 
 
+        // vult lijst
         refreshList()
-
-
 
         binding.lifecycleOwner = this.viewLifecycleOwner
 
         return binding.root
     }
 
+    /**
+     * Vult lijst met behulp van eventuele filters
+     */
     fun refreshList(){
 
         viewModel.firstname = binding.firstname.text.toString()

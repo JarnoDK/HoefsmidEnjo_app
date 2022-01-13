@@ -4,6 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**
+ * Database model van gebruiker
+ */
 @Entity(tableName = "users")
 data class DbUser(
 

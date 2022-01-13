@@ -13,6 +13,9 @@ import timber.log.Timber
 
 class UserRepository (private val database: RoomDb){
 
+    /**
+     * Ophalen van data uit api en toevoegen aan room database
+     */
     suspend fun InsertFromApi(){
 
         withContext(Dispatchers.IO){
@@ -21,7 +24,9 @@ class UserRepository (private val database: RoomDb){
             Timber.i("end suspend")
         }
     }
-
+    /**
+     * Verwijderen van gebruiker uit api en room database
+     */
     suspend fun removeUser(id:Int){
         withContext(Dispatchers.IO) {
 
@@ -37,6 +42,9 @@ class UserRepository (private val database: RoomDb){
         }
     }
 
+    /**
+     * Toevoegen van gebruiker aan api en roomdatabase
+     */
     suspend fun addUser(user:ApiUser){
         withContext(Dispatchers.IO) {
 

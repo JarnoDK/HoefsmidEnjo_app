@@ -40,10 +40,21 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
         .toTypedArray()
 
 
+    /**
+     * User ophalen door middel van geselecteerde naam
+     * @param name naam van de klant
+     */
     fun setSelectedUser(name: String){
 
         selectedUser= database.userDao.getUserByName(name)
     }
+
+    /**
+     * Toevoegen van afspraak of toekennen errors
+     * controles op dag(niet leeg) , locatie (niet leeg) , tijd (niet leeg)
+     * titel (niet leeg) combinatie tijd niet in verleden, minimum 30 minuten in de toekomst,
+     * overlapping (30 min voor of achter ander event)
+     */
     fun addAppointment():Boolean{
         var check =true
         errors = ""
@@ -112,6 +123,10 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
         return check
     }
 
+    /**
+     * Controle of datetime is beschikbaar en minimum 30 minuten voor of na event
+     * @param te vergelijken datum
+     */
     fun LocalDateTime.isTimeAvailable(dt:LocalDateTime):Boolean{
 
 
@@ -121,9 +136,17 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
         return true
     }
 
+    /**
+     * Controle of string leeg is
+     */
     fun String.isEmpty():Boolean{
         return this == null || this.trim() == ""
     }
+
+    /**
+     * Converteer strim time naar localdatetime
+     * @return datetime van string
+     */
     fun String.asDateTime():LocalDateTime{
 
         var date:String= this.split(" ")[0]

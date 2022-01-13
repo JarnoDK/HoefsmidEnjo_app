@@ -14,6 +14,9 @@ import com.enjo.hoefsmidenjo.database.invoiceitem.InvoiceItemDao
 import com.enjo.hoefsmidenjo.database.user.DbUser
 import com.enjo.hoefsmidenjo.database.user.UserDao
 
+/**
+ * Aanmaken van databank en registreren van de verschillende databank entiteiten
+ */
 @Database(entities = [
 
     DbEvent::class,
@@ -33,8 +36,6 @@ abstract class RoomDb : RoomDatabase() {
         @Volatile
         private var INSTANCE: RoomDb? = null
 
-        //<TODO> find fix fir not on main thread
-        // in add invoice item the exist does not want to work (even with view scope)
         fun getInstance(context: Context): RoomDb {
             synchronized(this) {
                 return INSTANCE ?: Room.databaseBuilder(

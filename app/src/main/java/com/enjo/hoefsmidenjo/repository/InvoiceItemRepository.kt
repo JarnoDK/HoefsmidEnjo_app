@@ -17,21 +17,21 @@ class InvoiceItemRepository (private val database: RoomDb){
 
     var dao = database.invoiceItemDao
 
+    /**
+     * Ophalen van data uit de api en toevoegen aan room database
+     */
     suspend fun InsertFromApi(){
 
         withContext(Dispatchers.IO){
             val invoiceItems = InvoiceItemApi.retrofitService.getInvoiceItemAsync().await()
-            //'*': kotlin spread operator.
-            //Used for functions that expect a vararg param
-            //just spreads the array into separate fields
-
-
             dao.insertAll(*invoiceItems.asDatabaseModel())
-
             Timber.i("end suspend")
         }
     }
 
+    /**
+     * Toevoegen van data aan api en room database
+     */
     suspend fun addItem(item:ApiInvoiceItem){
         withContext(Dispatchers.IO){
                 val invoiceItem= InvoiceItemApi.retrofitService.createInvoiceItemAsync(item).await()

@@ -9,6 +9,6 @@ class AppointmentCreateModelFactory(private var app:Application) : ViewModelProv
         if(modelClass.isAssignableFrom(AppointmentCreateViewModel::class.java)){
             return AppointmentCreateViewModel(app) as T
         }
-        throw IllegalArgumentException("LoginViewModel class not found")
+        throw IllegalArgumentException("AppointmentCreateViewmodel class not found")
     }
 }
