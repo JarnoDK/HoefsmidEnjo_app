@@ -26,6 +26,21 @@ interface EventDao {
     suspend fun insert(event :DbEvent)
 
     /**
+     * Get event by id
+     * @param id eventId
+     * @return DbEvent with given id
+     */
+    @Query("SELECT * FROM event_table WHERE eventid == :id")
+    suspend fun getById(id:Int):DbEvent
+
+    /**
+     * Get event and client by event id
+     * @param id event id
+     * @return relation client-event by event id
+     */
+    @Query("SELECT * FROM event_table JOIN users on userid == client WHERE eventid == :id")
+    suspend fun getRelEventClientById(id:Int):RelUserEvent
+    /**
      * Ophalen events uit event tabel gesorteerd op titel
      * @return Livedata van lijst met database events
      */

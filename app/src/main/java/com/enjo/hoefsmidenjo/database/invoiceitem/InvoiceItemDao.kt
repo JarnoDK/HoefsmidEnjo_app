@@ -46,6 +46,13 @@ interface InvoiceItemDao {
     fun insert(item: DbInvoiceItem)
 
     /**
+     * Get invoice item by id
+     * @param id item id
+     * @return invoiceitem with id
+     */
+    @Query("SELECT * FROM invoice_item WHERE itemId == :id")
+    fun getById(id:Int):DbInvoiceItem
+    /**
      * Controleert of item naam reeds bestaat
      * @return true indien item bestaat
      */

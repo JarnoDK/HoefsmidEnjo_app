@@ -55,6 +55,14 @@ interface UserDao {
     fun deleteUser(id:Int)
 
     /**
+     * get user by his id
+     * @param id user id
+     * @return DbUser
+     */
+    @Query("Select * from users where userid == :id")
+    fun getUserById(id:Int):DbUser
+
+    /**
      * gebruiker van enkele gebruiker op basis van volledige naam
      */
     @Query("SELECT * FROM users WHERE (firstName ||' '||lastName) == :name")

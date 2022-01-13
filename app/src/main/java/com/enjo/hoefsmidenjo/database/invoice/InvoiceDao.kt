@@ -45,6 +45,8 @@ interface InvoiceDao {
     @Query("select * from invoice")
     fun getAll():LiveData<List<DbInvoice>>
 
+    @Query("SELECT * FROM invoice_line WHERE id = :id")
+    fun getLineById(id:Int):DbInvoiceLine
     /**
      * Verkrijgen van alle rekeningen met hun client en totale prijs
      * @return Livedate met lijst van rekeningen met client en totale prijs
@@ -68,6 +70,7 @@ interface InvoiceDao {
     @Query("Select sum(ii.unitPrice*il.amount) as amount from invoice_line il join invoice_item ii on il.item == ii.itemId where il.invoiceId == :id")
     fun getTotalAmount(id:Int):Double
 
+
     /**
      * Opvragen van rekening met client en totale prijs
      * @param id rekeningid
@@ -85,4 +88,7 @@ interface InvoiceDao {
      */
     @Query("Select *,  (Select sum(ii.unitPrice*il.amount) from invoice_line il join invoice_item ii on il.item == ii.itemId where il.invoiceId == inv.id ) as  \"amount\" from invoice inv join users us on inv.client == us.userid where firstName like '%'||:firstname||'%' and lastName like '%'||:lastname||'%' and time LIKE :date||'%' Order by time")
     fun GetInvoicesWithTotalPriceFiltered(date:String,firstname:String,lastname:String):LiveData<List<RelClientInvoiceAmount>>
+
+    @Query("SELECT * FROM invoice WHERE id == :id")
+    fun getInvoiceById(id:Int):DbInvoice
 }
