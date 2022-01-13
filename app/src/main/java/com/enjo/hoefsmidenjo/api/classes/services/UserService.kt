@@ -2,8 +2,6 @@ package com.enjo.hoefsmidenjo.api.classes.services
 
 import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 import kotlinx.coroutines.Deferred
-import okhttp3.ResponseBody
-import retrofit2.Response
 import retrofit2.http.*
 
 

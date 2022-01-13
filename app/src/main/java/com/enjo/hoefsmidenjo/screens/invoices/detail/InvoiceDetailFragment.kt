@@ -1,22 +1,17 @@
 package com.enjo.hoefsmidenjo.screens.invoices.detail
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.enjo.hoefsmidenjo.R
-import com.enjo.hoefsmidenjo.database.invoice.DbInvoice
 import com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceDetailBinding
-import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceDetailItemBinding
-import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceListBinding
 import timber.log.Timber
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 
 class InvoiceDetailFragment() : Fragment() {

@@ -3,47 +3,41 @@ package com.enjo.hoefsmidenjo.screens.invoices.create
 import android.app.Application
 import android.content.Context
 import android.view.Gravity
-import android.view.View
 import android.widget.ImageView
 import android.widget.TableLayout
 import android.widget.TableRow
 import android.widget.TextView
-import androidx.core.view.get
-import androidx.core.view.updatePadding
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.api.classes.invoice.ApiInvoice
 import com.enjo.hoefsmidenjo.api.classes.invoice.ApiInvoiceLine
-import com.enjo.hoefsmidenjo.api.classes.invoiceitem.ApiInvoiceItem
 import com.enjo.hoefsmidenjo.api.classes.invoiceitem.asApiModel
-import com.enjo.hoefsmidenjo.api.classes.services.EventApi
-import com.enjo.hoefsmidenjo.api.classes.services.InvoiceApi
-import com.enjo.hoefsmidenjo.api.classes.services.InvoiceItemApi
-import com.enjo.hoefsmidenjo.api.classes.services.UserApi
 import com.enjo.hoefsmidenjo.api.classes.user.asApiUser
 import com.enjo.hoefsmidenjo.database.RoomDb
-import com.enjo.hoefsmidenjo.database.event.DbEvent
 import com.enjo.hoefsmidenjo.database.invoice.DbInvoice
-import com.enjo.hoefsmidenjo.database.invoice.DbInvoiceLine
 import com.enjo.hoefsmidenjo.database.invoiceitem.DbInvoiceItem
-import com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount
-import com.enjo.hoefsmidenjo.database.relations.RelInvoiceLineInvoiceItem
-import com.enjo.hoefsmidenjo.database.relations.RelUserEvent
 import com.enjo.hoefsmidenjo.database.user.DbUser
-import com.enjo.hoefsmidenjo.generated.callback.OnClickListener
-import com.enjo.hoefsmidenjo.repository.EventRepository
-import com.enjo.hoefsmidenjo.repository.InvoiceItemRepository
 import com.enjo.hoefsmidenjo.repository.InvoiceRepository
-import com.enjo.hoefsmidenjo.repository.UserRepository
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.util.stream.Collectors
+import kotlin.collections.MutableList
+import kotlin.collections.MutableMap
+import kotlin.collections.firstOrNull
+import kotlin.collections.map
+import kotlin.collections.mutableListOf
+import kotlin.collections.mutableMapOf
+import kotlin.collections.set
+import kotlin.collections.sorted
+import kotlin.collections.toList
+import kotlin.collections.toTypedArray
 
 class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
 
@@ -105,6 +99,7 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
             TableRow.LayoutParams.WRAP_CONTENT,
             )
 
+
         var unitprice:Double = item.unitPrice?:0.00
         var result:Double = unitprice*amount
 
@@ -112,13 +107,14 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         am.text = "$amount"
         total.text = "%.2f €".format(result)
 
-
+        itemName.maxWidth = 150
 
         row.addView(itemName, layoutParams)
         row.addView(am, layoutParams)
         row.addView(total,layoutParams)
         row.addView(delete,layoutParams)
 
+        row.gravity = Gravity.CENTER_VERTICAL
         lines.add(
             ApiInvoiceLine(
                 amount = amount,

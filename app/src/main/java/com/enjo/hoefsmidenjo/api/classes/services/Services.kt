@@ -14,7 +14,7 @@ open class Services {
 
     companion object {
         // Localhost api using ngrok
-        const val BASE_URL = "https://d4b8-2a02-1811-cd1b-600-ed2c-3892-ad58-498d.ngrok.io"
+        const val BASE_URL = "https://0330-2a02-1811-cd1b-600-f1a1-c1b-a47d-9dd.ngrok.io "
 
         val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())

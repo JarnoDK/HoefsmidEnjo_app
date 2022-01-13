@@ -1,29 +1,25 @@
 package com.enjo.hoefsmidenjo
 
+
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.TextAppearanceSpan
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.enjo.hoefsmidenjo.databinding.ActivityMainBinding
-
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
-import timber.log.Timber
-
-
-import android.text.style.TextAppearanceSpan
-
-import android.text.SpannableString
-import android.view.Menu
-import androidx.appcompat.app.AlertDialog
-import androidx.navigation.NavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-
 import com.google.android.material.navigation.NavigationView
+import timber.log.Timber
 
 
 class MainActivity : AppCompatActivity() {
@@ -76,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 
 
         navController.addOnDestinationChangedListener { _, destination, _  ->
-
+/*
             if (destination.id == R.id.loginFragment) {
                 Timber.tag("DestinationChange").i("Login fragment")
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
@@ -87,6 +83,20 @@ class MainActivity : AppCompatActivity() {
 
                 drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                 bottomNav.visibility = View.VISIBLE
+            }*/
+
+            when (destination.id) {
+                R.id.loginFragment -> {
+                    Timber.tag("DestinationChange").i("Login fragment")
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                    bottomNav.visibility = View.INVISIBLE
+                }
+
+                else -> {
+                    Timber.tag("DestinationChange").i("Other fragment")
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                    bottomNav.visibility = View.VISIBLE
+                }
             }
         }
 

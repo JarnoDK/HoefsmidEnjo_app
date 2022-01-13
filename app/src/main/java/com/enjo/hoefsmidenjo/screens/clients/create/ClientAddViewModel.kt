@@ -2,22 +2,15 @@ package com.enjo.hoefsmidenjo.screens.clients.create
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 import com.enjo.hoefsmidenjo.database.RoomDb
-import com.enjo.hoefsmidenjo.database.relations.RelUserEvent
-import com.enjo.hoefsmidenjo.database.user.DbUser
-import com.enjo.hoefsmidenjo.database.user.UserDao
 import com.enjo.hoefsmidenjo.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.time.LocalDate
-import java.time.LocalDateTime
 
 class ClientAddViewModel( app: Application): AndroidViewModel(app){
 

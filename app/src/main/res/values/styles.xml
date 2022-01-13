@@ -85,4 +85,8 @@
         <item name="android:textColor">@color/textGold</item>
         <item name="android:textSize">16sp</item>
     </style>
+
+    <style name="doublecolumn">
+        <item name="android:layout_span">2</item>
+    </style>
 </resources>

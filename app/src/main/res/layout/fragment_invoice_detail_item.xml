@@ -13,12 +13,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="350dp"
-        android:layout_height="60dp">
+        android:layout_height="wrap_content"
+        android:minHeight="60dp">
 
         <TextView
             android:id="@+id/line_name"
             android:layout_width="91dp"
-            android:layout_height="23dp"
+            android:layout_height="match_parent"
             android:layout_marginTop="24dp"
             android:text="@string/naam"
             android:textColor="@color/textGold"
@@ -74,12 +75,12 @@
             android:id="@+id/view8"
             android:layout_width="320dp"
             android:layout_height="2dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="8dp"
             android:background="@color/navigation"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.297"
+            app:layout_constraintHorizontal_bias="0.466"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/line_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

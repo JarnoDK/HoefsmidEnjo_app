@@ -5,15 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.enjo.hoefsmidenjo.database.event.DbEvent
 import com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount
-import com.enjo.hoefsmidenjo.database.relations.RelInvoiceLineInvoiceItem
-import com.enjo.hoefsmidenjo.database.relations.RelUserEvent
-import com.enjo.hoefsmidenjo.databinding.EventItemBinding
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceListItemBinding
-import com.enjo.hoefsmidenjo.screens.clients.get.ClientListener
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 class InvoiceAdapter(val InvoiceListener: InvoiceDetailListener) : ListAdapter<RelClientInvoiceAmount, ViewHolder>(EventDiffCallback()){
 

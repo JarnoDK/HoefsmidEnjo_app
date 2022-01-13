@@ -4,26 +4,19 @@ import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.enjo.hoefsmidenjo.R
-import com.enjo.hoefsmidenjo.databinding.FragmentHome3Binding
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceListBinding
-import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceListItemBinding
-import com.enjo.hoefsmidenjo.screens.clients.get.ClientAdapter
-import com.enjo.hoefsmidenjo.screens.clients.get.ClientListener
 import timber.log.Timber
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
-import java.time.format.TextStyle
-import java.util.*
 
 
 class InvoiceFragment : Fragment() {
@@ -154,7 +147,6 @@ class InvoiceFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        binding.unbind()
         super.onDestroy()
     }
 

@@ -1,23 +1,20 @@
 package com.enjo.hoefsmidenjo.screens.invoices.create
 
+import android.app.DatePickerDialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.TableRow
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceCreateBinding
-import timber.log.Timber
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
-import android.widget.TableRow
-import androidx.appcompat.app.AlertDialog
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
-import java.text.SimpleDateFormat
+import timber.log.Timber
 import java.time.LocalDate
-import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 
 
@@ -111,6 +108,9 @@ class InvoiceCreateFragment() : Fragment() {
                 .show()
             viewModel.errors = ""
         }
+
+
+
 
     }
 

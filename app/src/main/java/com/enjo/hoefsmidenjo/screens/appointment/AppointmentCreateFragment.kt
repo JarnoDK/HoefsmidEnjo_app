@@ -1,18 +1,16 @@
 package com.enjo.hoefsmidenjo.screens.appointment
 
 import android.app.DatePickerDialog
-import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.databinding.FragmentAppointmentCreateBinding
-import com.enjo.hoefsmidenjo.databinding.FragmentClientGetBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import timber.log.Timber
 import java.time.LocalDate

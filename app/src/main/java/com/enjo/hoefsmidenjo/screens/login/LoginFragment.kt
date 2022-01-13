@@ -1,13 +1,12 @@
 package com.enjo.hoefsmidenjo.screens.login
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.enjo.hoefsmidenjo.MainActivity
 import com.enjo.hoefsmidenjo.databinding.FragmentLoginBinding
 import com.example.k2_kolveniershof_android.screens.login.LoginViewModel
 import com.example.k2_kolveniershof_android.screens.login.LoginViewModelFactory

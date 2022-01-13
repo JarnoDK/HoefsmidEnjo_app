@@ -3,7 +3,6 @@ package com.enjo.hoefsmidenjo.screens.appointment
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import java.lang.IllegalArgumentException
 
 class AppointmentCreateModelFactory(private var app:Application) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

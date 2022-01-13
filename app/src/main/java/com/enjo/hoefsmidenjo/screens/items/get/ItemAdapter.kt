@@ -1,21 +1,11 @@
 package com.enjo.hoefsmidenjo.screens.items.get
 
-import android.content.Context
-import android.net.ConnectivityManager
-import android.net.NetworkCapabilities
-import android.opengl.Visibility
-import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.enjo.hoefsmidenjo.database.invoiceitem.DbInvoiceItem
-import com.enjo.hoefsmidenjo.database.user.DbUser
-import com.enjo.hoefsmidenjo.databinding.EventItemBinding
-import com.enjo.hoefsmidenjo.databinding.FragmentClientGetBinding
-import com.enjo.hoefsmidenjo.databinding.FragmentClientItemBinding
 import com.enjo.hoefsmidenjo.databinding.FragmentItemGetListitemBinding
 
 class ItemAdapter() : ListAdapter<DbInvoiceItem, ViewHolder>(EventDiffCallback()){

@@ -1,23 +1,16 @@
 package com.enjo.hoefsmidenjo.screens.items.create
 
 import android.os.Bundle
-import android.text.Editable
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.enjo.hoefsmidenjo.databinding.FragmentHome3Binding
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceitemAddBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import timber.log.Timber
-import java.lang.Exception
-import java.time.LocalDate
-import java.time.format.TextStyle
-import java.util.*
 
 
 class ItemCreateFragment : Fragment() {

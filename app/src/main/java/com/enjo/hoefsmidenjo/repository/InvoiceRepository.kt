@@ -29,6 +29,7 @@ class InvoiceRepository (private val database: RoomDb){
     }
 
     suspend fun addInvoice(inv:ApiInvoice){
+        Timber.tag("Added invoice").i("$inv")
 
         val invoice:ApiInvoice = InvoiceApi.retrofitService.createInvoiceAsync(inv).await()
 

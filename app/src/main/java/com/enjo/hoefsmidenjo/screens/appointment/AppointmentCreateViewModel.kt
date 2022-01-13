@@ -2,25 +2,17 @@ package com.enjo.hoefsmidenjo.screens.appointment
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.enjo.hoefsmidenjo.api.classes.event.ApiEvent
 import com.enjo.hoefsmidenjo.api.classes.user.asApiUser
 import com.enjo.hoefsmidenjo.database.RoomDb
 import com.enjo.hoefsmidenjo.database.event.DbEvent
-import com.enjo.hoefsmidenjo.database.relations.RelUserEvent
 import com.enjo.hoefsmidenjo.database.user.DbUser
-import com.enjo.hoefsmidenjo.database.user.UserDao
-import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import com.enjo.hoefsmidenjo.repository.EventRepository
-import com.enjo.hoefsmidenjo.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){

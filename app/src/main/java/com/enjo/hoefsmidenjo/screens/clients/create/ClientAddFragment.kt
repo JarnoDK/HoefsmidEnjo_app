@@ -1,22 +1,13 @@
 package com.enjo.hoefsmidenjo.screens.clients.create
 
-import android.app.Dialog
-import android.content.Context
 import android.os.Bundle
-import android.view.KeyEvent
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AlertDialog
-import androidx.core.widget.doAfterTextChanged
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.enjo.hoefsmidenjo.MainActivity
-import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.databinding.FragmentClientAddBinding
-import com.enjo.hoefsmidenjo.databinding.FragmentClientGetBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import timber.log.Timber
 

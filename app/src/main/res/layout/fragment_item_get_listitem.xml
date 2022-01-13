@@ -29,8 +29,10 @@
 
         <TextView
             android:id="@+id/itemname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="162dp"
+            android:layout_height="58dp"
+            android:gravity="center_vertical"
+            android:maxWidth="150dp"
             android:text="@string/name"
             android:textColor="@color/textGold"
             android:textSize="20sp"
