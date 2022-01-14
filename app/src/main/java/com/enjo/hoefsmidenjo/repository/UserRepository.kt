@@ -3,10 +3,8 @@ package com.enjo.hoefsmidenjo.repository
 
 import com.enjo.hoefsmidenjo.api.classes.services.UserApi
 import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
-import com.enjo.hoefsmidenjo.api.classes.user.asApiUser
 import com.enjo.hoefsmidenjo.api.classes.user.asDatabaseModel
 import com.enjo.hoefsmidenjo.database.RoomDb
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber

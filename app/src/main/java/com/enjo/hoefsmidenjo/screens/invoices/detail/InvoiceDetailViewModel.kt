@@ -6,9 +6,7 @@ import androidx.lifecycle.LiveData
 import com.enjo.hoefsmidenjo.database.RoomDb
 import com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount
 import com.enjo.hoefsmidenjo.database.relations.RelInvoiceLineInvoiceItem
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+
 
 class InvoiceDetailViewModel(app: Application): AndroidViewModel(app){
 
