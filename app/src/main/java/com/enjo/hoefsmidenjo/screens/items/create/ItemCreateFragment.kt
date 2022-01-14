@@ -8,6 +8,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceitemAddBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 
@@ -50,7 +51,7 @@ class ItemCreateFragment : Fragment() {
     private fun addItem() {
 
 
-        if (DomainController.instance.checkForInternet(this.requireContext())) {
+        if (DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid) {
             viewModel.name = binding.itemname.text.toString()
             viewModel.price = binding.Prijs.parseToDouble()
             if (viewModel.createInvoiceItem()) {
@@ -75,7 +76,7 @@ class ItemCreateFragment : Fragment() {
             AlertDialog
                 .Builder(this.requireContext())
                 .setTitle("Geen verbinding")
-                .setMessage("Kan geen verbinding maken tot databank")
+                .setMessage("Kan geen verbinding maken met internet/databank")
                 .show()
         }
 

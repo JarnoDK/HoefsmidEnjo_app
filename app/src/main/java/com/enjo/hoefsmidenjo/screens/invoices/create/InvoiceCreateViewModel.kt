@@ -48,7 +48,7 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
 
 
     var current = LocalDate.now()!!
-    var date = LocalDate.now()!!.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    var date: String = current.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 
     var time:String = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
 

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentHomeBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import java.time.LocalDate
@@ -37,8 +38,8 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
 
-        // indien internet, Ophalen van events uit API
-        if(DomainController.instance.checkForInternet(this.requireContext())){
+        // Indien api beschikbaar, hervul database
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
             viewModel.reloadInvoices()
         }
         binding.planning.adapter = adapter
@@ -47,6 +48,10 @@ class HomeFragment : Fragment() {
         binding.Today.text = viewModel.date.dayOfMonth.toString()
         binding.tomorrowDate.text = viewModel.date.plusDays(1).dayOfMonth.toString()
         binding.tomorrowDate.text = viewModel.date.plusDays(-1).dayOfMonth.toString()
+
+        viewModel.events.observe(viewLifecycleOwner, {
+            adapter.submitList(it)
+        })
 
         update(0)
 

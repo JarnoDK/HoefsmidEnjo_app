@@ -16,8 +16,6 @@ class InvoiceRepository (private val database: RoomDb){
     suspend fun insertFromApi(){
 
         withContext(Dispatchers.IO){
-            database.invoiceDao.clearInvoice()
-            database.invoiceDao.clearInvoiceLine()
             val invoices = InvoiceApi.retrofitService.getInvoiceAsync().await()
             database.invoiceDao.insertAll(*invoices.asDatabaseModel())
             for(inv in invoices){

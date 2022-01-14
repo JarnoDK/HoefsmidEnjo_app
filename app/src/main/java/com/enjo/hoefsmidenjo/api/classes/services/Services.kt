@@ -1,5 +1,6 @@
 package com.enjo.hoefsmidenjo.api.classes.services
 
+import android.util.Patterns
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -34,7 +35,10 @@ open class Services {
             .build()
 
     companion object {
-        private const val BASEURL = "https://0330-2a02-1811-cd1b-600-f1a1-c1b-a47d-9dd.ngrok.io "
+
+        private val BASEURL = "https://3a5b-2a02-1811-cd1b-600-dc09-972-199e-71a5.ngrok.io"
+        val APIIsValid =  Patterns.WEB_URL.matcher(BASEURL).matches()
+
     }
 
 

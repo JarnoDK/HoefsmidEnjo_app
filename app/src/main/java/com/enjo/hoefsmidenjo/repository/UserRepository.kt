@@ -17,7 +17,6 @@ class UserRepository (private val database: RoomDb){
     suspend fun insertFromApi(){
 
         withContext(Dispatchers.IO){
-            database.userDao.clearUsers()
             val users = UserApi.retrofitService.getUserAsync().await()
             database.userDao.insertAll(*users.asDatabaseModel())
         }

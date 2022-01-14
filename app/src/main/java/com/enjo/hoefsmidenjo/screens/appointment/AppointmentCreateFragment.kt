@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.R
+import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentAppointmentCreateBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import timber.log.Timber
@@ -86,7 +87,7 @@ class AppointmentCreateFragment : Fragment() {
     fun addAppointment(){
 
         // controle op internet, geeft melding indien false
-        if(DomainController.instance.checkForInternet(this.requireContext())){
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
 
             // Variabelen in viewmodel toekennen door inputs in fragment
             viewModel.time = "${binding.appointmenttime.hour}:${binding.appointmenttime.minute}"
@@ -113,7 +114,7 @@ class AppointmentCreateFragment : Fragment() {
             AlertDialog
                 .Builder(this.requireContext())
                 .setTitle("Geen verbinding")
-                .setMessage("Kan geen verbinding maken met internet")
+                .setMessage("Kan geen verbinding maken met internet/databank")
                 .show()
         }
     }

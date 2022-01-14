@@ -15,7 +15,6 @@ class EventRepository (private val database: RoomDb){
     suspend fun insertFromApi(){
 
         withContext(Dispatchers.IO){
-            database.eventDao.clearEvents()
             val events = EventApi.retrofitService.getEventAsync().await()
             database.eventDao.insertAll(*events.asDatabaseModel())
 

@@ -17,7 +17,6 @@ class InvoiceItemRepository (private var database: RoomDb){
     suspend fun insertFromApi(){
 
         withContext(Dispatchers.IO){
-            database.invoiceItemDao.clearItems()
             val invoiceItems = InvoiceItemApi.retrofitService.getInvoiceItemAsync().await()
             database.invoiceItemDao.insertAll(*invoiceItems.asDatabaseModel())
         }

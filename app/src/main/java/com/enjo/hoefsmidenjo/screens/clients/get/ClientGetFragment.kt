@@ -11,6 +11,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.R
+import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentClientGetBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 
@@ -56,7 +57,8 @@ class ClientGetFragment : Fragment() {
         // invullen van correcte data
         refreshUsers()
 
-        if(DomainController.instance.checkForInternet(this.requireContext())){
+        // Indien api beschikbaar, hervul database
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
             viewModel.reloadUsersFromApi()
         }
 

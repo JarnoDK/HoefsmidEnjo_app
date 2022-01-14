@@ -22,7 +22,7 @@ class HomeViewModel( app: Application): AndroidViewModel(app){
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     private val dao = database.eventDao
-    lateinit var events:LiveData<List<RelUserEvent>>
+    var events:LiveData<List<RelUserEvent>> =  dao.getAllEventsOfDateLive(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
 
 
     /**

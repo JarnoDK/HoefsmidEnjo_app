@@ -1,6 +1,7 @@
 package com.enjo.hoefsmidenjo.screens.invoices.create
 
 import android.app.DatePickerDialog
+import android.app.Service
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.R
+import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceCreateBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import timber.log.Timber
@@ -125,7 +127,7 @@ class InvoiceCreateFragment : Fragment() {
     fun addInvoice(){
 
         // controleert internet, indien geen internet , geeft melding
-        if(DomainController.instance.checkForInternet(this.requireContext())){
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
 
             // variabelen initialiseren
             var timepicker = binding.hourpicker
@@ -155,7 +157,7 @@ class InvoiceCreateFragment : Fragment() {
             AlertDialog
                 .Builder(this.requireContext())
                 .setTitle("Geen verbinding")
-                .setMessage("Kan geen verbinding maken met internet")
+                .setMessage("Kan geen verbinding maken met internet/databank")
                 .show()
         }
 

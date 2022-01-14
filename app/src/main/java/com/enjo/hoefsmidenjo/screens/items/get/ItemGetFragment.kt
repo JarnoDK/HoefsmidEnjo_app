@@ -9,8 +9,10 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentItemGetBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
+import timber.log.Timber
 
 
 class ItemGetFragment : Fragment() {
@@ -38,9 +40,11 @@ class ItemGetFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[ItemGetViewModel::class.java]
         binding.items.adapter = adapter
 
-        // lezen van data uit api indien online
-        if(DomainController.instance.checkForInternet(this.requireContext())){
+        // Indien api beschikbaar, hervul database
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
             viewModel.reloadItemsFromApi()
+        }else{
+            Timber.tag("FAIL").i("Api is niet beschikbaar")
         }
 
         // vult lijst met items

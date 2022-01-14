@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentClientAddBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 
@@ -46,7 +47,7 @@ class ClientAddFragment : Fragment() {
     private fun addUser(){
 
         // check voor apparaat online
-        if(DomainController.instance.checkForInternet(this.requireContext())){
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
             // toekennen variabelen
             viewModel.firstname = binding.firstname.text.toString()
             viewModel.lastname = binding.lastname.text.toString()
@@ -79,7 +80,7 @@ class ClientAddFragment : Fragment() {
             AlertDialog
                 .Builder(this.requireContext())
                 .setTitle("Geen verbinding")
-                .setMessage("Kan geen verbinding maken met internet")
+                .setMessage("Kan geen verbinding maken met internet/databank")
                 .show()
         }
 
