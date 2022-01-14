@@ -81,13 +81,15 @@ class MainActivity : AppCompatActivity() {
 
             when (destination.id) {
                 R.id.loginFragment -> {
-                    Timber.tag("DestinationChange").i("Login fragment")
+                    drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                    bottomNav.visibility = View.INVISIBLE
+                }
+                R.id.logout -> {
                     drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
                     bottomNav.visibility = View.INVISIBLE
                 }
 
                 else -> {
-                    Timber.tag("DestinationChange").i("Other fragment")
                     drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
                     bottomNav.visibility = View.VISIBLE
                 }
@@ -116,12 +118,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * Navigeer naar start scherm
+     * Navigeer naar login scherm
      */
     private fun logout() {
         navController.navigate(R.id.logout)
         val navController = findNavController(R.id.navHostFragment)
-        navController.navigate(R.id.logout)
+        navController.navigate(R.id.loginFragment)
     }
 }
 
