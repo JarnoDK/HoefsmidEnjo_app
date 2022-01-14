@@ -14,60 +14,112 @@
 
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"
+            />
     </fragment>
 
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.enjo.hoefsmidenjo.screens.home.HomeFragment"
         android:label="HomeFragment"
-        tools:layout="@layout/fragment_home"/>
+        tools:layout="@layout/fragment_home"
+        />
 
     <fragment
         android:id="@+id/kalender_raadplegen"
         android:name="com.enjo.hoefsmidenjo.screens.home.HomeFragment"
-        android:label="KalenderRaadplegen" />
+        android:label="KalenderRaadplegen"
+
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"
+        />
 
     <fragment
         android:id="@+id/klant_beheren"
         android:name="com.enjo.hoefsmidenjo.screens.clients.get.ClientGetFragment"
-        android:label="Klant beheren" />
+        android:label="Klant beheren"
+
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"
+        />
     <fragment
         android:id="@id/klant_toevoegen"
         android:name="com.enjo.hoefsmidenjo.screens.clients.create.ClientAddFragment"
         android:label="Klant Toevoegen"
+
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"
         />
     <fragment
         android:id="@id/item_beheren"
         android:name="com.enjo.hoefsmidenjo.screens.items.get.ItemGetFragment"
         android:label="Item Beheren"
+
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"
         />
     <fragment
         android:id="@+id/logout"
         android:name="com.enjo.hoefsmidenjo.screens.login.LoginFragment"
         android:label="Logout"
         app:destination="@id/loginFragment"
+
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"
         />
 
     <fragment
         android:id="@+id/item_toevoegen"
         android:name="com.enjo.hoefsmidenjo.screens.items.create.ItemCreateFragment"
         android:label="@string/item_toevoegen"
+
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"
         />
 
     <fragment
         android:id="@+id/rekening_toevoegen"
         android:name="com.enjo.hoefsmidenjo.screens.invoices.create.InvoiceCreateFragment"
         android:label="@string/rekening_toevoegen"
+
         />
 
     <fragment
         android:id="@+id/rekening_bekijken"
         android:name="com.enjo.hoefsmidenjo.screens.invoices.get.InvoiceFragment"
-        android:label="Item Toevoegen">
+        android:label="@string/rekening_bekijken"
+
+        app:enterAnim="@anim/slide_in"
+        app:exitAnim="@anim/slide_out"
+        app:popEnterAnim="@anim/slide_in"
+        app:popExitAnim="@anim/slide_out"
+        >
         <action
             android:id="@+id/invoice_to_detail"
             app:destination="@+id/detailfragment"
+
+
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out"
+            app:popEnterAnim="@anim/slide_in"
+            app:popExitAnim="@anim/slide_out"
             />
 
     </fragment>
@@ -75,9 +127,19 @@
     <fragment
         android:id="@+id/detailfragment"
         android:name="com.enjo.hoefsmidenjo.screens.invoices.detail.InvoiceDetailFragment"
+
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"
         />
     <fragment
         android:id="@+id/afspraak_maken"
         android:name="com.enjo.hoefsmidenjo.screens.appointment.AppointmentCreateFragment"
+
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"
         />
 </navigation>

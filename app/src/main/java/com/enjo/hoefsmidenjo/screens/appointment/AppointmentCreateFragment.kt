@@ -126,7 +126,6 @@ class AppointmentCreateFragment : Fragment() {
 
 
     override fun onDestroy() {
-        binding.unbind()
         super.onDestroy()
     }
 

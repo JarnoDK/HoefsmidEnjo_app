@@ -166,7 +166,6 @@ class InvoiceCreateFragment() : Fragment() {
     }
 
     override fun onDestroy() {
-        binding.unbind()
         super.onDestroy()
     }
 

@@ -17,6 +17,13 @@ import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceListBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import androidx.navigation.NavOptions
+
+
+
+
+
+
 
 
 class InvoiceFragment : Fragment() {
@@ -34,8 +41,14 @@ class InvoiceFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
+
+        // animation
+        val navBuilder = NavOptions.Builder()
+        navBuilder.setEnterAnim(R.anim.slide_in).setExitAnim(R.anim.slide_in)
+            .setPopEnterAnim(R.anim.slide_out).setPopExitAnim(R.anim.slide_out)
+
         // Binding
         binding = FragmentInvoiceListBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
@@ -53,7 +66,7 @@ class InvoiceFragment : Fragment() {
 
                 val bundle= Bundle()
                 bundle.putInt("invoiceid",invoice.invoice.id)
-                findNavController().navigate(R.id.detailfragment, bundle)
+                findNavController().navigate(R.id.detailfragment, bundle, navBuilder.build())
         })
 
         binding.invoices.adapter = adapter

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.enjo.hoefsmidenjo.database.relations.RelUserEvent
-import com.enjo.hoefsmidenjo.databinding.EventItemBinding
+import com.enjo.hoefsmidenjo.databinding.FragmentEventItemBinding
 
 class EventAdapter() : ListAdapter<RelUserEvent, ViewHolder>(EventDiffCallback()){
 
@@ -24,7 +24,7 @@ class EventAdapter() : ListAdapter<RelUserEvent, ViewHolder>(EventDiffCallback()
 }
 
 
-class ViewHolder(val binding: EventItemBinding): RecyclerView.ViewHolder(binding.root){
+class ViewHolder(val binding: FragmentEventItemBinding): RecyclerView.ViewHolder(binding.root){
 
     /**
      * Gives each element in the layout the correct text
@@ -48,7 +48,7 @@ class ViewHolder(val binding: EventItemBinding): RecyclerView.ViewHolder(binding
     companion object {
         fun from(parent: ViewGroup): ViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            val binding = EventItemBinding.inflate(layoutInflater, parent, false)
+            val binding = FragmentEventItemBinding.inflate(layoutInflater, parent, false)
             return ViewHolder(binding)
         }
     }

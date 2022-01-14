@@ -83,7 +83,6 @@ class ItemGetFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        binding.unbind()
         super.onDestroy()
     }
 

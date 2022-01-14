@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.enjo.hoefsmidenjo.databinding.FragmentHome3Binding
+import com.enjo.hoefsmidenjo.databinding.FragmentHomeBinding
 import timber.log.Timber
 import java.time.LocalDate
 import java.time.format.TextStyle
@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
     private var adapter = EventAdapter()
 
     // Binding
-    private lateinit var binding: FragmentHome3Binding
+    private lateinit var binding: FragmentHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
@@ -31,8 +31,10 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
         // Binding
-        binding = FragmentHome3Binding.inflate(layoutInflater)
+        binding = FragmentHomeBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
 
         // ViewModel
@@ -124,7 +126,6 @@ class HomeFragment : Fragment() {
     }
 
     override fun onDestroy() {
-        binding.unbind()
         super.onDestroy()
     }
 

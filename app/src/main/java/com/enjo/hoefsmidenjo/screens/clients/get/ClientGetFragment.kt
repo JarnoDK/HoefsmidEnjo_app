@@ -14,7 +14,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.databinding.FragmentClientGetBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
-import timber.log.Timber
 
 
 class ClientGetFragment : Fragment() {
@@ -120,10 +119,6 @@ class ClientGetFragment : Fragment() {
 
     }
 
-    override fun onDestroy() {
-        binding.unbind()
-        super.onDestroy()
-    }
 
 
 }

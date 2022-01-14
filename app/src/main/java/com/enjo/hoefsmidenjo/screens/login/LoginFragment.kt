@@ -87,7 +87,6 @@ class LoginFragment : Fragment(){
     }
 
     override fun onDestroy() {
-        binding.unbind()
         super.onDestroy()
     }
 

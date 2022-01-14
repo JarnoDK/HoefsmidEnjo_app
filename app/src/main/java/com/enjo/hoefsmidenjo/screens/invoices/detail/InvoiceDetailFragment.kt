@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount
@@ -36,10 +37,17 @@ class InvoiceDetailFragment() : Fragment() {
         }
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+        // animation
+        val navBuilder = NavOptions.Builder()
+        navBuilder.setEnterAnim(R.anim.slide_in).setExitAnim(R.anim.slide_out)
+            .setPopEnterAnim(R.anim.slide_in).setPopExitAnim(R.anim.slide_out)
+
         // Binding
         binding = FragmentInvoiceDetailBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
@@ -72,7 +80,7 @@ class InvoiceDetailFragment() : Fragment() {
 
         // back knop
         binding.imgback.setOnClickListener{
-            findNavController().navigate(R.id.rekening_bekijken)
+            findNavController().navigate(R.id.rekening_bekijken,savedInstanceState, navBuilder.build())
         }
 
 
@@ -81,7 +89,6 @@ class InvoiceDetailFragment() : Fragment() {
     }
 
     override fun onDestroy() {
-        binding.unbind()
         super.onDestroy()
     }
 

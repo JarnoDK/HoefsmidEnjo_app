@@ -15,158 +15,158 @@
             android:id="@+id/pincode_3"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="264dp"
-            android:layout_marginTop="224dp"
+            android:layout_marginStart="60dp"
             android:background="@drawable/button_design"
             android:text="3"
             android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/pincode_2"
+            app:layout_constraintTop_toTopOf="@+id/pincode_2" />
 
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:foregroundGravity="center_horizontal"
-            app:constraint_referenced_ids="pincode_6,pincode_back,pincode_9,pincode_3,pincodeDisplay,pincode_7,pincode_8,pincode_1,pincode_ok,pincode_5,pincode_0,pincode_2,pincode_4,view6" />
+            app:constraint_referenced_ids="pincode_6,pincode_back,pincode_9,pincode_3,pincodeDisplay,pincode_7,pincode_8,pincode_1,pincode_ok,pincode_5,pincode_0,pincode_2,pincode_4,pincodetopbar" />
 
         <Button
             android:id="@+id/pincode_8"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="452dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/button_design"
             android:text="8"
             android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/pincode_5"
+            app:layout_constraintStart_toStartOf="@+id/pincode_5"
+            app:layout_constraintTop_toBottomOf="@+id/pincode_5" />
 
         <Button
             android:id="@+id/pincode_9"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="260dp"
-            android:layout_marginTop="452dp"
+            android:layout_marginStart="60dp"
             android:background="@drawable/button_design"
             android:text="9"
             android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/pincode_8"
+            app:layout_constraintTop_toTopOf="@+id/pincode_8" />
 
-        <Button
+        <ImageButton
             android:id="@+id/pincode_back"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="556dp"
-            android:background="@drawable/button_design"
-            android:text="Back"
-            android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginEnd="60dp"
+            android:adjustViewBounds="true"
 
-            app:layout_constraintTop_toTopOf="parent" />
+            android:background="@drawable/button_design"
+            android:padding="5dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/backarrow"
+            android:theme="@style/buttonText"
+            app:layout_constraintEnd_toStartOf="@+id/pincode_0"
+            app:layout_constraintTop_toTopOf="@+id/pincode_0" />
 
         <Button
             android:id="@+id/pincode_0"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="140dp"
-            android:layout_marginTop="556dp"
+            android:layout_marginTop="50dp"
             android:background="@drawable/button_design"
             android:text="0"
             android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="@+id/pincode_8"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/pincode_8"
+            app:layout_constraintTop_toBottomOf="@+id/pincode_8" />
 
         <Button
             android:id="@+id/pincode_ok"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="260dp"
-            android:layout_marginTop="556dp"
+            android:layout_marginStart="60dp"
             android:background="@drawable/button_design"
             android:text="OK"
             android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/pincode_0"
+            app:layout_constraintTop_toTopOf="@+id/pincode_0" />
 
         <Button
             android:id="@+id/pincode_6"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="264dp"
-            android:layout_marginTop="332dp"
+            android:layout_marginStart="60dp"
             android:background="@drawable/button_design"
             android:text="6"
             android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/pincode_5"
+            app:layout_constraintTop_toTopOf="@+id/pincode_5" />
 
         <View
-            android:id="@+id/view6"
+            android:id="@+id/pincodetopbar"
             android:layout_width="wrap_content"
             android:layout_height="190dp"
-            android:background="@color/navigation" />
+            android:background="@color/navigation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/pincode_5"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="144dp"
-            android:layout_marginTop="332dp"
+            android:layout_marginTop="124dp"
             android:background="@drawable/button_design"
             android:text="5"
             android:theme="@style/buttonText"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/pincodetopbar" />
 
         <Button
             android:id="@+id/pincode_2"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="144dp"
-            android:layout_marginTop="224dp"
+            android:layout_marginBottom="50dp"
             android:background="@drawable/button_design"
             android:text="2"
             android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@+id/pincode_5"
+            app:layout_constraintEnd_toEndOf="@+id/pincode_5"
+            app:layout_constraintStart_toStartOf="@+id/pincode_5" />
 
         <Button
             android:id="@+id/pincode_1"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="224dp"
+            android:layout_marginEnd="60dp"
             android:background="@drawable/button_design"
             android:text="1"
             android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/pincode_2"
+            app:layout_constraintTop_toTopOf="@+id/pincode_2" />
 
         <Button
             android:id="@+id/pincode_4"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="332dp"
+            android:layout_marginEnd="60dp"
             android:background="@drawable/button_design"
             android:text="4"
             android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/pincode_5"
+            app:layout_constraintTop_toTopOf="@+id/pincode_5" />
 
         <TextView
             android:id="@+id/pincodeDisplay"
             android:layout_width="294dp"
             android:layout_height="46dp"
-            android:layout_marginStart="32dp"
             android:layout_marginTop="108dp"
             android:background="@color/white"
             android:gravity="center"
             android:text="xxxx"
             android:textColor="#000000"
             android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/pincodetopbar"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -174,13 +174,12 @@
             android:id="@+id/pincode_7"
             android:layout_width="57dp"
             android:layout_height="60dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="452dp"
+            android:layout_marginEnd="60dp"
             android:background="@drawable/button_design"
             android:text="7"
             android:theme="@style/buttonText"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toStartOf="@+id/pincode_8"
+            app:layout_constraintTop_toTopOf="@+id/pincode_8" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

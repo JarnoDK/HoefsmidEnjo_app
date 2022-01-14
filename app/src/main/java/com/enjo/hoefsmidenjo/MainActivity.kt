@@ -11,6 +11,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.commit
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -71,6 +73,8 @@ class MainActivity : AppCompatActivity() {
             s.setSpan(TextAppearanceSpan(this, R.style.category), 0, s.length, 0)
             tools.title = s
         }
+
+
 
 
         // indien login scherm, schakel navigatie uit, anders schakel navigatie in
