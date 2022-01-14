@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.enjo.hoefsmidenjo.database.invoiceitem.DbInvoiceItem
 import com.enjo.hoefsmidenjo.databinding.FragmentItemGetListitemBinding
 
-class ItemAdapter() : ListAdapter<DbInvoiceItem, ViewHolder>(EventDiffCallback()){
+class ItemAdapter : ListAdapter<DbInvoiceItem, ViewHolder>(EventDiffCallback()){
 
     //fill up the item you need (e.g. set texts and images)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

@@ -1,6 +1,5 @@
 package com.enjo.hoefsmidenjo.api.classes.user
 
-import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.database.user.DbUser
 
 /**

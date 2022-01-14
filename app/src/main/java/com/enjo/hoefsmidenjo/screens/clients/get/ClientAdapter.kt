@@ -10,7 +10,7 @@ import com.enjo.hoefsmidenjo.database.user.DbUser
 import com.enjo.hoefsmidenjo.databinding.FragmentClientItemBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 
-class ClientAdapter(val clickListener: ClientListener) : ListAdapter<DbUser, ViewHolder>(EventDiffCallback()){
+class ClientAdapter(private val clickListener: ClientListener) : ListAdapter<DbUser, ViewHolder>(EventDiffCallback()){
 
     //fill up the item you need (e.g. set texts and images)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -26,7 +26,7 @@ class ClientAdapter(val clickListener: ClientListener) : ListAdapter<DbUser, Vie
 }
 
 
-class ViewHolder(val binding: FragmentClientItemBinding, val online:Boolean): RecyclerView.ViewHolder(binding.root){
+class ViewHolder(val binding: FragmentClientItemBinding, private val online:Boolean): RecyclerView.ViewHolder(binding.root){
 
     /**
      * Gives each element in the layout the correct text
@@ -40,7 +40,7 @@ class ViewHolder(val binding: FragmentClientItemBinding, val online:Boolean): Re
             binding.imgDelete.visibility = View.VISIBLE
         }
 
-        binding.clientName.text = item.firstName + " " + item.lastName
+        binding.clientName.text = "${item.firstName} ${item.lastName}"
         binding.clientEmail.text = item.email
         binding.clientPhone.text = item.phone
         binding.clickListener = clickListener

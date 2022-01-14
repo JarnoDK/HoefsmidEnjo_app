@@ -35,9 +35,6 @@ class InvoiceFragment : Fragment() {
 
     // Binding
     private lateinit var binding: FragmentInvoiceListBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -171,9 +168,6 @@ class InvoiceFragment : Fragment() {
         })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
 
 

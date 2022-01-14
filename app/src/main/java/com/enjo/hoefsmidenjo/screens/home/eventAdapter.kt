@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.enjo.hoefsmidenjo.database.relations.RelUserEvent
 import com.enjo.hoefsmidenjo.databinding.FragmentEventItemBinding
 
-class EventAdapter() : ListAdapter<RelUserEvent, ViewHolder>(EventDiffCallback()){
+class EventAdapter : ListAdapter<RelUserEvent, ViewHolder>(EventDiffCallback()){
 
     //fill up the item you need (e.g. set texts and images)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -34,7 +34,7 @@ class ViewHolder(val binding: FragmentEventItemBinding): RecyclerView.ViewHolder
         binding.eventHour.text = item.event.time.substring(11)
         binding.eventTitel.text = item.event.title
         binding.eventLocation.text = item.event.location
-        binding.eventClient.text = item.user.firstName + " " + item.user.lastName
+        binding.eventClient.text = "${item.user.firstName} ${item.user.lastName}"
 
         binding.relUserEvent = item
         binding.executePendingBindings()

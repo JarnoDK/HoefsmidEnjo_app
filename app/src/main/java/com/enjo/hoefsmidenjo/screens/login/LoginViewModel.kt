@@ -1,27 +1,26 @@
-package com.example.k2_kolveniershof_android.screens.login
+package com.enjo.hoefsmidenjo.screens.login
 
 import androidx.lifecycle.ViewModel
-import timber.log.Timber
 
 class LoginViewModel:ViewModel() {
 
-    var Pincode = ""
+    var pincode = ""
 
-    val TestPincode = "1234"
+    private val testPincode = "1234"
 
     /**
      * voeg nummer toe aan pincode
      */
-    fun AppendNumber(number:Int){
-        Pincode += number
+    fun appendNumber(number:Int){
+        pincode += number
     }
 
     /**
      * verwijder laatste element van pincode
      */
-    fun RemoveNumber(){
-        if(Pincode!=""){
-            Pincode = Pincode.substring(0,Pincode.length-1)
+    fun removeNumber(){
+        if(pincode!=""){
+            pincode = pincode.substring(0,pincode.length-1)
         }
 
     }
@@ -29,17 +28,18 @@ class LoginViewModel:ViewModel() {
     /**
      * Leeg pincode
      */
-    fun ClearPincode(){
-        Pincode = ""
+    fun clearPincode(){
+        pincode = ""
     }
 
     /**
      * Controleerd pincode
      * @return true indien pincode correct
      */
-    fun ValidatePin():Boolean{
-        if(Pincode != ""){
-            if(Pincode == TestPincode){
+    fun validatePin():Boolean{
+        if(pincode != ""){
+
+            if(pincode == testPincode){
                 return true
             }
         }
@@ -47,7 +47,5 @@ class LoginViewModel:ViewModel() {
     }
 
 
-    override fun onCleared() {
-        super.onCleared()
-    }
+
 }

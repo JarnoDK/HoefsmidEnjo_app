@@ -9,15 +9,11 @@ import com.enjo.hoefsmidenjo.database.relations.RelInvoiceLineInvoiceItem
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import timber.log.Timber
 
 class InvoiceDetailViewModel(app: Application): AndroidViewModel(app){
 
 
     private val database = RoomDb.getInstance(app.applicationContext)
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
 
     private val dao = database.invoiceDao
 
@@ -28,7 +24,7 @@ class InvoiceDetailViewModel(app: Application): AndroidViewModel(app){
 
     /**
      * Zetten van invoice, invoiceitem en totaal door middel van id
-     * @param Rekening ID
+     * @param id Rekening ID
      */
     fun setInvoice(id:Int){
         invoice = dao.getById(id)
@@ -37,8 +33,4 @@ class InvoiceDetailViewModel(app: Application): AndroidViewModel(app){
     }
 
 
-
-    override fun onCleared() {
-        super.onCleared()
-    }
 }

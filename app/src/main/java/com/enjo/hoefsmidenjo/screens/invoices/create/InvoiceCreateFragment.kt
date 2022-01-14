@@ -18,7 +18,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 
-class InvoiceCreateFragment() : Fragment() {
+class InvoiceCreateFragment : Fragment() {
 
     // ViewModel
     private lateinit var viewModelFactory: InvoiceCreateViewModelFactory
@@ -26,10 +26,7 @@ class InvoiceCreateFragment() : Fragment() {
 
     // Binding
     private lateinit var binding: FragmentInvoiceCreateBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -165,9 +162,6 @@ class InvoiceCreateFragment() : Fragment() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
 
 }

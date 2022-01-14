@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.enjo.hoefsmidenjo.database.relations.RelInvoiceLineInvoiceItem
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceDetailItemBinding
 
-class InvoiceLineAdapter() : ListAdapter<RelInvoiceLineInvoiceItem, ViewHolder>(EventDiffCallback()){
+class InvoiceLineAdapter : ListAdapter<RelInvoiceLineInvoiceItem, ViewHolder>(EventDiffCallback()){
 
     //fill up the item you need (e.g. set texts and images)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -31,8 +31,8 @@ class ViewHolder(val binding: FragmentInvoiceDetailItemBinding): RecyclerView.Vi
      */
     fun bind(item: RelInvoiceLineInvoiceItem) {
 
-        binding.lineAmount.text = ""+item.invoiceLine.amount
-        binding.lineUnitprice.text = "%.2f €".format(item.item.unitPrice)
+        binding.lineAmount.text = "${item.invoiceLine.amount}"
+        binding.lineUnitprice.text =  "%.2f €".format(item.item.unitPrice)
         binding.lineTotal.text = "%.2f €".format(item.item.unitPrice?.times(item.invoiceLine.amount))
         binding.lineName.text = item.item.name
 

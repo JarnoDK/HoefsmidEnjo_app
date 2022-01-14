@@ -9,9 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.enjo.hoefsmidenjo.databinding.FragmentLoginBinding
-import com.example.k2_kolveniershof_android.screens.login.LoginViewModel
-import com.example.k2_kolveniershof_android.screens.login.LoginViewModelFactory
-import timber.log.Timber
 
 
 class LoginFragment : Fragment(){
@@ -22,9 +19,6 @@ class LoginFragment : Fragment(){
 
     // Binding
     private lateinit var binding: FragmentLoginBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,21 +36,22 @@ class LoginFragment : Fragment(){
         binding.pincodeDisplay.text = ""
 
         // toevoegen letter
-        binding.pincode0.setOnClickListener{ view -> Check(0) }
-        binding.pincode1.setOnClickListener{ view -> Check(1) }
-        binding.pincode2.setOnClickListener{ view -> Check(2) }
-        binding.pincode3.setOnClickListener{ view -> Check(3) }
-        binding.pincode4.setOnClickListener{ view -> Check(4) }
-        binding.pincode5.setOnClickListener{ view -> Check(5) }
-        binding.pincode6.setOnClickListener{ view -> Check(6) }
-        binding.pincode7.setOnClickListener{ view -> Check(7) }
-        binding.pincode8.setOnClickListener{ view -> Check(8) }
-        binding.pincode9.setOnClickListener{ view -> Check(9) }
+        binding.pincode0.setOnClickListener{ check(0) }
+        binding.pincode1.setOnClickListener{ check(1) }
+        binding.pincode2.setOnClickListener{ check(2) }
+        binding.pincode3.setOnClickListener{ check(3) }
+        binding.pincode4.setOnClickListener{ check(4) }
+        binding.pincode5.setOnClickListener{ check(5) }
+        binding.pincode6.setOnClickListener{ check(6) }
+        binding.pincode7.setOnClickListener{ check(7) }
+        binding.pincode8.setOnClickListener{ check(8) }
+        binding.pincode9.setOnClickListener{ check(9) }
         binding.pincodeBack.setOnClickListener{
-            viewModel.RemoveNumber()
-            binding.pincodeDisplay.text = viewModel.Pincode
-
+            viewModel.removeNumber()
+            binding.pincodeDisplay.text = viewModel.pincode
         }
+
+        binding.pincodeOk.setOnClickListener{ check(-1) }
 
 
 
@@ -67,10 +62,12 @@ class LoginFragment : Fragment(){
      * Inloggen, bij 4'de getal automatische check
      * momenteel hardcoded "1234"
      */
-    fun Check(number:Int){
-        viewModel.AppendNumber(number)
-        if(viewModel.Pincode.length >=4){
-                if(viewModel.ValidatePin()){
+    private fun check(number:Int){
+        if(number !=-1){
+            viewModel.appendNumber(number)
+        }
+        if(viewModel.pincode.length >=4){
+                if(viewModel.validatePin()){
                     findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
 
                 }else{
@@ -79,15 +76,24 @@ class LoginFragment : Fragment(){
                         .setTitle("Inloggen mislukt")
                         .setMessage("Ongeldige pincode, probeer opnieuw")
                         .show()
-                    viewModel.ClearPincode()
+                    viewModel.clearPincode()
                 }
+        }else if(number == -1){
+            if(viewModel.validatePin()){
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+
+            }else{
+                AlertDialog
+                    .Builder(this.requireContext())
+                    .setTitle("Inloggen mislukt")
+                    .setMessage("Ongeldige pincode, probeer opnieuw")
+                    .show()
+                viewModel.clearPincode()
+            }
         }
-        binding.pincodeDisplay.text = viewModel.Pincode
+        binding.pincodeDisplay.text = viewModel.pincode
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
 }

@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class ClientGetViewModel( app: Application): AndroidViewModel(app){
 
@@ -40,14 +39,14 @@ class ClientGetViewModel( app: Application): AndroidViewModel(app){
 
     fun reloadUsersFromApi(){
         coroutineScope.launch {
-            userRepo.InsertFromApi()
+            userRepo.insertFromApi()
 
         }
     }
 
     /**
      * Gebruiker verwijderen
-     * @param Id van gebruiker om te verwijderen
+     * @param id van gebruiker om te verwijderen
      */
     fun removeUser(id:Int){
 
@@ -58,9 +57,4 @@ class ClientGetViewModel( app: Application): AndroidViewModel(app){
     }
 
 
-    override fun onCleared() {
-        super.onCleared()
-
-        Timber.tag("ClientViewModel").i("ClientViewModel destroyed")
-    }
 }

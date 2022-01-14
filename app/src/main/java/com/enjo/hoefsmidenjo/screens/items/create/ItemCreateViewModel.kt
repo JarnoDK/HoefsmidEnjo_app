@@ -11,7 +11,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class ItemCreateViewModel( app: Application): AndroidViewModel(app){
 
@@ -28,14 +27,14 @@ class ItemCreateViewModel( app: Application): AndroidViewModel(app){
 
     var errors:String = ""
     private var check: Boolean = true
-    var items:LiveData<List<DbInvoiceItem>> = database.invoiceItemDao.GetAll()
+    var items:LiveData<List<DbInvoiceItem>> = database.invoiceItemDao.getAll()
 
     /**
      * Toevoegen van rekening met controle
      */
     fun createInvoiceItem():Boolean {
         errors = ""
-        var item = ApiInvoiceItem(
+        val item = ApiInvoiceItem(
             id = -1,
             name = name,
             unitPrice = price
@@ -68,7 +67,5 @@ class ItemCreateViewModel( app: Application): AndroidViewModel(app){
         return check
     }
 
-    override fun onCleared() {
-        super.onCleared()
-    }
+
 }

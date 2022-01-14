@@ -10,7 +10,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 class ItemGetViewModel( app: Application): AndroidViewModel(app){
 
@@ -22,13 +21,13 @@ class ItemGetViewModel( app: Application): AndroidViewModel(app){
     var itemname = ""
 
     private val dao = database.invoiceItemDao
-    var items:LiveData<List<DbInvoiceItem>> = dao.GetAll()
+    var items:LiveData<List<DbInvoiceItem>> = dao.getAll()
 
     /**
      * Herlaad items met filter
      */
     fun refreshItems(){
-        items = dao.GetFilteredItem(itemname)
+        items = dao.getFilteredItem(itemname)
     }
 
     /**
@@ -36,17 +35,11 @@ class ItemGetViewModel( app: Application): AndroidViewModel(app){
      */
     fun reloadItemsFromApi(){
         coroutineScope.launch {
-            var itemRepo = InvoiceItemRepository(database)
-            itemRepo.InsertFromApi()
+            val itemRepo = InvoiceItemRepository(database)
+            itemRepo.insertFromApi()
         }
 
     }
 
 
-
-    override fun onCleared() {
-        super.onCleared()
-
-        Timber.tag("ClientViewModel").i("ClientViewModel destroyed")
-    }
 }

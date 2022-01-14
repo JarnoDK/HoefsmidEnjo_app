@@ -3,8 +3,6 @@ package com.enjo.hoefsmidenjo.domain.domaincontroller
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import android.os.Build
-import timber.log.Timber
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -36,9 +34,8 @@ class DomainController {
         val date:LocalDate = LocalDate.parse(time.substring(0,10))
         val hm :LocalTime= LocalTime.parse(time.substring(11,16))
         val dt = LocalDateTime.of(date.year,date.monthValue,date.dayOfMonth,hm.hour,hm.minute)
-        val dtstring = dt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+        return dt.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
 
-        return dtstring
     }
 
     /**
@@ -47,7 +44,6 @@ class DomainController {
     fun checkForInternet(context: Context): Boolean {
 
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             val network = connectivityManager.activeNetwork ?: return false
             val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
             return when {
@@ -55,11 +51,6 @@ class DomainController {
                 activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
                 else -> false
             }
-        } else {
-            @Suppress("DEPRECATION") val networkInfo =
-                connectivityManager.activeNetworkInfo ?: return false
-            @Suppress("DEPRECATION")
-            return networkInfo.isConnected
-        }
+
     }
 }

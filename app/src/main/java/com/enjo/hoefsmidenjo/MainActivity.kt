@@ -11,8 +11,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.FragmentTransaction
-import androidx.fragment.app.commit
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -68,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         )
         // drawer nav design
         for (category: Int in categories) {
-            var tools: MenuItem = menu.findItem(category)
+            val tools: MenuItem = menu.findItem(category)
             val s = SpannableString(tools.title)
             s.setSpan(TextAppearanceSpan(this, R.style.category), 0, s.length, 0)
             tools.title = s
@@ -120,9 +118,9 @@ class MainActivity : AppCompatActivity() {
     /**
      * Navigeer naar start scherm
      */
-    fun logout() {
+    private fun logout() {
         navController.navigate(R.id.logout)
-        val navController = this.findNavController(R.id.navHostFragment)
+        val navController = findNavController(R.id.navHostFragment)
         navController.navigate(R.id.logout)
     }
 }

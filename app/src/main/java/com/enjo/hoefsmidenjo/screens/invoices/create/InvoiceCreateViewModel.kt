@@ -16,7 +16,6 @@ import com.enjo.hoefsmidenjo.api.classes.user.asApiUser
 import com.enjo.hoefsmidenjo.database.RoomDb
 import com.enjo.hoefsmidenjo.database.invoice.DbInvoice
 import com.enjo.hoefsmidenjo.database.invoiceitem.DbInvoiceItem
-import com.enjo.hoefsmidenjo.database.user.DbUser
 import com.enjo.hoefsmidenjo.repository.InvoiceRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +26,6 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
-import java.util.stream.Collectors
 import kotlin.collections.MutableList
 import kotlin.collections.MutableMap
 import kotlin.collections.firstOrNull
@@ -36,7 +34,6 @@ import kotlin.collections.mutableListOf
 import kotlin.collections.mutableMapOf
 import kotlin.collections.set
 import kotlin.collections.sorted
-import kotlin.collections.toList
 import kotlin.collections.toTypedArray
 
 class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
@@ -47,20 +44,19 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     var users: Array<String> = database.userDao.getAllClientArray().map { s -> "${s.firstName} ${s.lastName}" }.sorted().toTypedArray()
-    var items: Array<String> = database.invoiceItemDao.GetAllArray().map { s -> "${s.name}"}.sorted().toTypedArray()
+    var items: Array<String> = database.invoiceItemDao.getAllArray().map { s -> "${s.name}"}.sorted().toTypedArray()
 
-    lateinit var selectedUser:DbUser
 
-    var current = LocalDate.now()
-    var date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
+    var current = LocalDate.now()!!
+    var date = LocalDate.now()!!.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
 
     var time:String = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
 
-    var invoiceRepo:InvoiceRepository= InvoiceRepository(database)
+    private var invoiceRepo:InvoiceRepository= InvoiceRepository(database)
 
     lateinit var invoice:DbInvoice
-    var lines:MutableList<ApiInvoiceLine> = mutableListOf()
-    var rows:MutableMap<String,TableRow> = mutableMapOf()
+    private var lines:MutableList<ApiInvoiceLine> = mutableListOf()
+    private var rows:MutableMap<String,TableRow> = mutableMapOf()
 
     var errors:String = ""
 
@@ -105,19 +101,19 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         val item:DbInvoiceItem = database.invoiceItemDao.getByName(name)
 
         // zet layout breedte naar wrapcontent
-        var layoutParams = TableRow.LayoutParams(
+        val layoutParams = TableRow.LayoutParams(
             TableRow.LayoutParams.WRAP_CONTENT,
             TableRow.LayoutParams.WRAP_CONTENT,
             )
 
         // waarde van lijnen invullen
-        var unitprice:Double = item.unitPrice?:0.00
-        var result:Double = unitprice*amount
+        val unitprice:Double = item.unitPrice?:0.00
+        val result:Double = unitprice*amount
 
         //  view elementen invullen met correcte tekst
         itemName.text = name
         am.text = "$amount"
-        total.text = "%.2f €".format(result)
+        total.text = context.getString(R.string.priceformat).format(result)
 
         // item breedte limiteren
         itemName.maxWidth = 150
@@ -156,7 +152,7 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
             table.removeView(rows[name])
             rows.remove(name)
             // verwijder van rekening lijnen (benodigdheid in rekening)
-            var invoiceLine = lines.firstOrNull{s -> s.item.name == name}
+            val invoiceLine = lines.firstOrNull{s -> s.item.name == name}
             if(invoiceLine != null){
                 lines.remove(invoiceLine)
             }
@@ -169,7 +165,7 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
      * @param name naam van item
      * @return true indien item in lijst
      */
-    fun itemExists(name:String):Boolean{
+    private fun itemExists(name:String):Boolean{
         for(item in lines){
             if(item.item.name == name){
                 return true
@@ -185,11 +181,11 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
     fun addInvoice(client:String):Boolean{
 
         // tijd naar correct formaat
-        var dt = current
-        var timestring = time.split(":")
-        var tm = LocalTime.of(timestring[0].toInt(),timestring[1].toInt())
-        var datetime :LocalDateTime = LocalDateTime.of(dt.year,dt.monthValue,dt.dayOfMonth,tm.hour,tm.minute)
-        var dtstring = datetime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
+        val dt = current
+        val timestring = time.split(":")
+        val tm = LocalTime.of(timestring[0].toInt(),timestring[1].toInt())
+        val datetime :LocalDateTime = LocalDateTime.of(dt.year,dt.monthValue,dt.dayOfMonth,tm.hour,tm.minute)
+        val dtstring = datetime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"))
 
         var check = true
 
@@ -204,7 +200,7 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
             return false
         }
 
-        var inv  = ApiInvoice(
+        val inv  = ApiInvoice(
             client = database.userDao.getUserByName(client).asApiUser(),
             id = -1,
             time = dtstring,
@@ -222,16 +218,11 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
 
     fun reloadInvoicesFromApi(){
         coroutineScope.launch {
-            var invRepo = InvoiceRepository(database)
-            invRepo.InsertFromApi()
+            val invRepo = InvoiceRepository(database)
+            invRepo.insertFromApi()
         }
     }
 
-
-    override fun onCleared() {
-        super.onCleared()
-        Timber.tag("LoginViewModel").i("LoginViewModel destroyed")
-    }
 
     /**
      * controleerd of een item kan worden toegevoegd
@@ -254,7 +245,7 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
             check=false
         }
         // controle of naam niet leef is
-        if(name == null || name.trim().equals("")){
+        if(name == null || name.trim() == ""){
             errors += "Naam kan niet leeg zijn\n"
             check=false
         }

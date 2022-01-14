@@ -12,13 +12,12 @@ import androidx.navigation.fragment.findNavController
 import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceDetailBinding
-import timber.log.Timber
 
 
-class InvoiceDetailFragment() : Fragment() {
+class InvoiceDetailFragment : Fragment() {
 
     // ViewModel
-    private lateinit var ViewModelFactory: InvoiceDetailViewModelFactory
+    private lateinit var viewModelFactory: InvoiceDetailViewModelFactory
     private lateinit var viewModel: InvoiceDetailViewModel
     private lateinit var adapter: InvoiceLineAdapter
     private var invoiceId:Int = -1
@@ -53,30 +52,30 @@ class InvoiceDetailFragment() : Fragment() {
         val application = requireNotNull(this.activity).application
 
         // ViewModel
-        ViewModelFactory = InvoiceDetailViewModelFactory(application)
-        viewModel = ViewModelProvider(this, ViewModelFactory)[InvoiceDetailViewModel::class.java]
+        viewModelFactory = InvoiceDetailViewModelFactory(application)
+        viewModel = ViewModelProvider(this, viewModelFactory)[InvoiceDetailViewModel::class.java]
 
 
         // Ophalen van rekening door meegegeven id
         viewModel.setInvoice(invoiceId)
 
-        var invoice:RelClientInvoiceAmount =  viewModel.invoice
+        val invoice:RelClientInvoiceAmount =  viewModel.invoice
 
         adapter = InvoiceLineAdapter()
         binding.invoicelines.adapter = adapter
 
         // invullen rekening lijnen
-        viewModel.invoiceItems.observe(viewLifecycleOwner, Observer {
+        viewModel.invoiceItems.observe(viewLifecycleOwner, {
 
             adapter.submitList(it)
         })
 
         // datum
-        var format = viewModel.invoice.invoice.time.substring(0,10)
+        val format = viewModel.invoice.invoice.time.substring(0,10)
         binding.fragmentTitle.text = "Rekening van ${invoice.client.firstName} ${invoice.client.lastName}\n${format}"
 
         // totale prijs
-        binding.invoiceTotalprice.text = "Totale prijs: %.2f €".format(viewModel.total)
+        binding.invoiceTotalprice.text = "Totale prijs: ${context?.getString(R.string.priceformat)}".format(viewModel.total)
 
         // back knop
         binding.imgback.setOnClickListener{
@@ -88,9 +87,7 @@ class InvoiceDetailFragment() : Fragment() {
         return binding.root
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
+
 
 
 

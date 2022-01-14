@@ -18,16 +18,11 @@ import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 
 class ClientGetFragment : Fragment() {
 
-    // ViewModel
     private lateinit var viewModelFactory: ClientGetModelFactory
     private lateinit var viewModel: ClientGetViewModel
     private lateinit var binding: FragmentClientGetBinding
 
     private lateinit var adapter:ClientAdapter
-    // Binding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -113,7 +108,7 @@ class ClientGetFragment : Fragment() {
 
         viewModel.refreshUserList()
 
-        viewModel.users.observe(viewLifecycleOwner, Observer {
+        viewModel.users.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
 

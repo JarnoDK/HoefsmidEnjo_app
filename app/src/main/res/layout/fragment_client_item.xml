@@ -34,7 +34,7 @@
             android:layout_height="28dp"
             android:layout_marginStart="20dp"
             android:layout_marginTop="8dp"
-            android:contentDescription="phonenumber"
+            android:contentDescription="@string/phonenumber"
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toBottomOf="@+id/client_name"
             app:srcCompat="@drawable/phone" />
@@ -103,6 +103,8 @@
             app:layout_constraintStart_toStartOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view"
             app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/trashcan" />
+            app:srcCompat="@drawable/trashcan"
+            android:contentDescription="@string/verwijder_klant"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

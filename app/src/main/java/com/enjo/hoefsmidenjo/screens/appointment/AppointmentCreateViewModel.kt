@@ -27,14 +27,14 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
     var users:Array<String> = database.userDao.getAllClientArray().map { s -> "${s.firstName} ${s.lastName}" }.toTypedArray()
 
 
-    lateinit var selectedUser:DbUser
+    private lateinit var selectedUser:DbUser
     var title:String = ""
     var time:String= ""
     var day:String = ""
     var location = ""
 
-    var events:Array<DbEvent> = database.eventDao.getAllEvents()
-    var occupiedTimes:Array<LocalDateTime> = events.map {
+    private var events:Array<DbEvent> = database.eventDao.getAllEvents()
+    private var occupiedTimes:Array<LocalDateTime> = events.map {
         s -> s.time.asDateTime()
     }.filter { s -> s.isAfter(LocalDateTime.now()) }
         .toTypedArray()
@@ -80,7 +80,7 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
             check=false
         }
 
-        var current = "$day $time".asDateTime()
+        val current = "$day $time".asDateTime()
 
         if(current.isBefore(LocalDateTime.now().minusMinutes(1))){
             errors += "Afspraak kan niet in het verleden liggen\n"
@@ -92,7 +92,7 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
         if(current.isBefore(from.plusMinutes(30))){
             errors += "Afspraak moet minimaal 30 minuten in de toekomst liggen\n"
         }
-        var timeCheck = true;
+        var timeCheck = true
         for (times in occupiedTimes ){
             if(!times.isTimeAvailable(current)){
                 timeCheck = false
@@ -106,7 +106,7 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
 
         if(check){
             coroutineScope.launch {
-                var ev = ApiEvent(
+                val ev = ApiEvent(
                     id = -1,
                     title = title,
                     client = selectedUser.asApiUser(),
@@ -125,9 +125,9 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
 
     /**
      * Controle of datetime is beschikbaar en minimum 30 minuten voor of na event
-     * @param te vergelijken datum
+     * @param dt vergelijken datum
      */
-    fun LocalDateTime.isTimeAvailable(dt:LocalDateTime):Boolean{
+    private fun LocalDateTime.isTimeAvailable(dt:LocalDateTime):Boolean{
 
 
         if(dt.isBefore(this.plusMinutes(30)) && dt.isAfter( this.minusMinutes(30))){
@@ -139,7 +139,7 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
     /**
      * Controle of string leeg is
      */
-    fun String.isEmpty():Boolean{
+    private fun String.isEmpty():Boolean{
         return this == null || this.trim() == ""
     }
 
@@ -147,23 +147,17 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
      * Converteer strim time naar localdatetime
      * @return datetime van string
      */
-    fun String.asDateTime():LocalDateTime{
+    private fun String.asDateTime():LocalDateTime{
 
-        var date:String= this.split(" ")[0]
-        var time: String = this.split(" ")[1]
+        val date:String= this.split(" ")[0]
+        val time: String = this.split(" ")[1]
 
-        var datesplit:Array<Int> = date.split("/").map { s -> s.toInt() }.toTypedArray()
-        var timesplit:Array<Int> = time.split(":").map { s -> s.toInt() }.toTypedArray()
+        val datesplit:Array<Int> = date.split("/").map { s -> s.toInt() }.toTypedArray()
+        val timesplit:Array<Int> = time.split(":").map { s -> s.toInt() }.toTypedArray()
 
         return LocalDateTime.of(datesplit[2],datesplit[1],datesplit[0],timesplit[0],timesplit[1])
 
 
     }
 
-
-    override fun onCleared() {
-        super.onCleared()
-
-        Timber.tag("ClientViewModel").i("ClientViewModel destroyed")
-    }
 }

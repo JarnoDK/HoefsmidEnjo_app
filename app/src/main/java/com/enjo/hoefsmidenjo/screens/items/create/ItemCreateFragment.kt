@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceitemAddBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
-import timber.log.Timber
 
 
 class ItemCreateFragment : Fragment() {
@@ -21,9 +20,6 @@ class ItemCreateFragment : Fragment() {
 
     // Binding
     private lateinit var binding: FragmentInvoiceitemAddBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -86,20 +82,16 @@ class ItemCreateFragment : Fragment() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
 
 }
 
 fun EditText.parseToDouble(): Double {
-    var text = this.text.toString()
+    val text = this.text.toString()
 
-    try {
-        return text.toDouble()
+    return try {
+        text.toDouble()
     } catch (ex: Exception) {
-        return -1.00
+        -1.00
     }
 
 }

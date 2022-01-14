@@ -22,10 +22,7 @@ class ItemGetFragment : Fragment() {
     private lateinit var binding: FragmentItemGetBinding
 
     private lateinit var adapter:ItemAdapter
-    // Binding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,14 +73,11 @@ class ItemGetFragment : Fragment() {
 
         viewModel.refreshItems()
 
-        viewModel.items.observe(viewLifecycleOwner, Observer {
+        viewModel.items.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
 }

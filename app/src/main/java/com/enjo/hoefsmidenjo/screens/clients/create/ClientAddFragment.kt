@@ -9,20 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.databinding.FragmentClientAddBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
-import timber.log.Timber
 
 
 class ClientAddFragment : Fragment() {
 
-    // ViewModel
     private lateinit var viewModelFactory: ClientAddModelFactory
     private lateinit var viewModel: ClientAddViewModel
     private lateinit var binding: FragmentClientAddBinding
-
-    // Binding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,7 +43,7 @@ class ClientAddFragment : Fragment() {
      * Initialiseer viewmodels met inputs
      * Toevoegen van gebruiker
      */
-    fun addUser(){
+    private fun addUser(){
 
         // check voor apparaat online
         if(DomainController.instance.checkForInternet(this.requireContext())){
@@ -95,9 +88,6 @@ class ClientAddFragment : Fragment() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
 
 

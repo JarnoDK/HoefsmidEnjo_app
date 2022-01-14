@@ -6,9 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 import com.enjo.hoefsmidenjo.database.RoomDb
 import com.enjo.hoefsmidenjo.repository.UserRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -16,8 +14,6 @@ class ClientAddViewModel( app: Application): AndroidViewModel(app){
 
 
     private val database = RoomDb.getInstance(app.applicationContext)
-    private var viewModelJob = Job()
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     var firstname=""
     var lastname=""
@@ -27,7 +23,6 @@ class ClientAddViewModel( app: Application): AndroidViewModel(app){
 
     private val userRepo = UserRepository(database)
 
-    private val dao = database.userDao
     var errors:String = ""
 
     /**
@@ -49,7 +44,7 @@ class ClientAddViewModel( app: Application): AndroidViewModel(app){
     fun addUser():Boolean{
 
         errors = ""
-        var user = ApiUser(
+        val user = ApiUser(
             firstName = firstname,
             lastName = lastname,
             email = email,

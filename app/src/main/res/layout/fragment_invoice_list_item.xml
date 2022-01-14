@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="datum"
+            android:text="@string/datum"
             android:theme="@style/invoicecard"
             app:layout_constraintStart_toStartOf="@+id/view7"
             app:layout_constraintTop_toTopOf="@+id/view7" />
@@ -45,7 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Voornaam achternaam"
+            android:text="@string/voornaam_achternaam"
             android:theme="@style/invoicecard"
             app:layout_constraintStart_toStartOf="@+id/view7"
             app:layout_constraintTop_toBottomOf="@+id/invoicedate" />
@@ -56,7 +56,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:text="Prijs"
+            android:text="@string/prijs"
             android:theme="@style/invoicecard"
             app:layout_constraintStart_toStartOf="@+id/view7"
             app:layout_constraintTop_toBottomOf="@+id/invoiceclient" />
@@ -65,13 +65,13 @@
             android:id="@+id/invoicedetail"
             android:layout_width="75dp"
             android:layout_height="84dp"
+            android:contentDescription="@string/naar_detail"
+            android:onClick="@{()->clickListener.onClick(RelClientInvoiceAmount)}"
             app:layout_constraintBottom_toBottomOf="@+id/view7"
             app:layout_constraintEnd_toEndOf="@+id/view7"
             app:layout_constraintTop_toTopOf="@+id/view7"
-            app:srcCompat="@drawable/detail"
-            android:onClick="@{()->clickListener.onClick(RelClientInvoiceAmount)}"
 
-            />
+            app:srcCompat="@drawable/detail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

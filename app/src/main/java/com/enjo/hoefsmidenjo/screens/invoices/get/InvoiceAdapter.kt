@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.enjo.hoefsmidenjo.database.relations.RelClientInvoiceAmount
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceListItemBinding
 
-class InvoiceAdapter(val InvoiceListener: InvoiceDetailListener) : ListAdapter<RelClientInvoiceAmount, ViewHolder>(EventDiffCallback()){
+class InvoiceAdapter(private val InvoiceListener: InvoiceDetailListener) : ListAdapter<RelClientInvoiceAmount, ViewHolder>(EventDiffCallback()){
 
     //fill up the item you need (e.g. set texts and images)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

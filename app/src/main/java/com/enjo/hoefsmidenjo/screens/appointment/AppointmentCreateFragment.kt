@@ -20,15 +20,9 @@ import java.time.format.DateTimeFormatter
 
 class AppointmentCreateFragment : Fragment() {
 
-    // ViewModel
     private lateinit var viewModelFactory: AppointmentCreateModelFactory
     private lateinit var viewModel: AppointmentCreateViewModel
     private lateinit var binding: FragmentAppointmentCreateBinding
-
-    // Binding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -122,11 +116,6 @@ class AppointmentCreateFragment : Fragment() {
                 .setMessage("Kan geen verbinding maken met internet")
                 .show()
         }
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
     }
 
 

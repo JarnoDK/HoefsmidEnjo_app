@@ -2,21 +2,17 @@ package com.enjo.hoefsmidenjo.repository
 
 import com.enjo.hoefsmidenjo.api.classes.event.ApiEvent
 import com.enjo.hoefsmidenjo.api.classes.event.asDatabaseModel
-import com.enjo.hoefsmidenjo.api.classes.invoiceitem.ApiInvoiceItem
-import com.enjo.hoefsmidenjo.api.classes.invoiceitem.asDatabaseModel
 import com.enjo.hoefsmidenjo.api.classes.services.EventApi
-import com.enjo.hoefsmidenjo.api.classes.services.InvoiceItemApi
 import com.enjo.hoefsmidenjo.database.RoomDb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import timber.log.Timber
 
 class EventRepository (private val database: RoomDb){
 
     /**
      * Ophalen data van api en toevoegen aan room database
      */
-    suspend fun InsertFromApi(){
+    suspend fun insertFromApi(){
 
         withContext(Dispatchers.IO){
             database.eventDao.clearEvents()

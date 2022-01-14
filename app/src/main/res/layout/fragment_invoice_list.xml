@@ -10,7 +10,7 @@
         android:layout_height="match_parent"
         android:background="@color/background">
 
-        <View xmlns:android="http://schemas.android.com/apk/res/android"
+        <View
             android:id="@+id/topbackground"
             android:layout_width="match_parent"
             android:layout_height="190dp"
@@ -20,6 +20,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:autofillHints="name"
             android:id="@+id/firstname"
             android:layout_width="300dp"
             android:layout_height="48dp"
@@ -35,6 +36,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
+            android:autofillHints="name"
             android:id="@+id/invoice_lastname"
             android:layout_width="300dp"
             android:layout_height="48dp"
@@ -56,7 +58,7 @@
             android:layout_marginTop="8dp"
             android:background="@color/white"
             android:gravity="center_vertical"
-            android:hint="Datum dd/MM/yyyy"
+            android:hint="@string/dateformat"
             android:inputType="none"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
@@ -82,6 +84,7 @@
             android:id="@+id/imgClear"
             android:layout_width="50dp"
             android:layout_height="48dp"
+            android:contentDescription="@string/datum_legen"
             app:layout_constraintBottom_toBottomOf="@+id/invoice_date"
             app:layout_constraintEnd_toEndOf="@+id/invoice_date"
             app:layout_constraintTop_toTopOf="@+id/invoice_date"

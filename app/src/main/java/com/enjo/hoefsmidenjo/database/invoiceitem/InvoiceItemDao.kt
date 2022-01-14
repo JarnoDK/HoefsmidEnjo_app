@@ -5,7 +5,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.enjo.hoefsmidenjo.database.invoice.DbInvoice
 
 @Dao
 interface InvoiceItemDao {
@@ -26,7 +25,7 @@ interface InvoiceItemDao {
      * @return Livedate lijst met database rekening items
      */
     @Query("SELECT * FROM invoice_item")
-    fun GetAll():LiveData<List<DbInvoiceItem>>
+    fun getAll():LiveData<List<DbInvoiceItem>>
 
 
     /**
@@ -34,7 +33,7 @@ interface InvoiceItemDao {
      * @return Array van database rekening items
      */
     @Query("SELECT * FROM invoice_item")
-    fun GetAllArray():Array<DbInvoiceItem>
+    fun getAllArray():Array<DbInvoiceItem>
 
     /**
      * Ophalen van gefilterde rekeningen
@@ -42,7 +41,7 @@ interface InvoiceItemDao {
      * @return Livedata lijst database rekening items
      */
     @Query("SELECT * FROM invoice_item WHERE name LIKE '%'||:filter||'%'")
-    fun GetFilteredItem(filter:String):LiveData<List<DbInvoiceItem>>
+    fun getFilteredItem(filter:String):LiveData<List<DbInvoiceItem>>
 
     /**
      * Toevoegen van database rekening item
@@ -66,7 +65,7 @@ interface InvoiceItemDao {
 
     /**
      * Ophalen item waar naam gelijk is aan gegeven naam
-     * @param naam van database rekening item
+     * @param name van database rekening item
      * @return database rekening item
      */
     @Query("SELECT * FROM invoice_item where name == :name")

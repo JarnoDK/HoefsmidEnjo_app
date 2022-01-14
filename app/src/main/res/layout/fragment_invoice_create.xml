@@ -36,7 +36,6 @@
                     android:theme="@style/clientlabel"
                     app:layout_constraintStart_toStartOf="@+id/invoiceclient"
                     app:layout_constraintTop_toTopOf="parent" />
-                app:layout_constraintTop_toBottomOf="@+id/invoicetime" />
 
 
                 <TimePicker

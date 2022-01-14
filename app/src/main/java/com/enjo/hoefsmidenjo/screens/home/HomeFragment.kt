@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.databinding.FragmentHomeBinding
-import timber.log.Timber
+import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.*
@@ -16,16 +16,11 @@ import java.util.*
 
 class HomeFragment : Fragment() {
 
-    // ViewModel
     private lateinit var viewModelFactory: HomeViewModelFactory
     private lateinit var viewModel: HomeViewModel
     private var adapter = EventAdapter()
 
-    // Binding
     private lateinit var binding: FragmentHomeBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,11 +32,16 @@ class HomeFragment : Fragment() {
         binding = FragmentHomeBinding.inflate(layoutInflater)
         val application = requireNotNull(this.activity).application
 
+
         // ViewModel
         viewModelFactory = HomeViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
-        Timber.tag("Home").i("ItemCreateFragment loaded")
+
+        // indien internet, Ophalen van events uit API
+        if(DomainController.instance.checkForInternet(this.requireContext())){
+            viewModel.reloadInvoices()
+        }
         binding.planning.adapter = adapter
 
         // Set days at top
@@ -89,7 +89,7 @@ class HomeFragment : Fragment() {
         updateYesterday(dt)
 
         viewModel.refreshList()
-        viewModel.events.observe(viewLifecycleOwner, Observer {
+        viewModel.events.observe(viewLifecycleOwner, {
             adapter.submitList(it)
         })
 
@@ -97,7 +97,7 @@ class HomeFragment : Fragment() {
 
     /**
      * Set previousdate
-     * @param current date
+     * @param dt date
      */
     private fun updateYesterday(dt:LocalDate){
         binding.yesterdayDate.text = dt.plusDays(-1).dayOfMonth.toString()
@@ -106,17 +106,17 @@ class HomeFragment : Fragment() {
     }
     /**
      * Set today
-     * @param current date
+     * @param dt date
      */
     private fun updateToday(dt:LocalDate){
         binding.Today.text = dt.dayOfMonth.toString()
         binding.todayDay.text = dt.dayOfWeek.getDisplayName(TextStyle.FULL , Locale("nl","NL")).substring(0,2).uppercase()
-        binding.date.text =  " " + dt.dayOfMonth + " " + dt.month.getDisplayName(TextStyle.FULL , Locale("nl","NL"))
+        binding.date.text = "${dt.dayOfMonth} ${dt.month.getDisplayName(TextStyle.FULL , Locale("nl","NL"))}"
 
     }
     /**
      * Set tomorrow
-     * @param current date
+     * @param dt date
      */
     private fun updateTomorrow(dt:LocalDate){
 
@@ -125,9 +125,6 @@ class HomeFragment : Fragment() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-    }
 
 
 }

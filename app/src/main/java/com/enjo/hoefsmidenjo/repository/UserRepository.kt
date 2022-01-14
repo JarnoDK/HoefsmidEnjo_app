@@ -16,7 +16,7 @@ class UserRepository (private val database: RoomDb){
     /**
      * Ophalen van data uit api en toevoegen aan room database
      */
-    suspend fun InsertFromApi(){
+    suspend fun insertFromApi(){
 
         withContext(Dispatchers.IO){
             database.userDao.clearUsers()
@@ -49,7 +49,7 @@ class UserRepository (private val database: RoomDb){
         withContext(Dispatchers.IO) {
 
             try{
-                var user = UserApi.retrofitService.createUserAsync(user).await()
+                val user = UserApi.retrofitService.createUserAsync(user).await()
                 database.userDao.insert(user.asDatabaseModel())
             }catch (t: Throwable){
                 throw t

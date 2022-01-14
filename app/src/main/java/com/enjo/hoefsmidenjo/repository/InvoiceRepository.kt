@@ -4,26 +4,24 @@ import com.enjo.hoefsmidenjo.api.classes.invoice.ApiInvoice
 import com.enjo.hoefsmidenjo.api.classes.invoice.asDatabaseModel
 import com.enjo.hoefsmidenjo.api.classes.services.InvoiceApi
 import com.enjo.hoefsmidenjo.database.RoomDb
-import com.enjo.hoefsmidenjo.database.invoice.DbInvoiceLine
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class InvoiceRepository (private val database: RoomDb){
-    private var dao = database.invoiceDao
 
     /**
      * Ophalen van data uit api en toevoegen aan room database
      */
-    suspend fun InsertFromApi(){
+    suspend fun insertFromApi(){
 
         withContext(Dispatchers.IO){
-            dao.clearInvoice()
-            dao.clearInvoiceLine()
+            database.invoiceDao.clearInvoice()
+            database.invoiceDao.clearInvoiceLine()
             val invoices = InvoiceApi.retrofitService.getInvoiceAsync().await()
-            dao.insertAll(*invoices.asDatabaseModel())
+            database.invoiceDao.insertAll(*invoices.asDatabaseModel())
             for(inv in invoices){
-                dao.insertAllInvoiceLines(inv.invoiceLines.asDatabaseModel(inv.id))
+                database.invoiceDao.insertAllInvoiceLines(inv.invoiceLines.asDatabaseModel(inv.id))
             }
             Timber.i("end suspend")
         }
@@ -37,8 +35,8 @@ class InvoiceRepository (private val database: RoomDb){
         val invoice:ApiInvoice = InvoiceApi.retrofitService.createInvoiceAsync(inv).await()
 
 
-        dao.insertAllInvoiceLines(invoice.invoiceLines.asDatabaseModel(invoice.id))
-        dao.insert(invoice.asDatabaseModel())
+        database.invoiceDao.insertAllInvoiceLines(invoice.invoiceLines.asDatabaseModel(invoice.id))
+        database.invoiceDao.insert(invoice.asDatabaseModel())
     }
 
 

@@ -25,6 +25,7 @@
             android:layout_marginTop="164dp"
             android:background="@color/white"
             android:hint="@string/filter_naam"
+            android:inputType="text"
             android:paddingStart="20dp"
             android:paddingEnd="20dp"
             app:layout_constraintEnd_toEndOf="parent"

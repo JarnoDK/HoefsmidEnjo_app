@@ -17,7 +17,6 @@ import com.enjo.hoefsmidenjo.database.user.UserDao
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.After
-import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -51,15 +50,15 @@ class DatabaseTest {
 
     }
 
-    lateinit var user: DbUser
-    lateinit var invoice: DbInvoice
-    lateinit var event:DbEvent
+    private lateinit var user: DbUser
+    private lateinit var invoice: DbInvoice
+    private lateinit var event:DbEvent
 
-    lateinit var line: DbInvoiceLine
-    lateinit var line2:DbInvoiceLine
+    private lateinit var line: DbInvoiceLine
+    private lateinit var line2:DbInvoiceLine
 
-    lateinit var item: DbInvoiceItem
-    lateinit var item2:DbInvoiceItem
+    private lateinit var item: DbInvoiceItem
+    private lateinit var item2:DbInvoiceItem
 
 
     /**
@@ -141,9 +140,9 @@ class DatabaseTest {
         )
         eventDao.insert(event)
         val newEvent = eventDao.getById(-1)
-        assertEquals(newEvent?.title, event.title)
-        assertEquals(newEvent?.time, event.time)
-        assertEquals(newEvent?.location,event.location )
+        assertEquals(newEvent.title, event.title)
+        assertEquals(newEvent.time, event.time)
+        assertEquals(newEvent.location,event.location )
 
     }
 

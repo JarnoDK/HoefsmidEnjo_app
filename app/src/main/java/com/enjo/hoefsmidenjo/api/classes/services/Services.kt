@@ -11,13 +11,10 @@ import retrofit2.converter.moshi.MoshiConverterFactory
  * Connectie met backend
  * Momenteel ngrok om backend lokaal raad te plegen
  */
-open class Services() {
-
-    private val BASE_URL = "https://0330-2a02-1811-cd1b-600-f1a1-c1b-a47d-9dd.ngrok.io "
+open class Services {
 
 
-
-        private val moshi = Moshi.Builder()
+    private val moshi = Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
             .build()
 
@@ -32,9 +29,13 @@ open class Services() {
         protected val retrofit: Retrofit = Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi).asLenient())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .baseUrl(BASE_URL)
+            .baseUrl(BASEURL)
             .client(client)
             .build()
+
+    companion object {
+        private const val BASEURL = "https://0330-2a02-1811-cd1b-600-f1a1-c1b-a47d-9dd.ngrok.io "
+    }
 
 
 }
