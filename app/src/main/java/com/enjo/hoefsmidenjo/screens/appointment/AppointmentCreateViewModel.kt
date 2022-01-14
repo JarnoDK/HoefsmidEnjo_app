@@ -12,7 +12,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import timber.log.Timber
+import java.lang.RuntimeException
 import java.time.LocalDateTime
 
 class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
@@ -105,19 +107,28 @@ class AppointmentCreateViewModel(app: Application): AndroidViewModel(app){
         }
 
         if(check){
-            coroutineScope.launch {
-                val ev = ApiEvent(
-                    id = -1,
-                    title = title,
-                    client = selectedUser.asApiUser(),
-                    time = "$day $time",
-                    location = location
-                )
+            try {
 
-                Timber.tag("Added event").i(ev.toString())
+            }catch(ex:RuntimeException){
+                coroutineScope.launch {
+                    val ev = ApiEvent(
+                        id = -1,
+                        title = title,
+                        client = selectedUser.asApiUser(),
+                        time = "$day $time",
+                        location = location
+                    )
 
-                eventRepo.addEvent(ev)
+                    if(eventRepo.addEvent(ev)){
+                        errors = ""
+                        check = true
+                    }else{
+                        errors +="Kan geen verbinding maken met databank"
+                        check = false
+                    }
+                }
             }
+
         }
 
         return check

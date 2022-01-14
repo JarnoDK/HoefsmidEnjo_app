@@ -36,9 +36,11 @@ open class Services {
 
     companion object {
 
-        private val BASEURL = "https://3a5b-2a02-1811-cd1b-600-dc09-972-199e-71a5.ngrok.io"
-        val APIIsValid =  Patterns.WEB_URL.matcher(BASEURL).matches()
+        private val BASEURL = "https://01a8-2a02-1811-cd1b-600-4921-f8ff-a1b-75b7.ngrok.io"
 
+        fun apiIsValid():Boolean{
+            return Patterns.WEB_URL.matcher(BASEURL).matches()
+        }
     }
 
 

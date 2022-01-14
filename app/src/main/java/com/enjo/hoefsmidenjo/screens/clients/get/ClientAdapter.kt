@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.database.user.DbUser
 import com.enjo.hoefsmidenjo.databinding.FragmentClientItemBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
@@ -34,7 +35,7 @@ class ViewHolder(val binding: FragmentClientItemBinding, private val online:Bool
     fun bind(clickListener: ClientListener, item: DbUser) {
 
         // indien offline, zet verwijder knop onzichtbaar
-        if(!online){
+        if(!online || !Services.apiIsValid()){
             binding.imgDelete.visibility = View.INVISIBLE
         }else{
             binding.imgDelete.visibility = View.VISIBLE

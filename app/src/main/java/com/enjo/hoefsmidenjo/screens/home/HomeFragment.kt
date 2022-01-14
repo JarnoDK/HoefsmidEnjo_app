@@ -9,6 +9,10 @@ import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentHomeBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
+import kotlinx.coroutines.CoroutineExceptionHandler
+import retrofit2.HttpException
+import retrofit2.Response
+import timber.log.Timber
 import java.time.LocalDate
 import java.time.format.TextStyle
 import java.util.*
@@ -38,10 +42,12 @@ class HomeFragment : Fragment() {
         viewModel = ViewModelProvider(this, viewModelFactory)[HomeViewModel::class.java]
 
 
+
         // Indien api beschikbaar, hervul database
-        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
-            viewModel.reloadInvoices()
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.apiIsValid()){
+             viewModel.reloadEvents()
         }
+
         binding.planning.adapter = adapter
 
         // Set days at top

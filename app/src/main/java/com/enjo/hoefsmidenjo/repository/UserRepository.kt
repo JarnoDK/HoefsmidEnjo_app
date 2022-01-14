@@ -7,6 +7,7 @@ import com.enjo.hoefsmidenjo.api.classes.user.asDatabaseModel
 import com.enjo.hoefsmidenjo.database.RoomDb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 import timber.log.Timber
 
 class UserRepository (private val database: RoomDb){
@@ -16,44 +17,50 @@ class UserRepository (private val database: RoomDb){
      */
     suspend fun insertFromApi(){
 
-        withContext(Dispatchers.IO){
-            val users = UserApi.retrofitService.getUserAsync().await()
-            database.userDao.insertAll(*users.asDatabaseModel())
-        }
+        try {
+            withContext(Dispatchers.IO){
+                val users = UserApi.retrofitService.getUserAsync().await()
+                database.userDao.insertAll(*users.asDatabaseModel())
+            }
+        }catch (ex:HttpException){ }
+
     }
     /**
      * Verwijderen van gebruiker uit api en room database
      */
-    suspend fun removeUser(id:Int){
+    suspend fun removeUser(id:Int):Boolean{
+
+        var check:Boolean
         withContext(Dispatchers.IO) {
-
             try {
-                var bool:Boolean=  UserApi.retrofitService.removeUserAsync(id).await()
+                var bool:Boolean= UserApi.retrofitService.removeUserAsync(id).await()
                 database.userDao.deleteUser(id)
-            }catch (t: Throwable){
-                Timber.tag("Geen connectie").i("Kan geen verbinding maken met api")
+                check = true
+            }catch (ex:HttpException){
+             check =false
             }
-
-
-
         }
+        return check
     }
 
     /**
      * Toevoegen van gebruiker aan api en roomdatabase
      */
-    suspend fun addUser(user:ApiUser){
+    suspend fun addUser(user:ApiUser):Boolean{
+        var check:Boolean
         withContext(Dispatchers.IO) {
 
             try{
                 val user = UserApi.retrofitService.createUserAsync(user).await()
                 database.userDao.insert(user.asDatabaseModel())
-            }catch (t: Throwable){
-                throw t
+                check = true
+            }catch (ex:HttpException){
+                check = false
             }
 
 
         }
+        return check
     }
 
 

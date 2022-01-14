@@ -114,7 +114,6 @@ class MainActivity : AppCompatActivity() {
             alert.show()
         }
 
-
     }
 
     /**

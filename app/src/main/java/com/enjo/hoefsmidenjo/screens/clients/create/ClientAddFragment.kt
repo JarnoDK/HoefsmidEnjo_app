@@ -47,7 +47,7 @@ class ClientAddFragment : Fragment() {
     private fun addUser(){
 
         // check voor apparaat online
-        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.apiIsValid()){
             // toekennen variabelen
             viewModel.firstname = binding.firstname.text.toString()
             viewModel.lastname = binding.lastname.text.toString()

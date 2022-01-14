@@ -11,6 +11,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 
 class ItemCreateViewModel( app: Application): AndroidViewModel(app){
 
@@ -61,7 +62,13 @@ class ItemCreateViewModel( app: Application): AndroidViewModel(app){
         coroutineScope.launch {
 
             if (check) {
-                itemRepo.addItem(item)
+                if(itemRepo.addItem(item)){
+                    errors=""
+                    false
+                }else{
+                    errors+="Kan geen verbinding maken met de databank"
+                    check = false
+                }
             }
         }
         return check

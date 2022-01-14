@@ -1,7 +1,6 @@
 package com.enjo.hoefsmidenjo.screens.invoices.create
 
 import android.app.DatePickerDialog
-import android.app.Service
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -127,7 +126,7 @@ class InvoiceCreateFragment : Fragment() {
     fun addInvoice(){
 
         // controleert internet, indien geen internet , geeft melding
-        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.apiIsValid()){
 
             // variabelen initialiseren
             var timepicker = binding.hourpicker

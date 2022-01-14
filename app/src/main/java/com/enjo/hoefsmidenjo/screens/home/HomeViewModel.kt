@@ -6,10 +6,7 @@ import androidx.lifecycle.LiveData
 import com.enjo.hoefsmidenjo.database.RoomDb
 import com.enjo.hoefsmidenjo.database.relations.RelUserEvent
 import com.enjo.hoefsmidenjo.repository.EventRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -23,7 +20,9 @@ class HomeViewModel( app: Application): AndroidViewModel(app){
 
     private val dao = database.eventDao
     var events:LiveData<List<RelUserEvent>> =  dao.getAllEventsOfDateLive(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")))
-
+    val handler = CoroutineExceptionHandler() { _, exception ->
+        throw AssertionError()
+    }
 
     /**
      * Refresh events of selected date on date changed
@@ -39,8 +38,8 @@ class HomeViewModel( app: Application): AndroidViewModel(app){
     /**
      * Read data from api and add to room database
      */
-     fun reloadInvoices() {
-        coroutineScope.launch {
+     fun reloadEvents() {
+        coroutineScope.launch (handler){
                 val eventRepo = EventRepository(database)
                 eventRepo.insertFromApi()
         }

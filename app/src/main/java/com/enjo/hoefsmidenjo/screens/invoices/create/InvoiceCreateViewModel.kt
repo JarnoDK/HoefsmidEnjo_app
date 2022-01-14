@@ -21,6 +21,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import timber.log.Timber
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -208,8 +209,15 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         )
 
         coroutineScope.launch {
-            invoiceRepo.addInvoice(inv)
-            errors = ""
+
+            if(invoiceRepo.addInvoice(inv)) {
+                errors = ""
+                check= true
+            }else {
+                errors += "Kan geen verbinding maken met databank"
+                check = false
+            }
+
 
         }
 

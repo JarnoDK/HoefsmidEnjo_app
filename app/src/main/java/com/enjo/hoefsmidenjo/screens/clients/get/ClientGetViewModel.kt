@@ -48,12 +48,14 @@ class ClientGetViewModel( app: Application): AndroidViewModel(app){
      * Gebruiker verwijderen
      * @param id van gebruiker om te verwijderen
      */
-    fun removeUser(id:Int){
+    fun removeUser(id:Int):Boolean{
 
+        var check = true
         viewModelScope.launch {
-            userRepo.removeUser(id)
 
+            check = userRepo.removeUser(id)
         }
+        return check
     }
 
 

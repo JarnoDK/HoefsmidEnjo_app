@@ -6,6 +6,7 @@ import com.enjo.hoefsmidenjo.api.classes.services.InvoiceItemApi
 import com.enjo.hoefsmidenjo.database.RoomDb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.HttpException
 
 
 class InvoiceItemRepository (private var database: RoomDb){
@@ -17,18 +18,31 @@ class InvoiceItemRepository (private var database: RoomDb){
     suspend fun insertFromApi(){
 
         withContext(Dispatchers.IO){
-            val invoiceItems = InvoiceItemApi.retrofitService.getInvoiceItemAsync().await()
-            database.invoiceItemDao.insertAll(*invoiceItems.asDatabaseModel())
+            try{
+                val invoiceItems = InvoiceItemApi.retrofitService.getInvoiceItemAsync().await()
+                database.invoiceItemDao.insertAll(*invoiceItems.asDatabaseModel())
+            }catch (ex:HttpException){
+
+            }
+
         }
     }
 
     /**
      * Toevoegen van data aan api en room database
      */
-    suspend fun addItem(item:ApiInvoiceItem){
-        withContext(Dispatchers.IO){
+    suspend fun addItem(item:ApiInvoiceItem):Boolean{
+
+        var check:Boolean
+        try{
+            withContext(Dispatchers.IO){
                 val invoiceItem= InvoiceItemApi.retrofitService.createInvoiceItemAsync(item).await()
                 database.invoiceItemDao.insert(invoiceItem.asDatabaseModel())
+                check = true
+            }
+        }catch (ex:HttpException){
+            check = false
         }
+        return check
     }
 }

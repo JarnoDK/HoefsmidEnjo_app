@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentItemGetBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
+import retrofit2.HttpException
 import timber.log.Timber
 
 
@@ -41,10 +42,8 @@ class ItemGetFragment : Fragment() {
         binding.items.adapter = adapter
 
         // Indien api beschikbaar, hervul database
-        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
-            viewModel.reloadItemsFromApi()
-        }else{
-            Timber.tag("FAIL").i("Api is niet beschikbaar")
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.apiIsValid()){
+                viewModel.reloadItemsFromApi()
         }
 
         // vult lijst met items

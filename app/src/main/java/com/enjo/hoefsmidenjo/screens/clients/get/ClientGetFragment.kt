@@ -14,6 +14,7 @@ import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentClientGetBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
+import retrofit2.HttpException
 
 
 class ClientGetFragment : Fragment() {
@@ -39,8 +40,15 @@ class ClientGetFragment : Fragment() {
                 builder.setMessage("Wilt u de klant ${user.firstName} ${user.lastName} verwijderen?")
                     .setCancelable(false)
                     .setPositiveButton("Ja") { _, _ ->
-                        viewModel.removeUser(user.id)
-                        refreshUsers()
+                        if(viewModel.removeUser(user.id)){
+                            refreshUsers()
+                        }else{
+                            AlertDialog
+                                .Builder(this.requireContext())
+                                .setTitle("Kan klant niet verwijderen")
+                                .setMessage("Kan geen verbinding maken met de databank")
+                                .show()
+                        }
                     }
                     .setNegativeButton("Nee") { dialog, _ ->
                         // Close dialog
@@ -58,8 +66,10 @@ class ClientGetFragment : Fragment() {
         refreshUsers()
 
         // Indien api beschikbaar, hervul database
-        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
-            viewModel.reloadUsersFromApi()
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.apiIsValid()){
+            try{
+                viewModel.reloadUsersFromApi()
+            }catch (e: HttpException){ }
         }
 
 

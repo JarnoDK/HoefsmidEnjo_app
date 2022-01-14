@@ -87,7 +87,7 @@ class AppointmentCreateFragment : Fragment() {
     fun addAppointment(){
 
         // controle op internet, geeft melding indien false
-        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid){
+        if(DomainController.instance.checkForInternet(this.requireContext()) && Services.apiIsValid()){
 
             // Variabelen in viewmodel toekennen door inputs in fragment
             viewModel.time = "${binding.appointmenttime.hour}:${binding.appointmenttime.minute}"

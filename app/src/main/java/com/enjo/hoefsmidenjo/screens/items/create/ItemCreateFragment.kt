@@ -51,7 +51,7 @@ class ItemCreateFragment : Fragment() {
     private fun addItem() {
 
 
-        if (DomainController.instance.checkForInternet(this.requireContext()) && Services.APIIsValid) {
+        if (DomainController.instance.checkForInternet(this.requireContext()) && Services.apiIsValid()) {
             viewModel.name = binding.itemname.text.toString()
             viewModel.price = binding.Prijs.parseToDouble()
             if (viewModel.createInvoiceItem()) {

@@ -1,7 +1,6 @@
 package com.enjo.hoefsmidenjo.screens.invoices.get
 
 import android.app.DatePickerDialog
-import android.app.Service
 import android.content.Context
 import android.os.Bundle
 import android.view.KeyEvent
@@ -20,6 +19,8 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import androidx.navigation.NavOptions
 import com.enjo.hoefsmidenjo.api.classes.services.Services
+import retrofit2.HttpException
+import java.lang.Exception
 
 
 class InvoiceFragment : Fragment() {
@@ -65,8 +66,9 @@ class InvoiceFragment : Fragment() {
         binding.invoices.adapter = adapter
 
         // Indien api beschikbaar, hervul database
-        if(DomainController.instance.checkForInternet(requireContext()) && Services.APIIsValid){
-            viewModel.reloadInvoicesFromApi()
+        if(DomainController.instance.checkForInternet(requireContext()) && Services.apiIsValid()){
+
+                viewModel.reloadInvoicesFromApi()
         }
 
         // datum

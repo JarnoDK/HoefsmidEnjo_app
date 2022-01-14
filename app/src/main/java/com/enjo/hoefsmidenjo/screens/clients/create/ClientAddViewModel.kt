@@ -8,7 +8,9 @@ import com.enjo.hoefsmidenjo.database.RoomDb
 import com.enjo.hoefsmidenjo.repository.UserRepository
 
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
 import timber.log.Timber
+import java.lang.Exception
 
 class ClientAddViewModel( app: Application): AndroidViewModel(app){
 
@@ -75,12 +77,16 @@ class ClientAddViewModel( app: Application): AndroidViewModel(app){
         viewModelScope.launch {
             if(check) {
 
-                try {
-                    Timber.tag("Create user").i(user.toString())
-                    userRepo.addUser(user)
-                }catch (t:Throwable){
-                    throw t
+                if(userRepo.addUser(user)){
+                    errors = ""
+                    check = true
                 }
+                else{
+                        errors +="Kan geen verbinding maken met databank"
+                        check = false
+                    }
+
+
 
             }
         }
