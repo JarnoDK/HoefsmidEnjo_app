@@ -30,10 +30,10 @@ interface InvoiceService {
 
 }
 
-object InvoiceApi{
+object InvoiceApi:Services(){
     //lazy properties = thread safe --> can only be initialized once at a time
     //adds extra safety to our 1 instance we need.
     val retrofitService : InvoiceService by lazy {
-        Services.retrofit.create(InvoiceService::class.java)
+        retrofit.create(InvoiceService::class.java)
     }
 }

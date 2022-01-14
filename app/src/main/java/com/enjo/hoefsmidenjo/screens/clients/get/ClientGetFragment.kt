@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.databinding.FragmentClientGetBinding
+import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import timber.log.Timber
 
 
@@ -61,6 +62,10 @@ class ClientGetFragment : Fragment() {
 
         // invullen van correcte data
         refreshUsers()
+
+        if(DomainController.instance.checkForInternet(this.requireContext())){
+            viewModel.reloadUsersFromApi()
+        }
 
 
         // filter op voornaam wanneer veld bevestigd (enter)

@@ -6,8 +6,6 @@ import androidx.lifecycle.LiveData
 import com.enjo.hoefsmidenjo.database.RoomDb
 import com.enjo.hoefsmidenjo.database.relations.RelUserEvent
 import com.enjo.hoefsmidenjo.repository.EventRepository
-import com.enjo.hoefsmidenjo.repository.InvoiceItemRepository
-import com.enjo.hoefsmidenjo.repository.InvoiceRepository
 import com.enjo.hoefsmidenjo.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,10 +27,8 @@ class HomeViewModel( app: Application): AndroidViewModel(app){
     lateinit var events:LiveData<List<RelUserEvent>>
 
     init {
-        Timber.tag("LoginViewModel").i("LoginViewModel created")
-
         // read API
-        getInvoices()
+        reloadInvoices()
     }
 
     /**
@@ -49,27 +45,10 @@ class HomeViewModel( app: Application): AndroidViewModel(app){
     /**
      * Read data from api and add to room database
      */
-    private fun getInvoices() {
-        // Call API
+    private fun reloadInvoices() {
         coroutineScope.launch {
-            try {
-
-                var invRepo = InvoiceRepository(database)
-                invRepo.InsertFromApi()
-
-                var itemRepo = InvoiceItemRepository(database)
-                itemRepo.InsertFromApi()
-                var invoiceRepo = InvoiceItemRepository(database)
-                invoiceRepo.InsertFromApi()
                 var eventRepo = EventRepository(database)
                 eventRepo.InsertFromApi()
-                var userRepo = UserRepository(database)
-                userRepo.InsertFromApi()
-
-            } catch (t: Throwable) {
-
-                Timber.tag("Error").i("Kan geen contact maken met repository")
-            }
         }
     }
 

@@ -35,8 +35,14 @@ class ClientGetViewModel( app: Application): AndroidViewModel(app){
      */
     fun refreshUserList(){
 
-        Timber.tag("Filtered").i("Firstname: ${firstnamefilter} lastname:${lastnamefilter}")
         users = dao.getAllFilteredClients(firstnamefilter,lastnamefilter)
+    }
+
+    fun reloadUsersFromApi(){
+        coroutineScope.launch {
+            userRepo.InsertFromApi()
+
+        }
     }
 
     /**

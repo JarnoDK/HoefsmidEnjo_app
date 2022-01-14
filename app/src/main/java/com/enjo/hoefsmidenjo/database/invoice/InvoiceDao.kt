@@ -39,6 +39,18 @@ interface InvoiceDao {
     suspend fun insertAllInvoiceLines(invoiceLines:Array<DbInvoiceLine> )
 
     /**
+     * Leeg de invoice database
+     */
+    @Query("DELETE FROM invoice")
+    fun clearInvoice()
+
+    /**
+     * Leeg de invoice line database
+     */
+    @Query("DELETE FROM invoice_line")
+    fun clearInvoiceLine()
+
+    /**
      * alle rekeningen opvragen
      * @return Livedate database rekening
      */

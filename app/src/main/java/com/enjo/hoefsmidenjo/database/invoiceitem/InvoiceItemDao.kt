@@ -17,6 +17,11 @@ interface InvoiceItemDao {
     suspend fun insertAll(vararg item: DbInvoiceItem)
 
     /**
+     * Leeg de invoice item database
+     */
+    @Query("DELETE FROM invoice_item")
+    fun clearItems()
+    /**
      * Ophalen van alle rekening items
      * @return Livedate lijst met database rekening items
      */

@@ -37,10 +37,10 @@ interface UserService {
 /**
  * Toevoegen gebruiker calls
  */
-object UserApi{
+object UserApi:Services(){
     //lazy properties = thread safe --> can only be initialized once at a time
     //adds extra safety to our 1 instance we need.
     val retrofitService : UserService by lazy {
-        Services.retrofit.create(UserService::class.java)
+        retrofit.create(UserService::class.java)
     }
 }

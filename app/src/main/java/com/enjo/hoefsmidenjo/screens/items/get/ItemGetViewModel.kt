@@ -5,9 +5,11 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import com.enjo.hoefsmidenjo.database.RoomDb
 import com.enjo.hoefsmidenjo.database.invoiceitem.DbInvoiceItem
+import com.enjo.hoefsmidenjo.repository.InvoiceItemRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class ItemGetViewModel( app: Application): AndroidViewModel(app){
@@ -27,6 +29,17 @@ class ItemGetViewModel( app: Application): AndroidViewModel(app){
      */
     fun refreshItems(){
         items = dao.GetFilteredItem(itemname)
+    }
+
+    /**
+     * Ophalen items uit api
+     */
+    fun reloadItemsFromApi(){
+        coroutineScope.launch {
+            var itemRepo = InvoiceItemRepository(database)
+            itemRepo.InsertFromApi()
+        }
+
     }
 
 

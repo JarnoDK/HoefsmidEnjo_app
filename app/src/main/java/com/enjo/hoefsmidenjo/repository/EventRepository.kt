@@ -19,21 +19,18 @@ class EventRepository (private val database: RoomDb){
     suspend fun InsertFromApi(){
 
         withContext(Dispatchers.IO){
-            // get events from api's getAll function
+            database.eventDao.clearEvents()
             val events = EventApi.retrofitService.getEventAsync().await()
             database.eventDao.insertAll(*events.asDatabaseModel())
 
-            Timber.i("end suspend")
         }
     }
 
     /**
-     * Verwijderen van data uit zowel api als room database
+     * Verwijderen van data uit api en room database
      */
     suspend fun addEvent(ev:ApiEvent){
         withContext(Dispatchers.IO){
-
-            Timber.tag("received event").i(ev.toString())
             val event = EventApi.retrofitService.createEventAsync(ev).await()
             database.eventDao.insert(event.asDatabaseModel())
         }

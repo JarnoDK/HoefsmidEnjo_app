@@ -220,6 +220,12 @@ class InvoiceCreateViewModel(app: Application): AndroidViewModel(app){
         return check
     }
 
+    fun reloadInvoicesFromApi(){
+        coroutineScope.launch {
+            var invRepo = InvoiceRepository(database)
+            invRepo.InsertFromApi()
+        }
+    }
 
 
     override fun onCleared() {

@@ -43,6 +43,9 @@ class InvoiceCreateFragment() : Fragment() {
         viewModelFactory = InvoiceCreateViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[InvoiceCreateViewModel::class.java]
 
+        if(DomainController.instance.checkForInternet(this.requireContext())){
+            viewModel.reloadInvoicesFromApi()
+        }
 
         // vult mogelijke gebruikers
         val userAdapter: ArrayAdapter<String> = ArrayAdapter<String>(this.requireContext(), android.R.layout.simple_spinner_item, viewModel.users)

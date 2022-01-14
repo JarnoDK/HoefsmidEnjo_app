@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.enjo.hoefsmidenjo.databinding.FragmentItemGetBinding
-import timber.log.Timber
+import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 
 
 class ItemGetFragment : Fragment() {
@@ -41,6 +41,11 @@ class ItemGetFragment : Fragment() {
         viewModelFactory = ItemGetModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[ItemGetViewModel::class.java]
         binding.items.adapter = adapter
+
+        // lezen van data uit api indien online
+        if(DomainController.instance.checkForInternet(this.requireContext())){
+            viewModel.reloadItemsFromApi()
+        }
 
         // vult lijst met items
         refreshItems()

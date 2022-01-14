@@ -31,8 +31,8 @@ interface EventService {
 /**
  * Toevoegen calls aan retrofit
  */
-object EventApi{
+object EventApi: Services() {
     val retrofitService : EventService by lazy {
-        Services.retrofit.create(EventService::class.java)
+        retrofit.create(EventService::class.java)
     }
 }

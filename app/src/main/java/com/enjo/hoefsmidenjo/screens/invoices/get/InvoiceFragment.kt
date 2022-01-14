@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.databinding.FragmentInvoiceListBinding
-import timber.log.Timber
+import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -57,6 +57,11 @@ class InvoiceFragment : Fragment() {
         })
 
         binding.invoices.adapter = adapter
+
+        // read api if internet on
+        if(DomainController.instance.checkForInternet(requireContext())){
+            viewModel.reloadInvoicesFromApi()
+        }
 
         // datum
         var current:LocalDate = LocalDate.now()

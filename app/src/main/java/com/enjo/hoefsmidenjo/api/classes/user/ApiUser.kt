@@ -1,5 +1,6 @@
 package com.enjo.hoefsmidenjo.api.classes.user
 
+import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.database.user.DbUser
 
 /**
@@ -65,6 +66,7 @@ fun DbUser.asApiUser():ApiUser{
  * @return database gebruiker
  */
 fun ApiUser.asDatabaseModel():DbUser{
+
     return DbUser(
         id = id,
         firstName = firstName,

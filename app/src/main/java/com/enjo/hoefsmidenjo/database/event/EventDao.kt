@@ -20,6 +20,11 @@ interface EventDao {
     suspend fun insertAll(vararg event :DbEvent)
 
     /**
+     * Leeg events database
+     */
+    @Query("DELETE FROM event_table")
+    fun clearEvents()
+    /**
      * Toevoegen van een enkele database even aan de database
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)

@@ -17,11 +17,11 @@
         <View
             android:id="@+id/Card"
             android:layout_width="302dp"
-            android:layout_height="93dp"
+            android:layout_height="100dp"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="4dp"
 
             android:background="@color/textGold"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_default="percent"
@@ -51,23 +51,23 @@
 
         <TextView
             android:id="@+id/event_client"
-            android:layout_width="217dp"
-            android:layout_height="23dp"
-            android:layout_marginStart="24dp"
+            android:layout_width="290dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:gravity="start|center_vertical"
-            android:text="Client"
+            android:text="@string/klant"
             app:layout_constraintStart_toStartOf="@+id/Card"
             app:layout_constraintTop_toTopOf="@+id/Card" />
 
         <TextView
             android:id="@+id/event_location"
-            android:layout_width="127dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="290dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
             android:gravity="start|center_vertical"
-            android:text="Locatie"
+            android:text="@string/locatie"
             app:layout_constraintStart_toStartOf="@+id/Card"
             app:layout_constraintTop_toBottomOf="@+id/event_client" />
 

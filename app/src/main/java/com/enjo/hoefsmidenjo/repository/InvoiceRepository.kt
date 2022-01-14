@@ -18,6 +18,8 @@ class InvoiceRepository (private val database: RoomDb){
     suspend fun InsertFromApi(){
 
         withContext(Dispatchers.IO){
+            dao.clearInvoice()
+            dao.clearInvoiceLine()
             val invoices = InvoiceApi.retrofitService.getInvoiceAsync().await()
             dao.insertAll(*invoices.asDatabaseModel())
             for(inv in invoices){
@@ -32,7 +34,6 @@ class InvoiceRepository (private val database: RoomDb){
      */
     suspend fun addInvoice(inv:ApiInvoice){
         Timber.tag("Added invoice").i("$inv")
-
         val invoice:ApiInvoice = InvoiceApi.retrofitService.createInvoiceAsync(inv).await()
 
 

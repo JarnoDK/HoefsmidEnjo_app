@@ -19,6 +19,11 @@ interface UserDao {
     suspend fun insertAll(vararg user: DbUser)
 
     /**
+     * Leeg de user database
+     */
+    @Query("DELETE FROM users")
+    fun clearUsers()
+    /**
      * Toevoegen van een enkele gebruiker
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
