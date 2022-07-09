@@ -11,7 +11,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.enjo.hoefsmidenjo.R
+import com.enjo.hoefsmidenjo.api.classes.services.Services
 import com.enjo.hoefsmidenjo.databinding.FragmentLoginBinding
+import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
+import kotlinx.coroutines.coroutineScope
+import kotlin.coroutines.coroutineContext
 
 
 class LoginFragment : Fragment(){
@@ -30,8 +34,10 @@ class LoginFragment : Fragment(){
         // Binding
         binding = FragmentLoginBinding.inflate(layoutInflater)
 
+        val application = requireNotNull(this.activity).application
+
         // ViewModel
-        viewModelFactory = LoginViewModelFactory()
+        viewModelFactory = LoginViewModelFactory(application)
         viewModel = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
         //binding.loginViewModel = viewModel
         binding.lifecycleOwner = this
@@ -48,6 +54,7 @@ class LoginFragment : Fragment(){
         }
 
         binding.btnLogin.setOnClickListener{
+
             if(logIn()){
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
 
@@ -59,36 +66,46 @@ class LoginFragment : Fragment(){
 
     private fun logIn():Boolean {
 
-
+        var check = true
             if(sharedPref.getBoolean("isLoggedIn",false)){
                 // Login
                 return true
             }
 
             var errors = ""
-        if (binding.txtUsername.equals(null) || binding.txtUsername.equals("")) {
+        if (binding.txtUsername.text.toString() == "") {
             errors += "${R.string.usernameEmpty}\n"
+            check = false
         }
-        if (binding.txtPassword.equals(null) || binding.txtPassword.equals("")) {
+        if (binding.txtPassword.text.toString() == "") {
             errors += "${R.string.PasswordEmpty}\n"
+            check = false
         }
 
-        if (viewModel.logIn(
+        if(DomainController.instance.checkForInternet(this.requireContext())){
+            var creds = viewModel.logIn(
                 binding.txtUsername.text.toString(),
                 binding.txtPassword.text.toString()
-            ) ) {
+            )
 
+            if (creds) {
+                with (sharedPref.edit()) {
+                    putString("username", binding.txtUsername.text.toString())
+                    putString("password", binding.txtPassword.text.toString())
+                    putBoolean("isLoggedIn", true)
+                    apply()
+                }
 
-            with (sharedPref.edit()) {
-                putString("username", binding.txtUsername.text.toString())
-                putString("password", binding.txtPassword.text.toString())
-                putBoolean("isLoggedIn", true)
-
-                apply()
+            }else{
+                check = false
             }
 
+
+        }else{
+            check = false
         }
-        return true
+
+        return check
     }
 
 

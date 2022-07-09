@@ -2,6 +2,7 @@ package com.enjo.hoefsmidenjo.api.classes.services
 
 import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 import kotlinx.coroutines.Deferred
+import retrofit2.Call
 import retrofit2.http.*
 
 /**
@@ -32,6 +33,8 @@ interface UserService {
     @POST("/api/user")
     fun createUserAsync(@Body user: ApiUser): Deferred<ApiUser>
 
+    @GET("/LogIn")
+    fun loginUser(@Query("username")username:String, @Query("password")password:String):Call<Boolean>
 }
 
 /**

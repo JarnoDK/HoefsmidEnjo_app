@@ -1,12 +1,14 @@
 package com.enjo.hoefsmidenjo.repository
 
 
+import android.util.Log
 import com.enjo.hoefsmidenjo.api.classes.services.UserApi
 import com.enjo.hoefsmidenjo.api.classes.user.ApiUser
 import com.enjo.hoefsmidenjo.api.classes.user.asDatabaseModel
 import com.enjo.hoefsmidenjo.database.RoomDb
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import okhttp3.internal.wait
 import retrofit2.HttpException
 import timber.log.Timber
 
@@ -49,7 +51,7 @@ class UserRepository (private val database: RoomDb){
      * Toevoegen van gebruiker aan api en roomdatabase
      */
     suspend fun addUser(user:ApiUser):Boolean{
-        var check:Boolean
+        var check= false
         withContext(Dispatchers.IO) {
 
             try{
@@ -61,6 +63,24 @@ class UserRepository (private val database: RoomDb){
             }
 
 
+        }
+        return check
+    }
+
+    /**
+     * Login user
+     */
+    suspend fun logIn(username:String,password:String):Boolean{
+        var check = true
+        withContext(Dispatchers.IO) {
+            try{
+                var result = UserApi.retrofitService.loginUser(username,password).execute().body()
+                if(result!= null){
+                    check =  result
+                }
+            }catch (ex:HttpException){
+                check = false
+            }
         }
         return check
     }

@@ -13,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.k2_kolveniershof_android"
+        applicationId "com.dekeyserjarno.hoefsmid"
         minSdk 26
         targetSdk 31
         versionCode 1
