@@ -4,8 +4,8 @@
     <string name="item_toevoegen">Item toevoegen</string>
     <string name="afspraak_maken">Afspraak maken</string>
     <string name="kalender_raadplegen">Kalender raadplegen</string>
-    <string name="rekening_bekijken">Rekening bekijken</string>
-    <string name="rekening">Rekening</string>
+    <string name="rekening_bekijken">Factuur bekijken</string>
+    <string name="rekening">Factuur</string>
     <string name="klanten">Klanten</string>
     <string name="item_beheren">Item beheren</string>
     <string name="klant_beheren">Klant beheren</string>
@@ -37,7 +37,7 @@
     <string name="filter_naam">Filter naam</string>
     <string name="name">Name</string>
     <string name="_5_00">5.00€</string>
-    <string name="rekening_van_voornaam_achternaam_op_datum">Rekening van voornaam achternaam op datum</string>
+    <string name="rekening_van_voornaam_achternaam_op_datum">Factuur van voornaam achternaam op datum</string>
     <string name="st">€ / st</string>
     <string name="aantal">Aantal</string>
     <string name="totale_prijs">totale prijs</string>
@@ -47,10 +47,9 @@
     <string name="totaal">Totaal</string>
     <string name="verwijder">Verwijder</string>
     <string name="tijd">Tijd</string>
-    <string name="rekening_toevoegen">Rekening toevoegen</string>
+    <string name="rekening_toevoegen">Factuur toevoegen</string>
     <string name="voeg_item_toe">Voeg Item Toe</string>
-    <string name="voeg_rekening_toe">Voeg rekening toe</string>
-    <string name="_1">1</string>
+    <string name="voeg_rekening_toe">Voeg factuur toe</string>
     <string name="Afspraak_maken2"><u>Afspraak maken</u></string>
     <string name="afspraak_titel">Afspraak titel</string>
     <string name="bevestig_afspraak">Bevestig afspraak</string>
@@ -61,22 +60,21 @@
     <string name="naar_detail">naar detail</string>
     <string name="voornaam_achternaam">Voornaam achternaam</string>
     <string name="verwijder_laatste">verwijder laatste</string>
-    <string name="_3">3</string>
     <string name="ok">OK</string>
-    <string name="_0">0</string>
-    <string name="_9">9</string>
-    <string name="_8">8</string>
-    <string name="_6">6</string>
-    <string name="_5">5</string>
-    <string name="_2">2</string>
-    <string name="_4">4</string>
     <string name="xxxx">xxxx</string>
-    <string name="_7">7</string>
     <string name="voeg_gebruiker_toe">Voeg gebruiker toe</string>
     <string name="phonenumber">phonenumber</string>
     <string name="prijs_per_stuk">prijs per stuk</string>
     <string name="verwijder_klant">Verwijder klant</string>
     <string name="dateformat">Datum dd/MM/yyyy</string>
     <string name="priceformat">%.2f €</string>
+    <string name="username">Gebruikersnaam</string>
+    <string name="Password">Wachtwoord</string>
+    <string name="logo">Logo</string>
+    <string name="LogIn">Log in</string>
+    <string name="us"></string>
+    <string name="pass"></string>
+    <string name="usernameEmpty">Gebruikersnaam kan niet leeg zijn</string>
+    <string name="PasswordEmpty">Wachtwoord kan niet leeg zijn</string>
 
 </resources>

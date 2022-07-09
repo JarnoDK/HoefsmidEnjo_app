@@ -14,12 +14,12 @@ data class ApiUser(
     var email:String="",
     var phone:String?="",
     var password:String?=null,
-    var pincode:String?=null
+    var username:String?=null
 
 )
 {
     override fun toString(): String {
-        return "id: ${id}\nfirstname:${firstName}\nlastname:${lastName}\nrole:$role\nemail: $email\nphone:$phone\npassword:$password\nPincode:$pincode"
+        return "id: ${id}\nfirstname:${firstName}\nlastname:${lastName}\nrole:$role\nemail: $email\nphone:$phone\npassword:$password\nPincode:$username"
     }
 }
 
@@ -37,7 +37,7 @@ fun List<ApiUser>.asDatabaseModel():Array<DbUser>{
             phone = it.phone.orEmpty(),
             password = it.password,
             role = it.role,
-            pincode= it.pincode
+            username= it.username
         )
     }.toTypedArray()
 }
@@ -54,7 +54,7 @@ fun DbUser.asApiUser():ApiUser{
         lastName=lastName,
         email=email,
         password = password?:"",
-        pincode = pincode?:"",
+        username = username?:"",
         phone = phone,
         role = role
     )
@@ -72,7 +72,7 @@ fun ApiUser.asDatabaseModel():DbUser{
         lastName=lastName,
         email=email,
         password = password?:"",
-        pincode = pincode?:"",
+        username = username?:"",
         phone = phone.orEmpty(),
         role = role
     )

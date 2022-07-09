@@ -1,9 +1,11 @@
 package com.enjo.hoefsmidenjo
 
 
+import android.content.Context
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.TextAppearanceSpan
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -13,10 +15,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.enjo.hoefsmidenjo.databinding.ActivityMainBinding
 import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
+import com.enjo.hoefsmidenjo.screens.login.LoginFragmentDirections
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 import timber.log.Timber
@@ -35,10 +39,11 @@ class MainActivity : AppCompatActivity() {
 
 
         // Binding
+        DomainController()
+
         binding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        DomainController()
         // Use Timber
         Timber.tag("MainActivity").i("onCreate Called")
 
@@ -120,6 +125,20 @@ class MainActivity : AppCompatActivity() {
      * Navigeer naar login scherm
      */
     private fun logout() {
+        var preference = getPreferences(Context.MODE_PRIVATE)
+        if(preference != null){
+
+
+            with (preference.edit()) {
+                putString("username", null)
+                putString("password", null)
+                putBoolean("isLoggedIn", false)
+
+                apply()
+                Log.d("logout","User logged out")
+            }
+        }
+
         navController.navigate(R.id.logout)
         val navController = findNavController(R.id.navHostFragment)
         navController.navigate(R.id.loginFragment)

@@ -53,8 +53,7 @@ class ClientAddViewModel( app: Application): AndroidViewModel(app){
             phone = telephone,
             role = 0,
             id = -1,
-            password = "",
-            pincode ="1234"
+            password = ""
             )
         var check = true
         if(isEmpty(user.firstName)){

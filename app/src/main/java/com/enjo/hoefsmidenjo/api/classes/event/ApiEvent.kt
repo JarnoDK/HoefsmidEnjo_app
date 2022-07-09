@@ -8,6 +8,7 @@ import com.enjo.hoefsmidenjo.domain.domaincontroller.DomainController
  * Inlezen van Event uit backend
 */
 data class ApiEvent (
+
     var id: Int,
     var time: String,
     var client: ApiUser,

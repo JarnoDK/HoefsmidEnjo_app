@@ -19,6 +19,6 @@ data class DbUser(
     var email:String,
     var phone:String,
     var password:String?=null,
-    var pincode:String?=null
+    var username:String?=null
 
 )

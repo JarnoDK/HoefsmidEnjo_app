@@ -1,13 +1,16 @@
 package com.enjo.hoefsmidenjo.screens.login
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.enjo.hoefsmidenjo.R
 import com.enjo.hoefsmidenjo.databinding.FragmentLoginBinding
 
 
@@ -16,7 +19,7 @@ class LoginFragment : Fragment(){
     // ViewModel
     private lateinit var viewModelFactory: LoginViewModelFactory
     private lateinit var viewModel: LoginViewModel
-
+    private lateinit var sharedPref:SharedPreferences
     // Binding
     private lateinit var binding: FragmentLoginBinding
 
@@ -33,66 +36,59 @@ class LoginFragment : Fragment(){
         //binding.loginViewModel = viewModel
         binding.lifecycleOwner = this
 
-        binding.pincodeDisplay.text = ""
 
-        // toevoegen letter
-        binding.pincode0.setOnClickListener{ check(0) }
-        binding.pincode1.setOnClickListener{ check(1) }
-        binding.pincode2.setOnClickListener{ check(2) }
-        binding.pincode3.setOnClickListener{ check(3) }
-        binding.pincode4.setOnClickListener{ check(4) }
-        binding.pincode5.setOnClickListener{ check(5) }
-        binding.pincode6.setOnClickListener{ check(6) }
-        binding.pincode7.setOnClickListener{ check(7) }
-        binding.pincode8.setOnClickListener{ check(8) }
-        binding.pincode9.setOnClickListener{ check(9) }
-        binding.pincodeBack.setOnClickListener{
-            viewModel.removeNumber()
-            binding.pincodeDisplay.text = viewModel.pincode
+        var preference = activity?.getPreferences(Context.MODE_PRIVATE)
+        if(preference != null){
+            sharedPref = preference
+            if(sharedPref.getBoolean("isLoggedIn",false)){
+                // Login
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+
+            }
         }
 
-        binding.pincodeOk.setOnClickListener{ check(-1) }
+        binding.btnLogin.setOnClickListener{
+            if(logIn()){
+                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
 
-
+            }
+        }
 
         return binding.root
     }
 
-    /**
-     * Inloggen, bij 4'de getal automatische check
-     * momenteel hardcoded "1234"
-     */
-    private fun check(number:Int){
-        if(number !=-1){
-            viewModel.appendNumber(number)
-        }
-        if(viewModel.pincode.length >=4){
-                if(viewModel.validatePin()){
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
+    private fun logIn():Boolean {
 
-                }else{
-                    AlertDialog
-                        .Builder(this.requireContext())
-                        .setTitle("Inloggen mislukt")
-                        .setMessage("Ongeldige pincode, probeer opnieuw")
-                        .show()
-                    viewModel.clearPincode()
-                }
-        }else if(number == -1){
-            if(viewModel.validatePin()){
-                findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToHomeFragment())
 
-            }else{
-                AlertDialog
-                    .Builder(this.requireContext())
-                    .setTitle("Inloggen mislukt")
-                    .setMessage("Ongeldige pincode, probeer opnieuw")
-                    .show()
-                viewModel.clearPincode()
+            if(sharedPref.getBoolean("isLoggedIn",false)){
+                // Login
+                return true
             }
-        }
-        binding.pincodeDisplay.text = viewModel.pincode
 
+            var errors = ""
+        if (binding.txtUsername.equals(null) || binding.txtUsername.equals("")) {
+            errors += "${R.string.usernameEmpty}\n"
+        }
+        if (binding.txtPassword.equals(null) || binding.txtPassword.equals("")) {
+            errors += "${R.string.PasswordEmpty}\n"
+        }
+
+        if (viewModel.logIn(
+                binding.txtUsername.text.toString(),
+                binding.txtPassword.text.toString()
+            ) ) {
+
+
+            with (sharedPref.edit()) {
+                putString("username", binding.txtUsername.text.toString())
+                putString("password", binding.txtPassword.text.toString())
+                putBoolean("isLoggedIn", true)
+
+                apply()
+            }
+
+        }
+        return true
     }
 
 

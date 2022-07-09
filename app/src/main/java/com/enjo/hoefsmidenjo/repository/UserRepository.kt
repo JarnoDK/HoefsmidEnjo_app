@@ -12,6 +12,8 @@ import timber.log.Timber
 
 class UserRepository (private val database: RoomDb){
 
+
+
     /**
      * Ophalen van data uit api en toevoegen aan room database
      */
